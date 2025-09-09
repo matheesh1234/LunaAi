@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - LunaAi</title>
+    <link rel="icon" type="image/png" href="Icon.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=wbZ8zXPTc8wo9VYHl54XthlVabQXPfg-VX5RxWCyRJybt3Ih6nbG2VqpIqgUPCoJgajWicqBTTzsro2B2CoyttOIy4b32L3Lh7rlsOoSqWiIIm-Y0DaPDDzYA6WHlD96O8Ihdd22-PHHflsZ_YSLPpy5j3VoDrvolOqHI_yNphpA4UepTCQYW7m3SKqzc2kUVR2rx8cdmra4ld4L2vzGNfC-dgGjc1DqLdz-czxsHZ9Onub8" charset="UTF-8"></script><script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .disabled-btn {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        /* Custom gradient for card backgrounds */
+        .card-bg-gradient {
+            background-image: linear-gradient(135deg, var(--tw-gradient-stops));
+        }
+        .card-bg-gradient-blue {
+            --tw-gradient-from: #dbeafe; /* Tailwind blue-100 */
+            --tw-gradient-to: #93c5fd;   /* Tailwind blue-300 */
+        }
+        .card-bg-gradient-green {
+            --tw-gradient-from: #dcfce7; /* Tailwind green-100 */
+            --tw-gradient-to: #86efac;  /* Tailwind green-300 */
+        }
+        .card-bg-gradient-purple {
+            --tw-gradient-from: #ede9fe; /* Tailwind purple-100 */
+            --tw-gradient-to: #c4b5fd;  /* Tailwind purple-300 */
+        }
+        .dark .card-bg-gradient-blue {
+            --tw-gradient-from: #1e3a8a; /* Tailwind blue-900 */
+            --tw-gradient-to: #3b82f6;   /* Tailwind blue-500 */
+        }
+        .dark .card-bg-gradient-green {
+            --tw-gradient-from: #166534; /* Tailwind green-900 */
+            --tw-gradient-to: #22c55e;   /* Tailwind green-500 */
+        }
+        .dark .card-bg-gradient-purple {
+            --tw-gradient-from: #312e81; /* Tailwind indigo-900 */
+            --tw-gradient-to: #6366f1;   /* Tailwind indigo-500 */
+        }
+        /* Animated spinner */
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: currentColor;
+            border-radius: 50%;
+            width: 1.5rem;
+            height: 1.5rem;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Dropdown menu styles */
+  .dropdown-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.2s ease;
+    /* Remove fixed width to allow for dynamic sizing */
+    /* width: 48px; */
+  }
+
+  .dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+        /* Logout confirmation modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        
+        .modal-overlay.show .modal-content {
+            transform: scale(1);
+        }
+          .user-info-section {
+    max-width: 100%; /* Ensure it doesn't overflow its container */
+    overflow-wrap: break-word; /* Allow long words to break and wrap */
+  }
+
+  .user-email-text {
+    white-space: nowrap; /* Keep the email on a single line */
+    overflow: hidden; /* Hide the overflowing part */
+    text-overflow: ellipsis; /* Add "..." at the end of the line */
+  }
+    /* New styles for the disabled card overlay */
+    .pro-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+      backdrop-filter: blur(4px); /* Blur effect */
+      border-radius: 24px; /* Match card border-radius */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      opacity: 1;
+      pointer-events: auto; /* Allow clicks on the overlay */
+      z-index: 10;
+    }
+
+    .pro-overlay-text {
+      font-weight: 700;
+      font-size: 1.5rem; /* text-2xl */
+      line-height: 2rem; /* leading-8 */
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      background-image: linear-gradient(to right, var(--tw-gradient-from), var(--tw-gradient-to));
+      --tw-gradient-from: #60a5fa; /* blue-400 */
+      --tw-gradient-to: #34d399; /* green-400 */
+    }
+
+    .dark .pro-overlay-text {
+      --tw-gradient-from: #93c5fd; /* blue-300 */
+      --tw-gradient-to: #6ee7b7; /* green-300 */
+    }
+    
+    .card-relative {
+      position: relative;
+    }
+
+    /* Styles for the unlock modal */
+    .unlock-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        display: none; /* Hidden by default */
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+    }
+    .unlock-modal.show {
+        display: flex;
+    }
+    .unlock-modal-content {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 1rem;
+        width: 90%;
+        max-width: 400px;
+        text-align: center;
+        position: relative;
+    }
+    .dark .unlock-modal-content {
+        background-color: #1f2937; /* Tailwind gray-800 */
+    }
+    .unlock-modal .close-btn {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        color: #9ca3af; /* Tailwind gray-400 */
+        cursor: pointer;
+    }
+    </style>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+</head>
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
+
+    <header class="bg-white dark:bg-gray-800 shadow-md flex items-center justify-between px-6 py-4 fixed w-full z-40 top-0">
+        <div class="flex items-center space-x-3">
+            <button id="toggleSidebar" class="mr-4 text-gray-600 dark:text-gray-300 focus:outline-none hover:scale-110 transition" aria-label="Toggle Sidebar">
+                <i data-feather="menu"></i>
+            </button>
+            <span class="font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-green-500">LunaAi<sup style="font-size: 12px; color: #666; font-family: Arial;">™</sup></span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="toggleDarkMode" class="hover:scale-110 transition text-gray-600 dark:text-gray-300" aria-label="Toggle Dark Mode">
+                <i data-feather="moon"></i>
+            </button>
+            <div class="relative">
+                <button id="userProfileBtn" class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 flex items-center justify-center hover:border-blue-400 dark:hover:border-blue-400 transition" aria-label="User Profile">
+                    <i data-feather="user" class="w-6 h-6 text-gray-500 dark:text-gray-400"></i>
+                </button>
+                <div id="userDropdown" class="dropdown-menu absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 py-2">
+                    <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-600 user-info-section">
+                    <p class="text-sm font-medium text-gray-900 dark:text-gray-100" id="userDisplayName">User Name</p>
+                    <p class="text-sm text-gray-500 dark:text-gray-400 user-email-text" id="userEmail">user@example.com</p>
+                    </div>
+                    <button id="logoutBtn" class="w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center space-x-2">
+                    <i data-feather="log-out" class="w-4 h-4"></i>
+                    <span>Logout</span>
+                    </button>
+                </div>
+                </div>
+        </div>
+    </header>
+
+    <div class="flex min-h-screen pt-16">
+        <aside id="sidebar" class="w-64 bg-white dark:bg-gray-800 shadow-lg h-screen p-4 space-y-4 border-r border-gray-200 dark:border-gray-700 fixed top-16 transform -translate-x-full transition-transform duration-300 ease-in-out z-30">
+            <nav class="space-y-2">
+                <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-blue-50 dark:bg-gray-700 text-blue-700 dark:text-blue-300 font-semibold transition hover:bg-blue-100 dark:hover:bg-gray-600">
+                    <i data-feather="home" class="w-5 h-5"></i><span>Dashboard</span>
+                </a>
+                <a href="chat.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-300 transition hover:bg-blue-50 dark:hover:bg-gray-700">
+                    <i data-feather="message-circle" class="w-5 h-5"></i><span>Chat with Luna</span>
+                </a>
+                <a href="notes.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-300 transition hover:bg-blue-50 dark:hover:bg-gray-700">
+                    <i data-feather="file-text" class="w-5 h-5"></i><span>Notes & Summaries</span>
+                </a>
+                <a href="quizzes.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-300 transition hover:bg-blue-50 dark:hover:bg-gray-700">
+                    <i data-feather="book-open" class="w-5 h-5"></i><span>Quizzes</span>
+                </a>
+                <a href="focus.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-300 transition hover:bg-blue-50 dark:hover:bg-gray-700">
+                    <i data-feather="clock" class="w-5 h-5"></i><span>Focus Mode</span>
+                </a>
+            </nav>
+        </aside>
+        
+
+        <main id="mainContent" class="flex-1 p-8 transition-all duration-300">
+            <h1 class="text-4xl font-bold mb-8">
+                Welcome back, <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500" id="welcomeUserName">User!</span> 👋
+            </h1>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div class="card-bg-gradient card-bg-gradient-blue p-8 shadow-xl rounded-3xl transition-all duration-300 transform hover:scale-105 card-relative">
+                    <h2 class="text-xl font-bold text-blue-800 dark:text-blue-200 mb-2">Study Hours</h2>
+                    <div id="studyHoursValue" class="text-6xl font-extrabold text-blue-600 dark:text-blue-400">0h</div>
+                    <p class="text-sm text-blue-600 dark:text-blue-300 mt-2">logged this week</p>
+                    <button id="logHourBtn" class="mt-6 px-6 py-2 text-sm rounded-full bg-blue-600 text-white font-semibold shadow-md transition transform hover:scale-105 hover:bg-blue-700">Log 1 Hour</button>
+
+                    <div class="pro-overlay" onclick="showUnlockModal()">
+                        <span class="pro-overlay-text bg-gradient-to-r from-blue-400 to-green-400 dark:from-blue-300 dark:to-green-300">Unlock Pro</span>
+                        <button class="mt-4 px-6 py-2 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-green-500 hover:scale-105 transition">Buy Pro</button>
+                    </div>
+                </div>
+
+                <div class="card-bg-gradient card-bg-gradient-green p-8 shadow-xl rounded-3xl transition-all duration-300 transform hover:scale-105 card-relative">
+                    <h2 class="text-xl font-bold text-green-800 dark:text-green-200 mb-2">Topics Covered</h2>
+                    <div id="topicsCoveredValue" class="text-6xl font-extrabold text-green-600 dark:text-green-400">0</div>
+                    <p class="text-sm text-green-600 dark:text-green-300 mt-2">new topics this month</p>
+                    <button id="addTopicBtn" class="mt-6 px-6 py-2 text-sm rounded-full bg-green-600 text-white font-semibold shadow-md transition transform hover:scale-105 hover:bg-green-700">Add Topic</button>
+
+                    <div class="pro-overlay" onclick="showUnlockModal()">
+                        <span class="pro-overlay-text bg-gradient-to-r from-blue-400 to-green-400 dark:from-blue-300 dark:to-green-300">Unlock Pro</span>
+                        <button class="mt-4 px-6 py-2 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-green-500 hover:scale-105 transition">Buy Pro</button>
+                    </div>
+                </div>
+
+                <div class="card-bg-gradient card-bg-gradient-purple p-8 shadow-xl rounded-3xl transition-all duration-300 transform hover:scale-105">
+                    <h2 class="text-xl font-bold text-purple-800 dark:text-purple-200 mb-2">Study Streak</h2>
+                    <div class="text-6xl font-extrabold text-purple-600 dark:text-purple-400 flex items-center">
+                        <span id="studyStreakValue">0</span>
+                        <span class="ml-2">🔥</span>
+                    </div>
+                    <p class="text-sm text-purple-600 dark:text-purple-300 mt-2">Days in a row</p>
+                    <button id="logDayBtn" class="mt-6 px-6 py-2 text-sm rounded-full bg-purple-600 text-white font-semibold shadow-md transition transform hover:scale-105 hover:bg-purple-700">Log Day</button>
+                    <p id="streakMessage" class="mt-4 text-xs text-gray-500 dark:text-gray-400 min-h-[20px]"></p>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-white dark:bg-gray-800 p-8 shadow-xl rounded-3xl text-center transition-all duration-300">
+                <h2 class="text-2xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-pink-500 to-red-500">
+                    Your Daily Dose of Motivation ✨
+                </h2>
+                <div class="flex justify-center items-center h-24">
+                    <p id="motivationalQuote" class="text-lg text-gray-700 dark:text-gray-300 font-medium italic">
+                        Click the button below to get your first motivational quote!
+                    </p>
+                    <div id="quote-spinner" class="hidden spinner text-pink-500"></div>
+                </div>
+                <button id="getQuoteBtn" class="mt-6 px-8 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white font-bold rounded-full shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+                    Get a New Quote
+                </button>
+            </div>
+            
+        </main>
+    </div>
+
+    <div id="logoutModal" class="modal-overlay">
+        <div class="modal-content bg-white dark:bg-gray-800 rounded-xl p-6 w-11/12 max-w-sm text-center shadow-2xl">
+            <div class="mb-4">
+                <div class="w-16 h-16 mx-auto bg-red-100 dark:bg-red-900/20 rounded-full flex items-center justify-center mb-4">
+                    <i data-feather="log-out" class="w-8 h-8 text-red-600 dark:text-red-400"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">Confirm Logout</h3>
+                <p class="text-gray-600 dark:text-gray-400 text-sm">Are you sure you want to sign out of your account?</p>
+            </div>
+            <div class="flex space-x-3">
+                <button id="cancelLogoutBtn" class="flex-1 px-4 py-2 text-gray-600 dark:text-gray-400 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                    Cancel
+                </button>
+                <button id="confirmLogoutBtn" class="flex-1 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition">
+                    Sign Out
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="unlockProModal" class="unlock-modal">
+        <div class="unlock-modal-content dark:bg-gray-800">
+            <button class="close-btn" onclick="hideUnlockModal()">
+                <i data-feather="x"></i>
+            </button>
+            <h3 class="text-xl font-bold mb-4">Unlock Pro Features</h3>
+            <p class="text-gray-600 dark:text-gray-400 mb-4">Enter your product key below to unlock these exclusive features.</p>
+            <input type="text" id="proProductKeyInput" placeholder="Enter product key" class="w-full px-4 py-2 mb-4 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <p id="unlockError" class="text-red-500 text-sm mb-4 hidden">Invalid product key. Please try again.</p>
+            <button id="unlockProBtn" class="w-full px-4 py-2 rounded-lg text-white font-semibold bg-blue-600 hover:bg-blue-700 transition">Unlock</button>
+        </div>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden md:hidden"></div>
+
+
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAeq9Tuo5CmLRh35thABNj-Qv9V_hpjB9c",
+            authDomain: "study-a25ac.firebaseapp.com",
+            projectId: "study-a25ac",
+            storageBucket: "study-a25ac.firebasestorage.app",
+            messagingSenderId: "173051640117",
+            appId: "1:173051640117:web:2ee34824b54b2e9ba7b47c",
+            measurementId: "G-MCSV02V3Q3"
+        };
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // DOM Elements
+        const toggleBtn = document.getElementById('toggleSidebar');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+        const darkModeToggle = document.getElementById('toggleDarkMode');
+        const htmlElement = document.documentElement;
+
+        const logDayBtn = document.getElementById('logDayBtn');
+        const streakMessage = document.getElementById('streakMessage');
+        const studyStreakValue = document.getElementById('studyStreakValue');
+        
+        const logHourBtn = document.getElementById('logHourBtn');
+        const studyHoursValue = document.getElementById('studyHoursValue');
+
+        const addTopicBtn = document.getElementById('addTopicBtn');
+        const topicsCoveredValue = document.getElementById('topicsCoveredValue');
+
+        const getQuoteBtn = document.getElementById('getQuoteBtn');
+        const motivationalQuoteEl = document.getElementById('motivationalQuote');
+        const quoteSpinner = document.getElementById('quote-spinner');
+
+        // User Profile Elements
+        const userProfileBtn = document.getElementById('userProfileBtn');
+        const userDropdown = document.getElementById('userDropdown');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const userDisplayName = document.getElementById('userDisplayName');
+        const userEmail = document.getElementById('userEmail');
+        const welcomeUserName = document.getElementById('welcomeUserName');
+
+        // Logout Modal Elements
+        const logoutModal = document.getElementById('logoutModal');
+        const cancelLogoutBtn = document.getElementById('cancelLogoutBtn');
+        const confirmLogoutBtn = document.getElementById('confirmLogoutBtn');
+
+        // New Pro Unlock Elements
+        const unlockProModal = document.getElementById('unlockProModal');
+        const proProductKeyInput = document.getElementById('proProductKeyInput');
+        const unlockProBtn = document.getElementById('unlockProBtn');
+        const unlockError = document.getElementById('unlockError');
+        const proOverlays = document.querySelectorAll('.pro-overlay');
+        
+        // --- Username Formatting Function ---
+        function formatUsername(email) {
+            // Get the part before the @ symbol
+            const baseUsername = email.split('@')[0];
+            
+            // Remove all numbers and special characters, keep only letters
+            const cleanUsername = baseUsername.replace(/[^a-zA-Z]/g, '');
+            
+            // If the cleaned username is empty or too short, fallback to original logic
+            if (!cleanUsername || cleanUsername.length < 2) {
+                return baseUsername.charAt(0).toUpperCase() + baseUsername.slice(1);
+            }
+            
+            // Capitalize the first letter and make the rest lowercase
+            return cleanUsername.charAt(0).toUpperCase() + cleanUsername.slice(1).toLowerCase();
+        }
+        
+        // --- Authentication Functions ---
+        function updateUserInfo(user) {
+            if (user) {
+                const formattedDisplayName = user.displayName || formatUsername(user.email);
+                const email = user.email;
+                
+                userDisplayName.textContent = formattedDisplayName;
+                userEmail.textContent = email;
+                welcomeUserName.textContent = formattedDisplayName;
+                
+                // Store formatted username for consistency
+                localStorage.setItem('username', formattedDisplayName);
+            }
+        }
+
+        async function handleLogout() {
+            try {
+                await signOut(auth);
+                // Clear stored user data
+                localStorage.removeItem('username');
+                // Redirect to login page
+                window.location.href = 'index.html'; // or your login page
+            } catch (error) {
+                console.error("Logout error:", error);
+                alert("Error signing out. Please try again.");
+            }
+        }
+
+        function showLogoutModal() {
+            logoutModal.classList.add('show');
+        }
+
+        function hideLogoutModal() {
+            logoutModal.classList.remove('show');
+        }
+
+        function toggleUserDropdown(show = null) {
+            if (show === null) {
+                userDropdown.classList.toggle('show');
+            } else if (show) {
+                userDropdown.classList.add('show');
+            } else {
+                userDropdown.classList.remove('show');
+            }
+        }
+        
+        // --- Dark/Light Mode Persistence ---
+        function setInitialTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                htmlElement.classList.add('dark');
+            } else {
+                htmlElement.classList.remove('dark');
+            }
+        }
+
+        function updateDarkModeIcon() {
+            darkModeToggle.innerHTML = '';
+            if (htmlElement.classList.contains('dark')) {
+                darkModeToggle.innerHTML = `<i data-feather="sun"></i>`;
+            } else {
+                darkModeToggle.innerHTML = `<i data-feather="moon"></i>`;
+            }
+            feather.replace();
+        }
+
+        // --- Dashboard Data Logic with localStorage ---
+        function loadDashboardData() {
+            // Check if Pro is unlocked
+            const isPro = localStorage.getItem('isProUnlocked') === 'true';
+            if (isPro) {
+                proOverlays.forEach(overlay => overlay.style.display = 'none');
+                logHourBtn.style.pointerEvents = 'auto';
+                addTopicBtn.style.pointerEvents = 'auto';
+            } else {
+                proOverlays.forEach(overlay => overlay.style.display = 'flex');
+                logHourBtn.style.pointerEvents = 'none';
+                addTopicBtn.style.pointerEvents = 'none';
+            }
+
+            // Load and update Study Hours
+            let studyHours = parseInt(localStorage.getItem('studyHours')) || 0;
+            studyHoursValue.textContent = `${studyHours}h`;
+
+            // Load and update Topics Covered
+            let topicsCovered = parseInt(localStorage.getItem('topicsCovered')) || 0;
+            topicsCoveredValue.textContent = topicsCovered;
+
+            // Load and update Study Streak (existing logic)
+            let studyStreak = parseInt(localStorage.getItem('studyStreak')) || 0;
+            studyStreakValue.textContent = studyStreak;
+            checkStudyStreak();
+        }
+
+        function logStudyHour() {
+            let studyHours = parseInt(localStorage.getItem('studyHours')) || 0;
+            studyHours++;
+            localStorage.setItem('studyHours', studyHours);
+            studyHoursValue.textContent = `${studyHours}h`;
+        }
+
+        function addTopic() {
+            let topicsCovered = parseInt(localStorage.getItem('topicsCovered')) || 0;
+            topicsCovered++;
+            localStorage.setItem('topicsCovered', topicsCovered);
+            topicsCoveredValue.textContent = topicsCovered;
+        }
+
+        // Existing Study Streak Logic
+        function checkStudyStreak() {
+            let streak = parseInt(localStorage.getItem('studyStreak')) || 0;
+            let lastLogTimestamp = parseInt(localStorage.getItem('lastLogTimestamp')) || 0;
+            const now = Date.now();
+            const twentyFourHours = 24 * 60 * 60 * 1000;
+            
+            studyStreakValue.textContent = streak;
+            
+            if (now - lastLogTimestamp >= twentyFourHours) {
+                logDayBtn.disabled = false;
+                logDayBtn.classList.remove('disabled-btn');
+                streakMessage.textContent = 'Ready to log your study day!';
+            } else {
+                logDayBtn.disabled = true;
+                logDayBtn.classList.add('disabled-btn');
+                const remainingTime = lastLogTimestamp + twentyFourHours - now;
+                const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
+                streakMessage.textContent = `You can log again in ${hours}h ${minutes}m.`;
+            }
+        }
+        
+        function logStudyDay() {
+            let streak = parseInt(localStorage.getItem('studyStreak')) || 0;
+            localStorage.setItem('studyStreak', streak + 1);
+            localStorage.setItem('lastLogTimestamp', Date.now());
+            checkStudyStreak();
+        }
+
+        // --- AI Motivational Quote Generator ---
+        async function getNewQuote() {
+            motivationalQuoteEl.classList.add('hidden');
+            quoteSpinner.classList.remove('hidden');
+            getQuoteBtn.disabled = true;
+
+            const prompt = "Generate a single, short, and inspiring motivational quote for a student.";
+
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: prompt }] }]
+            };
+            const apiKey = "AIzaSyA19xjTISq7xJRx8ab3-TGaSlVW7XxWFwQ";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const result = await response.json();
+                const quoteText = result.candidates[0].content.parts[0].text;
+                
+                motivationalQuoteEl.textContent = quoteText.replace(/"/g, '');
+            } catch (error) {
+                console.error("Error generating quote:", error);
+                motivationalQuoteEl.textContent = "Failed to fetch a quote. Please try again later.";
+            } finally {
+                quoteSpinner.classList.add('hidden');
+                motivationalQuoteEl.classList.remove('hidden');
+                getQuoteBtn.disabled = false;
+            }
+        }
+        
+        // --- Pro Unlock Modal Functions ---
+        window.showUnlockModal = function() {
+            unlockProModal.classList.add('show');
+            proProductKeyInput.value = '';
+            unlockError.classList.add('hidden');
+        }
+
+        window.hideUnlockModal = function() {
+            unlockProModal.classList.remove('show');
+        }
+
+        function handleProUnlock() {
+            const productKey = proProductKeyInput.value.trim();
+            const validKey = 'Admin'; // The example product key
+
+            if (productKey === validKey) {
+                localStorage.setItem('isProUnlocked', 'true');
+                hideUnlockModal();
+                alert('Pro features unlocked successfully!');
+                loadDashboardData(); // Reload data and hide overlays
+            } else {
+                unlockError.classList.remove('hidden');
+            }
+        }
+
+        // --- Event Listeners and Initial Setup ---
+        document.addEventListener('DOMContentLoaded', () => {
+            setInitialTheme();
+            loadDashboardData();
+            updateDarkModeIcon();
+            feather.replace();
+
+            // Check authentication state
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    updateUserInfo(user);
+                } else {
+                    // User is not authenticated, redirect to login
+                    window.location.href = 'index.html';
+                }
+            });
+
+            // --- NEW RESPONSIVE SIDEBAR LOGIC ---
+            if (toggleBtn) {
+                const overlay = document.getElementById('sidebar-overlay');
+
+                const openSidebar = () => {
+                    sidebar.classList.remove('-translate-x-full');
+                    if (window.innerWidth < 768) {
+                        overlay.classList.remove('hidden');
+                    } else {
+                        mainContent.classList.add('md:ml-64');
+                    }
+                };
+
+                const closeSidebar = () => {
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.add('hidden');
+                    mainContent.classList.remove('md:ml-64');
+                };
+
+                const toggleSidebar = () => {
+                    if (sidebar.classList.contains('-translate-x-full')) {
+                        openSidebar();
+                    } else {
+                        closeSidebar();
+                    }
+                };
+                
+                const setInitialState = () => {
+                    if (window.innerWidth >= 768) {
+                        openSidebar();
+                    } else {
+                        closeSidebar();
+                    }
+                };
+
+                setInitialState(); // Set state on initial load
+                toggleBtn.addEventListener('click', toggleSidebar);
+                overlay.addEventListener('click', toggleSidebar);
+
+                // Adjust on window resize
+                let isDesktop = window.innerWidth >= 768;
+                window.addEventListener('resize', () => {
+                    const wasDesktop = isDesktop;
+                    isDesktop = window.innerWidth >= 768;
+                    // Only reset state if we cross the breakpoint
+                    if (isDesktop !== wasDesktop) {
+                        setInitialState();
+                    }
+                });
+            }
+
+            // Dark mode toggle
+            if (darkModeToggle) {
+                darkModeToggle.addEventListener('click', () => {
+                    htmlElement.classList.toggle('dark');
+                    const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+                    localStorage.setItem('theme', currentTheme);
+                    updateDarkModeIcon();
+                });
+            }
+
+            // User Profile Dropdown
+            if (userProfileBtn) {
+                userProfileBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleUserDropdown();
+                });
+            }
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!userDropdown.contains(e.target) && !userProfileBtn.contains(e.target)) {
+                    toggleUserDropdown(false);
+                }
+            });
+
+            // Logout button
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    toggleUserDropdown(false);
+                    showLogoutModal();
+                });
+            }
+
+            // Logout modal buttons
+            if (cancelLogoutBtn) {
+                cancelLogoutBtn.addEventListener('click', hideLogoutModal);
+            }
+
+            if (confirmLogoutBtn) {
+                confirmLogoutBtn.addEventListener('click', () => {
+                    hideLogoutModal();
+                    handleLogout();
+                });
+            }
+
+            // Close modal when clicking outside
+            logoutModal.addEventListener('click', (e) => {
+                if (e.target === logoutModal) {
+                    hideLogoutModal();
+                }
+            });
+            
+            // Log Day button for Study Streak
+            if (logDayBtn) {
+                logDayBtn.addEventListener('click', logStudyDay);
+            }
+
+            // Log 1 Hour button (re-enabled for Pro users)
+            if (logHourBtn) {
+                logHourBtn.addEventListener('click', () => {
+                    if (localStorage.getItem('isProUnlocked') === 'true') {
+                        logStudyHour();
+                    }
+                });
+            }
+
+            // Add Topic button (re-enabled for Pro users)
+            if (addTopicBtn) {
+                addTopicBtn.addEventListener('click', () => {
+                    if (localStorage.getItem('isProUnlocked') === 'true') {
+                        addTopic();
+                    }
+                });
+            }
+            
+            // Get New Quote button
+            if (getQuoteBtn) {
+                getQuoteBtn.addEventListener('click', getNewQuote);
+            }
+            
+            // Unlock Pro modal event listeners
+            unlockProBtn.addEventListener('click', handleProUnlock);
+            proProductKeyInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    handleProUnlock();
+                }
+            });
+            unlockProModal.addEventListener('click', (e) => {
+                if (e.target === unlockProModal) {
+                    hideUnlockModal();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

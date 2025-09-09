@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Focus Mode - AI Study Partner</title>
+    <link rel="icon" type="image/png" href="Icon.png" />
+    <!-- Poppins font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Feather Icons for vector icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.35s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        .progress-ring__background {
+            stroke: #e5e7eb; /* light gray for light mode */
+        }
+        .dark .progress-ring__background {
+            stroke: #4b5563; /* dark gray for dark mode */
+        }
+
+        /* Custom Dropdown Styling */
+        .custom-dropdown-button {
+            transition: all 0.2s ease-in-out;
+        }
+        .custom-dropdown-button.active {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            border-color: transparent;
+        }
+        .custom-dropdown-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-in-out, padding 0.3s ease-in-out, opacity 0.2s ease-in-out;
+            opacity: 0;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+        .custom-dropdown-menu.active {
+            max-height: 200px; /* Adjust based on content */
+            opacity: 1;
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
+</head>
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 font-sans transition-colors duration-300">
+
+    <!-- Header -->
+    <header class="bg-white dark:bg-gray-800 shadow-md flex items-center justify-between px-6 py-4 fixed w-full z-40 top-0">
+        <div class="flex items-center space-x-3">
+            <button id="toggleSidebar" class="mr-4 text-gray-600 dark:text-gray-300 focus:outline-none hover:scale-110 transition" aria-label="Toggle Sidebar">
+                <i data-feather="menu"></i>
+            </button>
+            <span class="font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-green-500">LunaAi<sup style="font-size: 12px; color: #666; font-family: Arial;">™</sup></span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="toggleDarkMode" class="hover:scale-110 transition text-gray-600 dark:text-gray-300" aria-label="Toggle Dark Mode">
+                <i data-feather="moon"></i>
+            </button>
+            <div class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 flex items-center justify-center" aria-label="User Profile">
+                <i data-feather="user" class="w-6 h-6 text-gray-500 dark:text-gray-400"></i>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex min-h-screen pt-16">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 bg-white dark:bg-gray-800 shadow-lg h-screen p-4 space-y-4 border-r border-gray-200 dark:border-gray-700 fixed top-16 transform -translate-x-full transition-transform duration-300 ease-in-out z-30">
+            <nav class="space-y-2">
+                <a href="dashboard.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-300 transition hover:bg-blue-50 dark:hover:bg-gray-700">
+                    <i data-feather="home" class="w-5 h-5"></i><span>Dashboard</span>
+                </a>
+                <a href="chat.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-300 transition hover:bg-blue-50 dark:hover:bg-gray-700">
+                    <i data-feather="message-circle" class="w-5 h-5"></i><span>Chat with Luna</span>
+                </a>
+                <a href="notes.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-300 transition hover:bg-blue-50 dark:hover:bg-gray-700">
+                    <i data-feather="file-text" class="w-5 h-5"></i><span>Notes & Summaries</span>
+                </a>
+                <a href="quizzes.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-300 transition hover:bg-blue-50 dark:hover:bg-gray-700">
+                    <i data-feather="book-open" class="w-5 h-5"></i><span>Quizzes</span>
+                </a>
+                <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-blue-50 dark:bg-gray-700 text-blue-700 dark:text-blue-300 font-semibold transition hover:bg-blue-100 dark:hover:bg-gray-600">
+                    <i data-feather="clock" class="w-5 h-5"></i><span>Focus Mode</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="mainContent" class="flex-1 p-8 transition-all duration-300">
+            <h1 class="text-3xl font-bold mb-6 text-center">
+                Let's get <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500">Focused!</span> 🧠
+            </h1>
+            
+            <div class="bg-white dark:bg-gray-800 p-6 shadow-xl rounded-3xl max-w-md mx-auto w-full flex flex-col items-center">
+                <!-- Mode Selector - Custom Dropdown -->
+                <div class="mb-4 w-full max-w-sm relative">
+                    <label class="block mb-2 font-semibold text-center">Select Focus Method:</label>
+                    
+                    <!-- Dropdown Button -->
+                    <button
+                        id="dropdownButton"
+                        class="custom-dropdown-button w-full flex items-center justify-between px-4 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                    >
+                        <span id="selectedOption">Pomodoro (25/5)</span>
+                        <i data-feather="chevron-down" class="w-4 h-4 transition-transform duration-200"></i>
+                    </button>
+                    
+                    <!-- Dropdown Menu -->
+                    <div id="dropdownMenu" class="custom-dropdown-menu absolute z-10 w-full mt-1 bg-white dark:bg-gray-700 rounded-xl rounded-t-none border border-gray-300 dark:border-gray-600 border-t-0">
+                        <div class="dropdown-option p-3 hover:bg-blue-50 dark:hover:bg-gray-600 cursor-pointer rounded-b-xl" data-value="pomodoro">Pomodoro (25/5)</div>
+                        <div class="dropdown-option p-3 hover:bg-blue-50 dark:hover:bg-gray-600 cursor-pointer" data-value="52-17">52/17 Method</div>
+                        <div class="dropdown-option p-3 hover:bg-blue-50 dark:hover:bg-gray-600 cursor-pointer" data-value="90-20">90/20 Method</div>
+                        <div class="dropdown-option p-3 hover:bg-blue-50 dark:hover:bg-gray-600 cursor-pointer" data-value="custom">Custom</div>
+                    </div>
+                </div>
+
+                <!-- Custom Input -->
+                <div id="customInputs" class="mb-4 hidden space-y-3 w-full max-w-sm transition-all duration-300">
+                    <div>
+                        <label for="customWork" class="block font-semibold mb-1 text-sm">Work Duration (min):</label>
+                        <input
+                            type="number"
+                            id="customWork"
+                            min="1"
+                            max="180"
+                            value="25"
+                            class="w-full px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                        />
+                    </div>
+                    <div>
+                        <label for="customBreak" class="block font-semibold mb-1 text-sm">Break Duration (min):</label>
+                        <input
+                            type="number"
+                            id="customBreak"
+                            min="1"
+                            max="60"
+                            value="5"
+                            class="w-full px-3 py-2 rounded-xl border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-colors"
+                        />
+                    </div>
+                    <button
+                        id="applyCustom"
+                        class="px-4 py-2 rounded-full bg-blue-600 text-white font-semibold shadow-md transition transform hover:scale-105 hover:bg-blue-700 w-full text-sm"
+                    >
+                        Apply
+                    </button>
+                </div>
+
+                <!-- Timer display -->
+                <div class="text-center mb-6">
+                    <h2 id="timer" class="text-5xl font-bold mb-1">25:00</h2>
+                    <p id="phaseLabel" class="text-gray-600 dark:text-gray-300 text-lg">Focus Session</p>
+                </div>
+
+                <!-- Progress ring -->
+                <div class="flex justify-center mb-6">
+                    <svg
+                        class="progress-ring"
+                        width="150"
+                        height="150"
+                        aria-label="Progress ring"
+                        role="img"
+                    >
+                        <!-- Background circle (the initial full circle) -->
+                        <circle
+                            class="progress-ring__background"
+                            stroke-width="10"
+                            fill="transparent"
+                            r="70"
+                            cx="75"
+                            cy="75"
+                        />
+                        <!-- Foreground circle (the progress bar) -->
+                        <circle
+                            class="progress-ring__circle"
+                            stroke="#3b82f6"
+                            stroke-width="10"
+                            fill="transparent"
+                            r="70"
+                            cx="75"
+                            cy="75"
+                        />
+                    </svg>
+                </div>
+
+                <!-- Controls -->
+                <div class="flex space-x-3 justify-center w-full max-w-sm">
+                    <button
+                        id="startPauseBtn"
+                        class="flex-1 px-4 py-2 rounded-full bg-blue-600 text-white font-bold shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                    >
+                        Start
+                    </button>
+                    <button
+                        id="resetBtn"
+                        class="flex-1 px-4 py-2 rounded-full bg-gray-300 dark:bg-gray-700 text-gray-800 dark:text-gray-200 font-bold shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+                    >
+                    Reset
+                    </button>
+                </div>
+
+                <!-- Quick session selectors -->
+                <div class="mt-6 flex flex-wrap justify-center gap-3 w-full max-w-sm">
+                    <button
+                        class="sessionBtn px-4 py-2 rounded-full bg-green-600 text-white font-semibold shadow-md transition transform hover:scale-105 hover:bg-green-700"
+                        data-time="900"
+                    >
+                        15 min
+                    </button>
+                    <button
+                        class="sessionBtn px-4 py-2 rounded-full bg-blue-600 text-white font-semibold shadow-md transition transform hover:scale-105 hover:bg-blue-700"
+                        data-time="1500"
+                    >
+                        25 min
+                    </button>
+                    <button
+                        class="sessionBtn px-4 py-2 rounded-full bg-purple-600 text-white font-semibold shadow-md transition transform hover:scale-105 hover:bg-purple-700"
+                        data-time="3000"
+                    >
+                        50 min
+                    </button>
+                </div>
+            </div>
+
+            <!-- Alert sound -->
+            <audio id="alertSound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg" preload="auto"></audio>
+        </main>
+    </div>
+
+    <!-- Sidebar Overlay -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden md:hidden"></div>
+
+    <script>
+        // DOM Elements
+        const htmlElement = document.documentElement;
+        const toggleBtn = document.getElementById('toggleSidebar');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+        const darkModeToggle = document.getElementById('toggleDarkMode');
+
+        // Dark Mode Functionality
+        function updateDarkModeIcon() {
+            darkModeToggle.innerHTML = '';
+            if (htmlElement.classList.contains('dark')) {
+                darkModeToggle.innerHTML = `<i data-feather="sun"></i>`;
+            } else {
+                darkModeToggle.innerHTML = `<i data-feather="moon"></i>`;
+            }
+            feather.replace();
+        }
+        
+        function applyThemeFromLocalStorage() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                htmlElement.classList.add('dark');
+            } else {
+                htmlElement.classList.remove('dark');
+            }
+            updateDarkModeIcon();
+        }
+
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('click', () => {
+                htmlElement.classList.toggle('dark');
+                if (htmlElement.classList.contains('dark')) {
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                }
+                updateDarkModeIcon();
+            });
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            applyThemeFromLocalStorage();
+            feather.replace();
+
+            // --- NEW RESPONSIVE SIDEBAR LOGIC ---
+            if (toggleBtn) {
+                const overlay = document.getElementById('sidebar-overlay');
+
+                const openSidebar = () => {
+                    sidebar.classList.remove('-translate-x-full');
+                    if (window.innerWidth < 768) {
+                        overlay.classList.remove('hidden');
+                    } else {
+                        mainContent.classList.add('md:ml-64');
+                    }
+                };
+
+                const closeSidebar = () => {
+                    sidebar.classList.add('-translate-x-full');
+                    overlay.classList.add('hidden');
+                    mainContent.classList.remove('md:ml-64');
+                };
+
+                const toggleSidebar = () => {
+                    if (sidebar.classList.contains('-translate-x-full')) {
+                        openSidebar();
+                    } else {
+                        closeSidebar();
+                    }
+                };
+                
+                const setInitialState = () => {
+                    if (window.innerWidth >= 768) {
+                        openSidebar();
+                    } else {
+                        closeSidebar();
+                    }
+                };
+
+                setInitialState(); // Set state on initial load
+                toggleBtn.addEventListener('click', toggleSidebar);
+                overlay.addEventListener('click', toggleSidebar);
+
+                // Adjust on window resize
+                let isDesktop = window.innerWidth >= 768;
+                window.addEventListener('resize', () => {
+                    const wasDesktop = isDesktop;
+                    isDesktop = window.innerWidth >= 768;
+                    if (isDesktop !== wasDesktop) {
+                        setInitialState();
+                    }
+                });
+            }
+        });
+
+        // Timer and focus mode logic
+        const FULL_DASH_ARRAY = 2 * Math.PI * 70; // 2 * pi * radius (70)
+        const circle = document.querySelector('.progress-ring__circle');
+        const timerDisplay = document.getElementById('timer');
+        const startPauseBtn = document.getElementById('startPauseBtn');
+        const resetBtn = document.getElementById('resetBtn');
+        const alertSound = document.getElementById('alertSound');
+        const sessionBtns = document.querySelectorAll('.sessionBtn');
+        
+        // Custom Dropdown Elements
+        const dropdownButton = document.getElementById('dropdownButton');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        const dropdownOptions = document.querySelectorAll('.dropdown-option');
+        const selectedOptionSpan = document.getElementById('selectedOption');
+        const dropdownChevron = dropdownButton.querySelector('i');
+        const customInputs = document.getElementById('customInputs');
+        const customWorkInput = document.getElementById('customWork');
+        const customBreakInput = document.getElementById('customBreak');
+        const applyCustomBtn = document.getElementById('applyCustom');
+        const phaseLabel = document.getElementById('phaseLabel');
+
+
+        const MODES = {
+            pomodoro: { name: 'Pomodoro (25/5)', work: 1500, break: 300 },
+            '52-17': { name: '52/17 Method', work: 3120, break: 1020 },
+            '90-20': { name: '90/20 Method', work: 5400, break: 1200 },
+            custom: { name: 'Custom', work: 1500, break: 300 },
+        };
+
+        let currentMode = 'pomodoro';
+        let workDuration = MODES[currentMode].work;
+        let breakDuration = MODES[currentMode].break;
+
+        let timeLeft = workDuration;
+        let timerInterval = null;
+        let isRunning = false;
+        let isWorkPhase = true;
+
+        circle.setAttribute('r', '70'); // Set radius for calculation
+        circle.style.strokeDasharray = `${FULL_DASH_ARRAY} ${FULL_DASH_ARRAY}`;
+
+        function formatTime(time) {
+            const minutes = Math.floor(time / 60);
+            const seconds = time % 60;
+            return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function setCircleProgress() {
+            const total = isWorkPhase ? workDuration : breakDuration;
+            const progress = (total - timeLeft) / total;
+            const offset = FULL_DASH_ARRAY * (1 - progress);
+            circle.style.strokeDashoffset = offset;
+            circle.style.stroke = isWorkPhase ? '#3b82f6' : '#22c55e'; // Blue-500 or Green-500
+        }
+
+        function updateTimer() {
+            timeLeft--;
+            timerDisplay.textContent = formatTime(timeLeft);
+            setCircleProgress();
+
+            if (timeLeft <= 0) {
+                alertSound.play();
+                clearInterval(timerInterval);
+                isRunning = false;
+                startPauseBtn.textContent = 'Start';
+                
+                if (isWorkPhase) {
+                    isWorkPhase = false;
+                    timeLeft = breakDuration;
+                    phaseLabel.textContent = 'Break Time';
+                } else {
+                    isWorkPhase = true;
+                    timeLeft = workDuration;
+                    phaseLabel.textContent = 'Focus Session';
+                }
+                timerDisplay.textContent = formatTime(timeLeft);
+                setCircleProgress();
+            }
+        }
+
+        function startPauseTimer() {
+            if (!isRunning) {
+                timerInterval = setInterval(updateTimer, 1000);
+                isRunning = true;
+                startPauseBtn.textContent = 'Pause';
+                setCircleProgress(); // Start the progress animation immediately
+            } else {
+                clearInterval(timerInterval);
+                isRunning = false;
+                startPauseBtn.textContent = 'Start';
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            isWorkPhase = true;
+            timeLeft = workDuration;
+            timerDisplay.textContent = formatTime(timeLeft);
+            phaseLabel.textContent = 'Focus Session';
+            circle.style.strokeDashoffset = FULL_DASH_ARRAY; // Hide the progress circle
+            startPauseBtn.textContent = 'Start';
+        }
+
+        function setMode(mode) {
+            currentMode = mode;
+            if (mode === 'custom') {
+                customInputs.classList.remove('hidden');
+            } else {
+                customInputs.classList.add('hidden');
+                workDuration = MODES[mode].work;
+                breakDuration = MODES[mode].break;
+                resetTimer();
+            }
+        }
+        
+        // Custom dropdown logic
+        dropdownButton.addEventListener('click', () => {
+            dropdownMenu.classList.toggle('active');
+            dropdownButton.classList.toggle('active');
+            dropdownChevron.classList.toggle('rotate-180');
+        });
+
+        dropdownOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const value = option.getAttribute('data-value');
+                const text = option.textContent.trim();
+                selectedOptionSpan.textContent = text;
+                setMode(value);
+                
+                dropdownMenu.classList.remove('active');
+                dropdownButton.classList.remove('active');
+                dropdownChevron.classList.remove('rotate-180');
+            });
+        });
+
+        // Close the dropdown if the user clicks outside
+        window.addEventListener('click', (e) => {
+            if (!dropdownButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
+                dropdownMenu.classList.remove('active');
+                dropdownButton.classList.remove('active');
+                dropdownChevron.classList.remove('rotate-180');
+            }
+        });
+
+
+        applyCustomBtn.addEventListener('click', () => {
+            const work = parseInt(customWorkInput.value, 10);
+            const brk = parseInt(customBreakInput.value, 10);
+            if (work > 0 && brk > 0) {
+                workDuration = work * 60;
+                breakDuration = brk * 60;
+                resetTimer();
+            } else {
+                console.error('Please enter valid durations for work and break.');
+            }
+        });
+
+        sessionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const seconds = parseInt(btn.getAttribute('data-time'), 10);
+                workDuration = seconds;
+                breakDuration = Math.floor(seconds / 5);
+                
+                // Update custom inputs to reflect the quick select
+                customWorkInput.value = seconds / 60;
+                customBreakInput.value = Math.floor(seconds / 5) / 60;
+                
+                setMode('custom');
+                selectedOptionSpan.textContent = `Custom (${seconds / 60} min)`;
+                resetTimer();
+            });
+        });
+
+        startPauseBtn.addEventListener('click', startPauseTimer);
+        resetBtn.addEventListener('click', resetTimer);
+
+        // Initialize
+        setMode(currentMode);
+        resetTimer();
+    </script>
+</body>
+</html>

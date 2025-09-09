@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Progress - AI Study Partner</title>
+
+    <!-- Poppins font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' }
+    </script>
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, onSnapshot, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        window.firebase = {
+            initializeApp, getAuth, signInAnonymously, onAuthStateChanged,
+            getFirestore, doc, onSnapshot, setDoc
+        };
+    </script>
+
+    <style>
+        body { font-family: 'Poppins', sans-serif; }
+        .gradient-card-1 {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+        }
+        .gradient-card-2 {
+            background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+            color: white;
+        }
+        .fade-in {
+            animation: fadeIn 0.6s ease-in-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeIn {
+            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(20px); }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100 transition-colors duration-300">
+
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-600 to-green-500 text-white shadow-lg flex items-center justify-between px-6 py-4 dark:from-gray-800 dark:to-gray-900">
+        <a href="dashboard.html" class="flex items-center space-x-2 font-semibold hover:underline">
+            <i data-feather="arrow-left"></i><span>Back to Home</span>
+        </a>
+        <h1 class="text-xl sm:text-2xl font-bold">My Progress</h1>
+        <div class="flex items-center space-x-4">
+            <button id="themeToggle" class="p-2 rounded-full hover:bg-white hover:bg-opacity-20 transition-colors">
+                <i id="themeIcon" data-feather="sun" class="w-6 h-6"></i>
+            </button>
+            <div class="w-10 h-10 rounded-full border-2 border-white bg-gray-300 dark:bg-gray-700 flex items-center justify-center">
+                <i data-feather="user" class="text-gray-600 dark:text-gray-300"></i>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-6 space-y-12">
+
+        <!-- User ID -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-4 text-center fade-in">
+            <p class="text-sm text-gray-600 dark:text-gray-400">User ID: <span id="userIdDisplay" class="font-mono text-xs">Loading...</span></p>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="gradient-card-1 rounded-xl shadow-lg p-6 flex flex-col items-center text-center transform transition-transform duration-300 hover:scale-105 fade-in">
+                <i data-feather="clock" class="w-12 h-12 mb-3 drop-shadow-md"></i>
+                <p class="text-5xl font-bold"><span id="totalHours">...</span>h</p>
+                <p class="text-lg font-light opacity-80">Total Study Hours</p>
+            </div>
+            <div class="gradient-card-2 rounded-xl shadow-lg p-6 flex flex-col items-center text-center transform transition-transform duration-300 hover:scale-105 fade-in">
+                <i data-feather="book-open" class="w-12 h-12 mb-3 drop-shadow-md"></i>
+                <p class="text-5xl font-bold"><span id="topicsCovered">...</span></p>
+                <p class="text-lg font-light opacity-80">Topics Covered</p>
+            </div>
+        </div>
+        
+        <!-- Topics List -->
+        <section class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 fade-in">
+            <h2 class="text-2xl font-bold mb-4 text-center">Topics Studied</h2>
+            <ul id="topicsList" class="space-y-2 text-center text-gray-600 dark:text-gray-300">
+                <p class="text-sm">Loading topics...</p>
+            </ul>
+        </section>
+
+    </main>
+
+    <script>
+        feather.replace();
+
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+
+        function setTheme(dark) {
+            html.classList.toggle('dark', dark);
+            localStorage.setItem('theme', dark ? 'dark' : 'light');
+            themeIcon.setAttribute('data-feather', dark ? 'sun' : 'moon');
+            feather.replace();
+        }
+        themeToggle.addEventListener('click', () => setTheme(!html.classList.contains('dark')));
+        setTheme(localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches));
+
+        // Firebase
+        let db, auth;
+        const firebaseConfig = {
+            apiKey: "AIzaSyAeq9Tuo5CmLRh35thABNj-Qv9V_hpjB9c",
+            authDomain: "study-a25ac.firebaseapp.com",
+            projectId: "study-a25ac",
+            storageBucket: "study-a25ac.firebasestorage.app",
+            messagingSenderId: "173051640117",
+            appId: "1:173051640117:web:2ee34824b54b2e9ba7b47c",
+            measurementId: "G-MCSV02V3Q3"
+        };
+        const appId = "study-a25ac";
+
+        async function init() {
+            const fb = window.firebase;
+            const app = fb.initializeApp(firebaseConfig);
+            auth = fb.getAuth(app);
+            db = fb.getFirestore(app);
+
+            fb.onAuthStateChanged(auth, async (user) => {
+                if (user) {
+                    document.getElementById('userIdDisplay').textContent = user.uid;
+                    const ref = fb.doc(db, `/artifacts/${appId}/users/${user.uid}/progress/data`);
+                    fb.onSnapshot(ref, (doc) => {
+                        const data = doc.data();
+                        if (data) {
+                            updateSummary(data);
+                            updateTopics(data.topicsDistribution);
+                        } else {
+                            fb.setDoc(ref, { totalHours: 0, topicsCovered: 0, topicsDistribution: { labels: [], data: [] } });
+                        }
+                    });
+                } else {
+                    await fb.signInAnonymously(auth);
+                }
+            });
+        }
+
+        function updateSummary(data) {
+            document.getElementById('totalHours').textContent = data.totalHours;
+            document.getElementById('topicsCovered').textContent = data.topicsCovered;
+        }
+
+        function updateTopics(topics) {
+            const list = document.getElementById('topicsList');
+            list.innerHTML = '';
+            if (topics?.labels?.length) {
+                topics.labels.forEach((t, i) => {
+                    list.innerHTML += `<li class="bg-gray-100 dark:bg-gray-700 px-4 py-2 rounded-md flex justify-between">
+                        <span>${t}</span>
+                        <span class="text-sm text-gray-500 dark:text-gray-400">${topics.data[i]}h</span>
+                    </li>`;
+                });
+            } else {
+                list.innerHTML = `<p class="text-sm text-center">No topics found.</p>`;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

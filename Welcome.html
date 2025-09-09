@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Welcome - AI Study Partner</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .hero-bg {
+            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.5; }
+        }
+
+        .morphing-text {
+            background: linear-gradient(45deg, #fff, #f0f0f0, #fff);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textShimmer 3s ease-in-out infinite;
+        }
+
+        .glass {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-dark {
+            backdrop-filter: blur(20px);
+            background: rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card {
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .pulse-glow {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pulse-glow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.8s;
+        }
+
+        .pulse-glow:hover::before {
+            left: 100%;
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+
+        .slide-up {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideUp 1s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+        }
+
+        @keyframes slideUp {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .premium-glow {
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+            animation: premiumPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes premiumPulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 50px rgba(59, 130, 246, 0.8); }
+        }
+
+        .modal-enter {
+            animation: modalSlideIn 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        @keyframes modalSlideIn {
+            from { opacity: 0; transform: scale(0.8) translateY(-50px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .nav-glass {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .btn-3d {
+            transform-style: preserve-3d;
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .btn-3d:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-3d:active {
+            transform: translateY(-1px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon-rotate {
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+        }
+
+        .feature-card:hover .icon-rotate {
+            transform: rotateY(360deg);
+        }
+
+        .responsive-text {
+            font-size: clamp(1.5rem, 6vw, 3.5rem);
+            line-height: 1.1;
+        }
+        
+        .animated-subheading {
+            display: inline-block;
+            overflow: hidden;
+            border-right: 2px solid rgba(255, 255, 255, 0.75);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 0.15em;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: rgba(255, 255, 255, 0.75); }
+        }
+
+        .feature-icon-wrapper {
+            position: relative;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .feature-card:hover .feature-icon-wrapper {
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .hero-bg { background-attachment: scroll; }
+            .particle { display: none; }
+            .feature-card { transform: none !important; }
+            .feature-card:hover { transform: translateY(-5px) !important; }
+            .glass { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); }
+            .glass-dark { background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); }
+            .animated-subheading { white-space: normal; overflow: visible; border-right: none; animation: none; }
+        }
+
+        @media (max-width: 640px) {
+            .responsive-text { font-size: 2rem; line-height: 1.2; }
+        }
+    </style>
+</head>
+<body class="hero-bg min-h-screen flex flex-col overflow-x-hidden">
+
+    <!-- Floating Particles -->
+    <div class="fixed inset-0 pointer-events-none">
+        <div class="particle w-3 h-3 top-10 left-10 stagger-1"></div>
+        <div class="particle w-2 h-2 top-20 right-20 stagger-2"></div>
+        <div class="particle w-4 h-4 top-32 left-1/4 stagger-3"></div>
+        <div class="particle w-2 h-2 bottom-20 right-10 stagger-4"></div>
+        <div class="particle w-3 h-3 bottom-32 left-20 stagger-5"></div>
+        <div class="particle w-2 h-2 top-1/2 right-1/3 stagger-6"></div>
+    </div>
+
+    <!-- Navbar with Glass Effect -->
+    <nav class="nav-glass flex justify-between items-center px-4 py-4 slide-up stagger-1 relative z-10">
+        <!-- Logo -->
+        <span class="font-bold text-2xl morphing-text">LunaAi™</span>
+
+        <!-- Navigation Buttons -->
+        <div class="flex items-center space-x-4">
+            <button
+                id="signupBtn"
+                class="bg-white text-purple-700 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 hover:text-purple-800 transition-all duration-300 btn-3d pulse-glow"
+                onclick="window.location.href='index.html'"
+            >
+                Login
+            </button>
+        </div>
+
+        <!-- User Greeting (Hidden by default) -->
+        <div
+            id="userGreeting"
+            class="hidden items-center space-x-4 text-white font-semibold select-none"
+        >
+            <span id="welcomeUser" class="morphing-text text-sm sm:text-base"></span>
+            <button
+                id="logoutBtn"
+                class="bg-white text-purple-700 px-4 py-2 rounded-lg hover:bg-red-100 transition-all duration-300 btn-3d text-sm"
+            >
+                Logout
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Enhanced Visuals -->
+    <section class="flex-grow flex flex-col justify-center items-center text-center px-4 sm:px-6 max-w-6xl mx-auto text-white pb-16 sm:pb-32 relative z-10 min-h-[60vh] sm:min-h-0">
+        <div class="slide-up stagger-2 max-w-4xl">
+            <h1 class="responsive-text font-extrabold mb-4 sm:mb-6 morphing-text leading-tight px-2">
+                Your AI-Powered Study Partner
+            </h1>
+            <h2 class="text-base sm:text-xl lg:text-2xl font-normal text-gray-200 mb-8 sm:mb-12 animated-subheading">
+                Boost productivity, master subjects, and study smarter.
+            </h2>
+        </div>
+        
+        <div class="slide-up stagger-3 flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-6 w-full max-w-sm sm:max-w-none px-4 mx-auto justify-center">
+            <button id="ctaStudyAssistant" class="bg-gradient-to-r from-green-400 to-teal-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold hover:from-green-500 hover:to-teal-600 transition-all duration-300 btn-3d pulse-glow text-base sm:text-lg shadow-2xl">
+                ✨ Try Now
+            </button>
+            <button id="ctaLogin" class="glass border-2 border-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold hover:bg-white hover:text-purple-700 transition-all duration-300 btn-3d text-base sm:text-lg" onclick="window.location.href='index.html'">
+                Login
+            </button>
+        </div>
+    </section>
+
+    <!-- Features with Advanced Cards -->
+    <section class="slide-up stagger-4 bg-gray-900 py-12 sm:py-16 px-4 sm:px-16 text-center max-w-7xl -mt-8 sm:-mt-24 shadow-2xl backdrop-blur-sm bg-opacity-80 relative z-10">
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 sm:mb-16 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent px-4">
+            Powerful Features
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 justify-items-center px-4">
+            <div class="feature-card glass p-6 sm:p-8 rounded-xl sm:rounded-2xl cursor-pointer group">
+                <div class="feature-icon-wrapper mx-auto mb-4 sm:mb-6">
+                    <i data-feather="zap" class="w-12 h-12 sm:w-16 sm:h-16 text-yellow-400 group-hover:text-yellow-300"></i>
+                </div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4 text-white">Smart Recommendations</h3>
+                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    Our AI analyzes your performance to suggest personalized study materials, ensuring you focus on what matters most.
+                </p>
+            </div>
+            <div class="feature-card glass p-6 sm:p-8 rounded-xl sm:rounded-2xl cursor-pointer group">
+                <div class="feature-icon-wrapper mx-auto mb-4 sm:mb-6">
+                    <i data-feather="clock" class="w-12 h-12 sm:w-16 sm:h-16 text-green-400 group-hover:text-green-300"></i>
+                </div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4 text-white">Advanced Focus Timer</h3>
+                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    Utilize our Pomodoro and 52/17 timers with ambient soundscapes to achieve peak concentration and avoid burnout.
+                </p>
+            </div>
+            <div class="feature-card glass p-6 sm:p-8 rounded-xl sm:rounded-2xl cursor-pointer group">
+                <div class="feature-icon-wrapper mx-auto mb-4 sm:mb-6">
+                    <i data-feather="trending-up" class="w-12 h-12 sm:w-16 sm:h-16 text-purple-400 group-hover:text-purple-300"></i>
+                </div>
+                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4 text-white">Progress Analytics</h3>
+                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
+                    Track your study habits and visualize your progress with insightful, data-driven analytics to stay on top of your goals.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="slide-up stagger-5 py-12 sm:py-20 px-4 sm:px-6 max-w-7xl mx-auto text-center" id="pricingPlans">
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 sm:mb-16 text-white morphing-text">Choose Your Plan</h2>
+        <div class="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3 justify-items-center">
+            
+            <!-- Free Plan -->
+            <div class="glass-dark rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-xl transform hover:scale-105 transition-all duration-500 cursor-pointer text-white">
+                <div class="text-center mb-6 sm:mb-8">
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2">Free</h3>
+                    <div class="text-3xl sm:text-4xl font-bold text-green-400 mb-2">$0</div>
+                    <p class="text-gray-300 text-sm sm:text-base">Perfect for getting started</p>
+                </div>
+                <ul class="mb-6 sm:mb-8 text-left space-y-2 sm:space-y-3 text-sm sm:text-base">
+                    <li class="flex items-start"><i data-feather="check" class="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mr-3 mt-0.5 flex-shrink-0"></i><span>Limited AI recommendations</span></li>
+                    <li class="flex items-start"><i data-feather="check" class="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mr-3 mt-0.5 flex-shrink-0"></i><span>Basic study timer</span></li>
+                    <li class="flex items-start"><i data-feather="check" class="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mr-3 mt-0.5 flex-shrink-0"></i><span>Progress tracking</span></li>
+                </ul>
+                <button id="getStartedFree" class="bg-gradient-to-r from-green-500 to-green-600 text-white py-3 px-6 rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 w-full btn-3d font-semibold text-sm sm:text-base" onclick="window.location.href='index.html'">
+                    Get Started
+                </button>
+            </div>
+
+            <!-- Pro Plan - Featured -->
+            <div class="glass-dark rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-xl premium-glow transform hover:scale-105 transition-all duration-500 cursor-pointer text-white relative border-2 border-blue-500 order-first md:order-none">
+                <div class="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2">
+                    <span class="bg-gradient-to-r from-blue-500 to-purple-600 text-white px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-bold animate-pulse">
+                        MOST POPULAR
+                    </span>
+                </div>
+                <div class="text-center mb-6 sm:mb-8 pt-2">
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2">Pro</h3>
+                    <div class="text-3xl sm:text-4xl font-bold text-blue-400 mb-2">$9.99</div>
+                    <p class="text-gray-300 text-sm sm:text-base">Everything you need to excel</p>
+                </div>
+                <ul class="mb-6 sm:mb-8 text-left space-y-2 sm:space-y-3 text-sm sm:text-base">
+                    <li class="flex items-start"><i data-feather="check" class="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 mr-3 mt-0.5 flex-shrink-0"></i><span>Unlimited AI recommendations</span></li>
+                    <li class="flex items-start"><i data-feather="check" class="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 mr-3 mt-0.5 flex-shrink-0"></i><span>Advanced timers & focus modes</span></li>
+                    <li class="flex items-start"><i data-feather="check" class="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 mr-3 mt-0.5 flex-shrink-0"></i><span>Detailed analytics dashboard</span></li>
+                    <li class="flex items-start"><i data-feather="check" class="w-4 h-4 sm:w-5 sm:h-5 text-blue-400 mr-3 mt-0.5 flex-shrink-0"></i><span>Priority support</span></li>
+                </ul>
+                <button id="buyPro" class="bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 w-full btn-3d font-semibold pulse-glow text-sm sm:text-base">
+                    Get Pro Now
+                </button>
+            </div>
+
+            <!-- Premium Plan -->
+            <div class="glass-dark rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-xl transform hover:scale-105 transition-all duration-500 cursor-pointer text-white">
+                <div class="text-center mb-6 sm:mb-8">
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2">Premium</h3>
+                    <div class="text-3xl sm:text-4xl font-bold text-purple-400 mb-2">$19.99</div>
+                    <p class="text-gray-300 text-sm sm:text-base">For serious students</p>
+                </div>
+                <ul class="mb-6 sm:mb-8 text-left space-y-2 sm:space-y-3 text-sm sm:text-base">
+                    <li class="flex items-start"><i data-feather="check" class="w-4 h-4 sm:w-5 sm:h-5 text-purple-400 mr-3 mt-0.5 flex-shrink-0"></i><span>Everything in Pro</span></li>
+                    <li class="flex items-start"><i data-feather="check" class="w-4 h-4 sm:w-5 sm:h-5 text-purple-400 mr-3 mt-0.5 flex-shrink-0"></i><span>1-on-1 AI coaching</span></li>
+                    <li class="flex items-start"><i data-feather="check" class="w-4 h-4 sm:w-5 sm:h-5 text-purple-400 mr-3 mt-0.5 flex-shrink-0"></i><span>Exclusive content access</span></li>
+                    <li class="flex items-start"><i data-feather="check" class="w-4 h-4 sm:w-5 sm:h-5 text-purple-400 mr-3 mt-0.5 flex-shrink-0"></i><span>Live study sessions</span></li>
+                </ul>
+                <button id="buyPremium" class="bg-gradient-to-r from-purple-500 to-pink-600 text-white py-3 px-6 rounded-xl hover:from-purple-600 hover:to-pink-700 transition-all duration-300 w-full btn-3d font-semibold text-sm sm:text-base">
+                    Go Premium
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Pro/Premium Plans -->
+    <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50 p-4 backdrop-blur-sm">
+        <div class="glass-dark rounded-xl sm:rounded-2xl shadow-2xl max-w-sm sm:max-w-md w-full p-6 sm:p-10 relative modal-enter text-white">
+            <button
+                id="closePaymentModal"
+                class="absolute top-3 sm:top-4 right-3 sm:right-4 text-gray-300 hover:text-white transition-colors duration-300"
+                aria-label="Close Modal"
+            >
+                <i data-feather="x" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+            </button>
+            <div class="text-center">
+                <i data-feather="credit-card" class="mx-auto mb-4 w-16 h-16 text-yellow-400"></i>
+                <h3 class="text-xl sm:text-2xl font-bold mb-4">Online Payments Coming Soon</h3>
+                <p class="mb-6 text-gray-300 text-sm sm:text-base">
+                    For now, please contact us directly to purchase a plan.
+                </p>
+                <a href="https://wa.me/94764101397" target="_blank" class="block bg-gradient-to-r from-green-500 to-blue-500 text-white py-3 sm:py-4 rounded-xl hover:from-green-600 hover:to-blue-600 transition-all duration-300 font-semibold btn-3d pulse-glow text-sm sm:text-base">
+                    Contact via WhatsApp: +94 076 410 1397
+                </a>
+            </div>
+        </div>
+    </div>
+    <!-- /Modal for Pro/Premium Plans -->
+    
+    <!-- Study Assistant Modal -->
+    <div id="studyAssistantModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50 p-4 backdrop-blur-sm">
+        <div class="glass-dark rounded-xl sm:rounded-2xl shadow-2xl max-w-2xl w-full h-[90vh] flex flex-col p-6 sm:p-10 relative modal-enter text-white">
+            <button
+                id="closeStudyAssistantModal"
+                class="absolute top-3 sm:top-4 right-3 sm:right-4 text-gray-300 hover:text-white transition-colors duration-300"
+                aria-label="Close Modal"
+            >
+                <i data-feather="x" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+            </button>
+            <h3 class="text-xl sm:text-2xl font-bold mb-4 bg-gradient-to-r from-green-400 to-teal-500 bg-clip-text text-transparent">
+                Your AI Study Assistant ✨
+            </h3>
+            
+            <div class="flex-grow flex flex-col space-y-4 overflow-y-auto mb-4 hide-scrollbar">
+                <!-- Response Display Area -->
+                <div id="responseContainer" class="flex-grow p-4 sm:p-6 rounded-lg glass-dark overflow-y-auto text-sm sm:text-base leading-relaxed text-gray-200">
+                    <p id="responseContent" class="hidden">
+                        Hello! I am your personal AI study assistant. Ask me anything about a topic and I will help you understand it better. Try asking me to "Explain the process of photosynthesis."
+                    </p>
+                    <div id="loadingIndicator" class="hidden flex items-center justify-center text-green-400">
+                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Generating response...
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input area and buttons -->
+            <div class="space-y-4">
+                <textarea
+                    id="studyPromptInput"
+                    class="w-full h-20 p-4 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:ring focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 resize-none text-sm sm:text-base"
+                    placeholder="E.g., Explain the concept of supply and demand..."
+                ></textarea>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <button id="generateBtn" class="flex-grow bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 font-bold btn-3d text-sm sm:text-base">
+                        Generate Explanation
+                    </button>
+                    <button id="summarizeBtn" class="bg-yellow-500 text-white py-3 px-6 rounded-xl hover:bg-yellow-600 transition-all duration-300 font-bold btn-3d text-sm sm:text-base">
+                        ✨ Summarize
+                    </button>
+                    <button id="readAloudBtn" class="bg-red-500 text-white py-3 px-6 rounded-xl hover:bg-red-600 transition-all duration-300 font-bold btn-3d text-sm sm:text-base">
+                        ▶️ Read Aloud
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /Study Assistant Modal -->
+
+    <!-- Footer -->
+    <footer class="slide-up stagger-6 bg-gray-900 bg-opacity-80 text-white py-8 px-4 text-center mt-16 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <p class="text-gray-300 mb-4">© 2025 AI Study Partner. Empowering students worldwide.</p>
+            <div class="flex justify-center space-x-6 text-sm">
+                <a href="privacy.html" class="hover:text-blue-400 transition-colors duration-300">Privacy Policy</a>
+                <a href="#" class="hover:text-blue-400 transition-colors duration-300">Terms of Service</a>
+                <a href="#" class="hover:text-blue-400 transition-colors duration-300">Contact Us</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+
+        const paymentModal = document.getElementById('paymentModal');
+        const closePaymentModalBtn = document.getElementById('closePaymentModal');
+        const buyProBtn = document.getElementById('buyPro');
+        const buyPremiumBtn = document.getElementById('buyPremium');
+        
+        const studyAssistantModal = document.getElementById('studyAssistantModal');
+        const openStudyAssistantBtn = document.getElementById('ctaStudyAssistant');
+        const closeStudyAssistantBtn = document.getElementById('closeStudyAssistantModal');
+        const studyPromptInput = document.getElementById('studyPromptInput');
+        const generateBtn = document.getElementById('generateBtn');
+        const summarizeBtn = document.getElementById('summarizeBtn');
+        const readAloudBtn = document.getElementById('readAloudBtn');
+        const responseContainer = document.getElementById('responseContainer');
+        const responseContent = document.getElementById('responseContent');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+
+        let audio = null;
+        let hasGeneratedOnce = false;
+
+        function pcmToWav(pcmData, sampleRate) {
+            const numChannels = 1;
+            const bytesPerSample = 2; // 16-bit PCM
+            const dataLength = pcmData.length * bytesPerSample;
+
+            const buffer = new ArrayBuffer(44 + dataLength);
+            const view = new DataView(buffer);
+
+            // WAV header
+            let offset = 0;
+            // "RIFF" chunk descriptor
+            view.setUint32(offset, 0x52494646, false); offset += 4;
+            // File size (36 + data length)
+            view.setUint32(offset, 36 + dataLength, true); offset += 4;
+            // "WAVE" format
+            view.setUint32(offset, 0x57415645, false); offset += 4;
+            // "fmt " sub-chunk
+            view.setUint32(offset, 0x666d7420, false); offset += 4;
+            // Sub-chunk size (16 for PCM)
+            view.setUint32(offset, 16, true); offset += 4;
+            // Audio format (1 for PCM)
+            view.setUint16(offset, 1, true); offset += 2;
+            // Number of channels
+            view.setUint16(offset, numChannels, true); offset += 2;
+            // Sample rate
+            view.setUint32(offset, sampleRate, true); offset += 4;
+            // Byte rate (SampleRate * NumChannels * BytesPerSample)
+            view.setUint32(offset, sampleRate * numChannels * bytesPerSample, true); offset += 4;
+            // Block align (NumChannels * BytesPerSample)
+            view.setUint16(offset, numChannels * bytesPerSample, true); offset += 2;
+            // Bits per sample
+            view.setUint16(offset, 16, true); offset += 2;
+            // "data" sub-chunk
+            view.setUint32(offset, 0x64617461, false); offset += 4;
+            // Data size
+            view.setUint32(offset, dataLength, true); offset += 4;
+
+            // Write PCM data
+            for (let i = 0; i < pcmData.length; i++, offset += 2) {
+                view.setInt16(offset, pcmData[i], true);
+            }
+
+            return new Blob([view], { type: 'audio/wav' });
+        }
+        
+        function base64ToArrayBuffer(base64) {
+            const binaryString = window.atob(base64);
+            const len = binaryString.length;
+            const bytes = new Uint8Array(len);
+            for (let i = 0; i < len; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        async function fetchWithBackoff(url, options, maxRetries = 5, delay = 1000) {
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (response.status === 429) {
+                        if (i < maxRetries - 1) {
+                            await new Promise(res => setTimeout(res, delay));
+                            delay *= 2;
+                            continue;
+                        } else {
+                            throw new Error('Max retries exceeded for 429 status.');
+                        }
+                    }
+                    return response;
+                } catch (error) {
+                    if (i < maxRetries - 1) {
+                        await new Promise(res => setTimeout(res, delay));
+                        delay *= 2;
+                    } else {
+                        throw error;
+                    }
+                }
+            }
+        }
+
+        function toggleModal(modal, show) {
+            modal.classList.toggle('hidden', !show);
+            const modalContent = modal.querySelector('div');
+            modalContent.classList.remove('modal-enter');
+            void modalContent.offsetWidth; // Trigger reflow
+            modalContent.classList.add('modal-enter');
+        }
+
+        buyProBtn.addEventListener('click', () => {
+            toggleModal(paymentModal, true);
+        });
+
+        buyPremiumBtn.addEventListener('click', () => {
+            toggleModal(paymentModal, true);
+        });
+
+        closePaymentModalBtn.addEventListener('click', () => {
+            toggleModal(paymentModal, false);
+        });
+
+        paymentModal.addEventListener('click', (e) => {
+            if (e.target === paymentModal) {
+                toggleModal(paymentModal, false);
+            }
+        });
+
+        openStudyAssistantBtn.addEventListener('click', () => {
+            toggleModal(studyAssistantModal, true);
+            responseContent.classList.remove('hidden');
+        });
+
+        closeStudyAssistantBtn.addEventListener('click', () => {
+            toggleModal(studyAssistantModal, false);
+            if (audio) {
+                audio.pause();
+                audio = null;
+            }
+        });
+
+        studyAssistantModal.addEventListener('click', (e) => {
+            if (e.target === studyAssistantModal) {
+                toggleModal(studyAssistantModal, false);
+            }
+        });
+        
+        // Function to handle the initial click on the generate button
+        function handleGenerateClick() {
+            if (hasGeneratedOnce) {
+                window.location.href = 'index.html';
+            } else {
+                generateExplanation();
+            }
+        }
+        
+        async function generateExplanation() {
+            const prompt = studyPromptInput.value.trim();
+            if (!prompt) return;
+
+            responseContent.innerHTML = '';
+            responseContent.classList.add('hidden');
+            loadingIndicator.classList.remove('hidden');
+            generateBtn.disabled = true;
+
+            const fullPrompt = `Provide a short and friendly explanation of the following topic. Keep the tone conversational, and use simple language to make it easy to understand. Topic: ${prompt}`;
+
+            const payload = {
+                contents: [{
+                    parts: [{ text: fullPrompt }]
+                }],
+            };
+
+            const apiKey = "AIzaSyA19xjTISq7xJRx8ab3-TGaSlVW7XxWFwQ";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetchWithBackoff(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+
+                if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    const markdown = marked.parse(text); // Using markdown library
+                    responseContent.innerHTML = markdown;
+                    responseContent.classList.remove('hidden');
+
+                    if (!hasGeneratedOnce) {
+                        hasGeneratedOnce = true;
+                        generateBtn.textContent = 'Signup for more';
+                        generateBtn.onclick = () => window.location.href = 'index.html';
+                    }
+                } else {
+                    responseContent.textContent = "Sorry, I couldn't generate a response. Please try again.";
+                    responseContent.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error("Error generating text:", error);
+                responseContent.textContent = "An error occurred. Please check your network connection and try again.";
+                responseContent.classList.remove('hidden');
+            } finally {
+                loadingIndicator.classList.add('hidden');
+                generateBtn.disabled = false;
+            }
+        }
+
+        // Attach the initial click handler
+        generateBtn.addEventListener('click', handleGenerateClick);
+        
+        summarizeBtn.addEventListener('click', async () => {
+            const textToSummarize = responseContent.textContent.trim();
+            if (!textToSummarize) {
+                responseContent.textContent = "Please generate some content first to summarize.";
+                responseContent.classList.remove('hidden');
+                return;
+            }
+
+            responseContent.innerHTML = '';
+            loadingIndicator.classList.remove('hidden');
+            summarizeBtn.disabled = true;
+
+            const prompt = `Summarize the following text in a concise and clear manner, using bullet points where appropriate:\n\n${textToSummarize}`;
+
+            const payload = {
+                contents: [{
+                    parts: [{ text: prompt }]
+                }],
+            };
+
+            const apiKey = "AIzaSyA19xjTISq7xJRx8ab3-TGaSlVW7XxWFwQ";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetchWithBackoff(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    responseContent.innerHTML = marked.parse(text);
+                    responseContent.classList.remove('hidden');
+                } else {
+                    responseContent.textContent = "Sorry, I couldn't summarize this text.";
+                    responseContent.classList.remove('hidden');
+                }
+            } catch (error) {
+                console.error("Error summarizing text:", error);
+                responseContent.textContent = "An error occurred during summarization. Please try again.";
+                responseContent.classList.remove('hidden');
+            } finally {
+                loadingIndicator.classList.add('hidden');
+                summarizeBtn.disabled = false;
+            }
+        });
+
+        readAloudBtn.addEventListener('click', async () => {
+            const textToRead = responseContent.textContent.trim();
+            if (!textToRead) {
+                responseContent.textContent = "Please generate some content first to read aloud.";
+                responseContent.classList.remove('hidden');
+                return;
+            }
+
+            if (audio) {
+                audio.pause();
+                audio = null;
+                readAloudBtn.innerHTML = '▶️ Read Aloud';
+                return;
+            }
+            
+            readAloudBtn.innerHTML = 'Loading...';
+            readAloudBtn.disabled = true;
+
+            const payload = {
+                contents: [{
+                    parts: [{ text: textToRead }]
+                }],
+                generationConfig: {
+                    responseModalities: ["AUDIO"],
+                    speechConfig: {
+                        voiceConfig: {
+                            prebuiltVoiceConfig: { voiceName: "Kore" }
+                        }
+                    }
+                },
+                model: "gemini-2.5-flash-preview-tts"
+            };
+
+            const apiKey = "AIzaSyA19xjTISq7xJRx8ab3-TGaSlVW7XxWFwQ";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
+
+            try {
+                const response = await fetchWithBackoff(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const result = await response.json();
+                
+                const part = result?.candidates?.[0]?.content?.parts?.[0];
+                const audioData = part?.inlineData?.data;
+                const mimeType = part?.inlineData?.mimeType;
+
+                if (audioData && mimeType && mimeType.startsWith("audio/")) {
+                    const sampleRateMatch = mimeType.match(/rate=(\d+)/);
+                    const sampleRate = sampleRateMatch ? parseInt(sampleRateMatch[1], 10) : 16000;
+                    
+                    const pcmData = base64ToArrayBuffer(audioData);
+                    const pcm16 = new Int16Array(pcmData);
+                    const wavBlob = pcmToWav(pcm16, sampleRate);
+                    const audioUrl = URL.createObjectURL(wavBlob);
+                    
+                    audio = new Audio(audioUrl);
+                    audio.play();
+                    
+                    readAloudBtn.innerHTML = '⏸️ Stop Reading';
+                    
+                    audio.addEventListener('ended', () => {
+                        readAloudBtn.innerHTML = '▶️ Read Aloud';
+                        audio = null;
+                    });
+                } else {
+                    console.error("Audio data or mime type is missing or invalid.");
+                    responseContent.textContent = "Sorry, I couldn't generate the audio. Please try again.";
+                }
+            } catch (error) {
+                console.error("Error generating audio:", error);
+                responseContent.textContent = "An error occurred during audio generation. Please try again.";
+            } finally {
+                readAloudBtn.disabled = false;
+                if (!audio) {
+                     readAloudBtn.innerHTML = '▶️ Read Aloud';
+                }
+            }
+        });
+        
+        // This is a simple client-side markdown parser to render the AI's response
+        // In a real application, you might use a more robust library or server-side rendering
+        const marked = {
+            parse: function(text) {
+                let html = text
+                    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+                    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+                    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+                    .replace(/\*\*(.*)\*\*/gim, '<b>$1</b>')
+                    .replace(/\*(.*)\*/gim, '<i>$1</i>')
+                    .replace(/^- (.*$)/gim, '<li>$1</li>')
+                    .replace(/`/gim, '');
+                
+                if (html.includes('<li>')) {
+                    html = '<ul>' + html + '</ul>';
+                }
+
+                html = html.replace(/\n/g, '<br>');
+                
+                return html;
+            }
+        };
+
+    </script>
+</body>
+</html>

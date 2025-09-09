@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notes & Summaries - LunaAi</title>
+  <link rel="icon" type="image/png" href="Icon.png" />
+  <!-- Google Font: Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Feather Icons CDN for clean icons -->
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    #sidebar {
+      transition: width 0.3s ease, padding 0.3s ease;
+    }
+    #sidebar.hide {
+      width: 0;
+      overflow: hidden;
+      padding: 0 !important;
+    }
+    /* Modal Overlay + Modal animations */
+    #modalOverlay, #aiModalOverlay, #confirmModalOverlay {
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(3px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+    }
+    #modalOverlay.show, #aiModalOverlay.show, #confirmModalOverlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    #modalOverlay > div, #aiModalOverlay > div, #confirmModalOverlay > div {
+      transform: scale(0.95);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      will-change: transform, opacity;
+    }
+    #modalOverlay.show > div, #aiModalOverlay.show > div, #confirmModalOverlay.show > div {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    /* Animate notes fade-in and slide */
+    .note-appear {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeSlideUp 0.4s forwards;
+    }
+    @keyframes fadeSlideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-left-color: currentColor;
+      border-radius: 50%;
+      width: 1.5rem;
+      height: 1.5rem;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+
+  <script>
+    // Configure Tailwind to use 'class' for dark mode
+    tailwind.config = {
+      darkMode: 'class'
+    }
+  </script>
+</head>
+<!-- Apply dark mode classes to the body as well for consistent background/text color transitions -->
+<body class="bg-gray-100 text-gray-900 font-sans transition-colors duration-300 dark:bg-gray-900 dark:text-gray-100">
+
+  <header class="bg-white shadow-md flex items-center justify-between px-6 py-4 fixed w-full z-10 top-0 dark:bg-gray-800 dark:border-b dark:border-gray-700">
+    <div class="flex items-center space-x-3">
+      <button id="toggleSidebar" class="mr-4 text-gray-600 focus:outline-none hover:scale-110 transition dark:text-gray-300" aria-label="Toggle Sidebar">
+        <i data-feather="menu"></i>
+      </button>
+      <!-- Updated gradient for dark mode compatibility -->
+      <span class="font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-green-500">LunaAi<sup style="font-size: 12px; color: #666; font-family: Arial;">™</sup></span>
+      <div class="relative hidden sm:block">
+        <input
+          type="text"
+          id="searchNotes"
+          placeholder="Search notes..."
+          class="rounded-full px-4 py-2 text-gray-800 focus:outline-none w-64 border border-transparent dark:text-gray-100 dark:bg-gray-700 dark:border-gray-600"
+        />
+        <i
+          data-feather="search"
+          class="absolute right-3 top-2.5 w-5 h-5 text-gray-500 pointer-events-none dark:text-gray-400"
+        ></i>
+      </div>
+    </div>
+    <div class="flex items-center space-x-4">
+      <button id="toggleDarkMode" class="hover:scale-110 transition text-gray-600 dark:text-gray-300" aria-label="Toggle Dark Mode">
+        <i data-feather="moon"></i>
+      </button>
+      <div class="w-10 h-10 rounded-full border-2 border-gray-300 bg-gray-200 flex items-center justify-center dark:border-gray-700 dark:bg-gray-700" aria-label="User Profile">
+        <i data-feather="user" class="w-6 h-6 text-gray-500 dark:text-gray-400"></i>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex min-h-screen pt-16">
+    <!-- Updated sidebar background and border colors for dark mode -->
+    <aside id="sidebar" class="w-64 bg-white shadow-lg h-screen p-4 space-y-4 border-r border-gray-200 fixed top-16 dark:bg-gray-800 dark:border-gray-700">
+      <nav class="space-y-2">
+        <!-- Updated link colors for dark mode -->
+        <a href="dashboard.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 transition hover:bg-blue-50 dark:text-gray-300 dark:hover:bg-gray-700">
+          <i data-feather="home" class="w-5 h-5"></i><span>Dashboard</span>
+        </a>
+        <a href="chat.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 transition hover:bg-blue-50 dark:text-gray-300 dark:hover:bg-gray-700">
+          <i data-feather="message-circle" class="w-5 h-5"></i><span>Chat with Luna</span>
+        </a>
+        <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-xl bg-blue-50 text-blue-700 font-semibold transition hover:bg-blue-100 dark:bg-gray-700 dark:text-blue-300 dark:hover:bg-gray-600">
+          <i data-feather="file-text" class="w-5 h-5"></i><span>Notes & Summaries</span>
+        </a>
+        <a href="quizzes.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 transition hover:bg-blue-50 dark:text-gray-300 dark:hover:bg-gray-700">
+          <i data-feather="book-open" class="w-5 h-5"></i><span>Quizzes</span>
+        </a>
+        <a href="focus.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 transition hover:bg-blue-50 dark:text-gray-300 dark:hover:bg-gray-700">
+          <i data-feather="clock" class="w-5 h-5"></i><span>Focus Mode</span>
+        </a>
+      </nav>
+    </aside>
+
+    <main id="mainContent" class="flex-1 p-8 md:ml-64 transition-all duration-300">
+      <div class="flex justify-between items-center mb-6">
+        <!-- Updated gradient for dark mode compatibility -->
+        <h1 class="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500 dark:from-blue-400 dark:to-green-300">Notes & Summaries</h1>
+        <button
+          id="addNoteBtn"
+          class="bg-blue-600 hover:bg-blue-700 text-white rounded-full px-6 py-2 font-semibold transition transform hover:scale-105 shadow-md"
+        >
+          + Add New Note
+        </button>
+      </div>
+
+      <div id="notesList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-h-[70vh] overflow-y-auto pr-2">
+      </div>
+
+      <div
+        id="emptyState"
+        class="text-center text-gray-500 mt-16 dark:text-gray-400"
+        style="display:none;"
+      >
+        <p class="mb-4 text-lg">No notes yet.</p>
+        <p>Add notes to keep track of your important study materials!</p>
+      </div>
+
+      <div
+        id="modalOverlay"
+        class="hidden"
+      >
+        <!-- Updated modal background for dark mode -->
+        <div
+          class="bg-white rounded-lg shadow-lg max-w-lg w-full p-6 relative dark:bg-gray-800"
+        >
+          <h2 id="modalTitle" class="text-2xl font-bold mb-4">Add New Note</h2>
+
+          <form id="noteForm" class="flex flex-col space-y-4">
+            <!-- Updated input fields for dark mode -->
+            <input
+              type="text"
+              id="noteTitle"
+              placeholder="Note Title"
+              class="rounded border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100"
+              required
+              maxlength="100"
+            />
+            <textarea
+              id="noteContent"
+              placeholder="Write your note here..."
+              rows="6"
+              class="rounded border border-gray-300 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100"
+              required
+              maxlength="2000"
+            ></textarea>
+
+            <div class="flex justify-end space-x-4">
+              <button
+                type="button"
+                id="cancelBtn"
+                class="px-4 py-2 rounded bg-gray-300 text-gray-700 transition hover:bg-gray-400 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="px-4 py-2 rounded bg-blue-600 text-white font-semibold transition hover:bg-blue-700"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+
+          <button
+            id="closeModalBtn"
+            class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 transition dark:text-gray-400 dark:hover:text-white"
+            aria-label="Close Modal"
+          >
+            <i data-feather="x"></i>
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="aiModalOverlay"
+        class="hidden"
+      >
+        <!-- Updated AI modal background for dark mode -->
+        <div
+          class="bg-white rounded-lg shadow-lg max-w-3xl w-full p-6 relative dark:bg-gray-800"
+        >
+          <h2 id="aiModalTitle" class="text-2xl font-bold mb-4"></h2>
+          <div id="aiModalContent" class="prose max-h-[70vh] overflow-y-auto dark:prose-invert">
+          </div>
+          <button
+            id="closeAiModalBtn"
+            class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 transition dark:text-gray-400 dark:hover:text-white"
+            aria-label="Close AI Modal"
+          >
+            <i data-feather="x"></i>
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="confirmModalOverlay"
+        class="hidden"
+      >
+        <!-- Updated confirmation modal background for dark mode -->
+        <div class="bg-white rounded-lg shadow-lg max-w-sm w-full p-6 relative dark:bg-gray-800">
+          <h2 class="text-xl font-bold mb-4">Confirm Deletion</h2>
+          <p class="mb-6">Are you sure you want to delete this note? This action cannot be undone.</p>
+          <div class="flex justify-end space-x-4">
+            <button
+              type="button"
+              id="confirmCancelBtn"
+              class="px-4 py-2 rounded bg-gray-300 text-gray-700 transition hover:bg-gray-400 dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              id="confirmDeleteBtn"
+              class="px-4 py-2 rounded bg-red-600 text-white font-semibold transition hover:bg-red-700"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+    const toggleBtn = document.getElementById('toggleSidebar');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+    const darkModeToggle = document.getElementById('toggleDarkMode');
+    const htmlElement = document.documentElement;
+    const searchInput = document.getElementById('searchNotes');
+
+    const addNoteBtn = document.getElementById('addNoteBtn');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    const cancelBtn = document.getElementById('cancelBtn');
+    const noteForm = document.getElementById('noteForm');
+    const noteTitleInput = document.getElementById('noteTitle');
+    const noteContentInput = document.getElementById('noteContent');
+    const notesList = document.getElementById('notesList');
+    const emptyState = document.getElementById('emptyState');
+
+    const aiModalOverlay = document.getElementById('aiModalOverlay');
+    const aiModalTitle = document.getElementById('aiModalTitle');
+    const aiModalContent = document.getElementById('aiModalContent');
+    const closeAiModalBtn = document.getElementById('closeAiModalBtn');
+
+    const confirmModalOverlay = document.getElementById('confirmModalOverlay');
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+    const confirmCancelBtn = document.getElementById('confirmCancelBtn');
+    let deleteNoteIndex = null;
+
+    let notes = [];
+    let editNoteId = null;
+
+    // --- Theme Persistence Logic ---
+    function loadThemePreference() {
+      // Check for saved theme in local storage
+      const savedTheme = localStorage.getItem('theme');
+      if (savedTheme === 'dark') {
+        htmlElement.classList.add('dark');
+      } else {
+        htmlElement.classList.remove('dark');
+      }
+      updateDarkModeIcon();
+    }
+
+    function saveThemePreference(theme) {
+      // Save the current theme to local storage
+      localStorage.setItem('theme', theme);
+    }
+    // --- End Theme Persistence Logic ---
+
+    function loadNotes() {
+      const stored = localStorage.getItem('aiStudyPartnerNotes-' + appId);
+      notes = stored ? JSON.parse(stored) : [];
+      renderNotes();
+    }
+
+    function saveNotes() {
+      localStorage.setItem('aiStudyPartnerNotes-' + appId, JSON.stringify(notes));
+    }
+
+    function renderNotes() {
+      notesList.innerHTML = '';
+      if (notes.length === 0) {
+        emptyState.style.display = 'block';
+        return;
+      } else {
+        emptyState.style.display = 'none';
+      }
+
+      notes.forEach((note, index) => {
+        const article = document.createElement('article');
+        // Updated note card colors for dark mode
+        article.className = 'bg-white p-6 shadow-lg rounded-2xl hover:shadow-2xl transition duration-300 note-appear flex flex-col justify-between dark:bg-gray-800 dark:border dark:border-gray-700';
+        article.tabIndex = 0;
+
+        article.innerHTML = `
+          <div>
+            <!-- Updated text colors for dark mode -->
+            <h2 class="text-xl font-bold mb-2 text-blue-600 dark:text-blue-400">${escapeHTML(note.title)}</h2>
+            <p class="text-gray-600 text-sm mb-4 line-clamp-4 dark:text-gray-300">${escapeHTML(note.content)}</p>
+          </div>
+          <div class="flex justify-between items-center text-sm text-gray-500 mt-auto pt-4 border-t border-gray-200 dark:text-gray-400 dark:border-gray-700">
+            <time datetime="${note.date}">${formatDate(note.date)}</time>
+            <div class="flex space-x-2">
+              <button aria-label="Summarize Note" title="Summarize Note" data-index="${index}" class="summarizeBtn hover:text-green-600 focus:outline-none">
+                <i data-feather="file-text"></i>
+              </button>
+              <button aria-label="Generate Quiz" title="Generate Quiz" data-index="${index}" class="quizBtn hover:text-purple-600 focus:outline-none">
+                <i data-feather="book-open"></i>
+              </button>
+              <button aria-label="Edit Note" title="Edit Note" data-index="${index}" class="editBtn hover:text-blue-600 focus:outline-none">
+                <i data-feather="edit"></i>
+              </button>
+              <button aria-label="Delete Note" title="Delete Note" data-index="${index}" class="deleteBtn hover:text-red-600 focus:outline-none">
+                <i data-feather="trash-2"></i>
+              </button>
+            </div>
+          </div>
+        `;
+        article.addEventListener('click', (e) => {
+          if (e.target.closest('button')) return;
+          openEditModal(index);
+        });
+        notesList.appendChild(article);
+      });
+      feather.replace();
+      applySearchFilter();
+    }
+
+    function escapeHTML(str) {
+      if (!str) return '';
+      return str.replace(/[&<>"']/g, (m) => {
+        return {'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[m];
+      });
+    }
+
+    function formatDate(dateStr) {
+      const d = new Date(dateStr);
+      return d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' });
+    }
+
+    function openAddModal() {
+      editNoteId = null;
+      noteForm.reset();
+      document.getElementById('modalTitle').textContent = 'Add New Note';
+      showModal(modalOverlay);
+    }
+
+    function openEditModal(index) {
+      editNoteId = index;
+      const note = notes[index];
+      noteTitleInput.value = note.title;
+      noteContentInput.value = note.content;
+      document.getElementById('modalTitle').textContent = 'Edit Note';
+      showModal(modalOverlay);
+    }
+
+    function showModal(modalElement) {
+      modalElement.classList.add('show');
+      modalElement.classList.remove('hidden');
+      if (modalElement === modalOverlay) {
+        noteTitleInput.focus();
+      }
+    }
+
+    function hideModal(modalElement) {
+      modalElement.classList.remove('show');
+      setTimeout(() => {
+        modalElement.classList.add('hidden');
+      }, 300);
+      noteForm.reset();
+      editNoteId = null;
+    }
+
+    function showAiModal(title, content) {
+      aiModalTitle.textContent = title;
+      aiModalContent.innerHTML = content;
+      showModal(aiModalOverlay);
+    }
+
+    function hideAiModal() {
+      hideModal(aiModalOverlay);
+    }
+
+    function showConfirmModal(index) {
+        deleteNoteIndex = index;
+        showModal(confirmModalOverlay);
+    }
+
+    function hideConfirmModal() {
+      deleteNoteIndex = null;
+      hideModal(confirmModalOverlay);
+    }
+
+    noteForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const title = noteTitleInput.value.trim();
+      const content = noteContentInput.value.trim();
+      if (!title || !content) return;
+      const now = new Date().toISOString();
+      if (editNoteId === null) {
+        notes.unshift({ title, content, date: now });
+      } else {
+        notes[editNoteId].title = title;
+        notes[editNoteId].content = content;
+        notes[editNoteId].date = now;
+      }
+      saveNotes();
+      renderNotes();
+      hideModal(modalOverlay);
+    });
+
+    cancelBtn.addEventListener('click', () => hideModal(modalOverlay));
+    closeModalBtn.addEventListener('click', () => hideModal(modalOverlay));
+    closeAiModalBtn.addEventListener('click', hideAiModal);
+    confirmCancelBtn.addEventListener('click', hideConfirmModal);
+    confirmDeleteBtn.addEventListener('click', () => {
+        if (deleteNoteIndex !== null) {
+          notes.splice(deleteNoteIndex, 1);
+          saveNotes();
+          renderNotes();
+          hideConfirmModal();
+        }
+    });
+
+    notesList.addEventListener('click', async (e) => {
+      const target = e.target.closest('button');
+      if (!target) return;
+      e.stopPropagation();
+      const index = Number(target.dataset.index);
+      const note = notes[index];
+      if (target.classList.contains('summarizeBtn')) {
+        showAiModal('Summary', `<div class="flex flex-col items-center justify-center p-8"><div class="spinner text-blue-500"></div><p class="mt-4 text-center">Generating summary...</p></div>`);
+        const summary = await getSummary(note.content);
+        aiModalContent.innerHTML = `<p>${escapeHTML(summary)}</p>`;
+      } else if (target.classList.contains('quizBtn')) {
+        showAiModal('Quiz', `<div class="flex flex-col items-center justify-center p-8"><div class="spinner text-blue-500"></div><p class="mt-4 text-center">Generating quiz...</p></div>`);
+        const quiz = await getQuiz(note.content);
+        renderQuiz(quiz);
+      } else if (target.classList.contains('deleteBtn')) {
+        showConfirmModal(index);
+      } else if (target.classList.contains('editBtn')) {
+        openEditModal(index);
+      }
+    });
+
+    addNoteBtn.addEventListener('click', () => {
+      openAddModal();
+    });
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('hide');
+      mainContent.classList.toggle('md:ml-64');
+    });
+
+    function updateDarkModeIcon() {
+      darkModeToggle.innerHTML = '';
+      if (htmlElement.classList.contains('dark')) {
+        darkModeToggle.innerHTML = `<i data-feather="sun"></i>`;
+      } else {
+        darkModeToggle.innerHTML = `<i data-feather="moon"></i>`;
+      }
+      feather.replace();
+    }
+    
+    // Add logic to save theme to local storage when toggled
+    darkModeToggle.addEventListener('click', () => {
+      htmlElement.classList.toggle('dark');
+      const currentTheme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+      saveThemePreference(currentTheme);
+      updateDarkModeIcon();
+    });
+
+    loadThemePreference(); // Load the theme on page load
+    loadNotes();
+    feather.replace();
+
+    function applySearchFilter() {
+      const filter = searchInput.value.toLowerCase();
+      const noteArticles = notesList.querySelectorAll('article');
+      let visibleCount = 0;
+      noteArticles.forEach((article) => {
+        const text = article.textContent.toLowerCase();
+        if (text.includes(filter)) {
+          article.style.display = '';
+          visibleCount++;
+        } else {
+          article.style.display = 'none';
+        }
+      });
+      emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+    searchInput.addEventListener('input', applySearchFilter);
+
+    // --- AI API Call Functions ---
+    async function makeApiCall(prompt, responseSchema = null) {
+      const apiKey = "AIzaSyA19xjTISq7xJRx8ab3-TGaSlVW7XxWFwQ";
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+      const chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+      const payload = { contents: chatHistory };
+      if (responseSchema) {
+        payload.generationConfig = {
+          responseMimeType: "application/json",
+          responseSchema: responseSchema
+        };
+      }
+      const maxRetries = 5;
+      let retryCount = 0;
+      let delay = 1000;
+
+      while (retryCount < maxRetries) {
+        try {
+          const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+          if (response.status === 429) {
+            console.warn(`API call failed with 429. Retrying in ${delay}ms...`);
+            await new Promise(resolve => setTimeout(resolve, delay));
+            delay *= 2;
+            retryCount++;
+            continue;
+          }
+          if (!response.ok) {
+            throw new Error(`API call failed with status ${response.status}`);
+          }
+          const result = await response.json();
+          const responsePart = result?.candidates?.[0]?.content?.parts?.[0];
+          if (responseSchema) {
+            if (responsePart?.text) {
+              return JSON.parse(responsePart.text);
+            } else {
+              throw new Error("Failed to parse JSON response from API.");
+            }
+          } else {
+            return responsePart?.text || "Failed to get a response from the AI.";
+          }
+        } catch (error) {
+          console.error('API call error:', error);
+          return responseSchema ? [{ error: `API call error: ${error.message}` }] : `API call error: ${error.message}`;
+        }
+      }
+      return responseSchema ? [{ error: "Failed to get a response after multiple retries." }] : "Failed to get a response after multiple retries.";
+    }
+
+    async function getSummary(noteContent) {
+      const prompt = `Summarize the following text in a concise and clear manner, focusing on key concepts:\n\n${noteContent}`;
+      return makeApiCall(prompt);
+    }
+
+    async function getQuiz(noteContent) {
+      const prompt = `Generate a multiple-choice quiz with 3 questions based on the following text. Each question should have 4 options, with one being the correct answer. Format the output as a JSON array of objects, where each object has a "question" string, an "options" array of strings, and a "correctAnswer" string that matches one of the options.\n\n${noteContent}`;
+      const responseSchema = {
+          type: "ARRAY",
+          items: {
+              type: "OBJECT",
+              properties: {
+                  "question": { "type": "STRING" },
+                  "options": { "type": "ARRAY", "items": { "type": "STRING" } },
+                  "correctAnswer": { "type": "STRING" }
+              },
+              "propertyOrdering": ["question", "options", "correctAnswer"]
+          }
+      };
+      return makeApiCall(prompt, responseSchema);
+    }
+
+    function renderQuiz(quizData) {
+        if (quizData.length === 1 && quizData[0].error) {
+            aiModalContent.innerHTML = `<p class="text-red-500">${escapeHTML(quizData[0].error)}</p>`;
+            return;
+        }
+        let quizHtml = '';
+        quizData.forEach((q, qIndex) => {
+            quizHtml += `
+                <div class="mb-6 p-4 border rounded-lg bg-gray-50 dark:border-gray-700 dark:bg-gray-700">
+                    <p class="font-semibold text-lg mb-2">Question ${qIndex + 1}: ${escapeHTML(q.question)}</p>
+                    <ul class="space-y-2">
+                        ${q.options.map((option) => `
+                            <li class="pl-4 rounded-md">
+                                <label class="inline-flex items-center space-x-2">
+                                    <input type="radio" name="question-${qIndex}" value="${escapeHTML(option)}" class="form-radio text-blue-600 dark:text-blue-400">
+                                    <span>${escapeHTML(option)}</span>
+                                </label>
+                            </li>
+                        `).join('')}
+                    </ul>
+                    <p class="mt-2 font-medium text-green-600 dark:text-green-400">Correct Answer: ${escapeHTML(q.correctAnswer)}</p>
+                </div>
+            `;
+        });
+        aiModalContent.innerHTML = quizHtml;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome To Luna AI</title>
+    <link rel="icon" type="image/png" href="Icon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a, #1e293b);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .input-focus:focus {
+            outline: none;
+            border-color: #3b82f6; /* Tailwind blue-500 */
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.5);
+        }
+        
+        .btn-gradient {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+        }
+        
+        .tab-btn.active {
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        .form-container {
+            position: relative;
+            height: 300px; /* Initial height, will be adjusted by JS */
+            transition: height 0.4s ease;
+            overflow: hidden;
+        }
+
+        .form-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .form-slide.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        .modal-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content-transition {
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .pulse-btn {
+            animation: pulse-animation 2s infinite;
+        }
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); }
+            70% { box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen flex items-center justify-center p-4">
+    <div class="w-full max-w-md">
+        <div class="text-center mb-8">
+            <div class="inline-block">
+                <h1 class="font-bold text-4xl text-white mb-2">
+                    Luna<span class="bg-gradient-to-r from-blue-400 to-green-400 bg-clip-text text-transparent">AI</span><sup class="text-xs text-white/70" style="font-size: 10px;">™</sup>
+                </h1>
+                <p class="text-white/80 text-sm">Light Up Your Studies</p>
+            </div>
+        </div>
+
+        <div class="glass-effect rounded-2xl p-8 shadow-xl">
+            <div class="flex mb-6 bg-white/5 rounded-lg p-1">
+                <button id="signinTab" class="tab-btn flex-1 py-2 px-4 rounded-md text-white font-medium transition-all duration-300 bg-white/10 active">
+                    Sign In
+                </button>
+                <button id="signupTab" class="tab-btn flex-1 py-2 px-4 rounded-md text-white/70 font-medium transition-all duration-300 hover:text-white">
+                    Sign Up
+                </button>
+            </div>
+
+            <div class="form-container">
+                <form id="signinForm" class="form-slide active signin-form space-y-4">
+                    <div class="form-field">
+                        <label class="block text-white/90 text-sm font-medium mb-2">Email</label>
+                        <div class="relative">
+                            <i class="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50"></i>
+                            <input type="email" id="signinEmail" class="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 input-focus" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label class="block text-white/90 text-sm font-medium mb-2">Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50"></i>
+                            <input type="password" id="signinPassword" class="w-full pl-10 pr-12 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 input-focus" placeholder="Enter your password" required>
+                            <button type="button" onclick="window.togglePassword('signinPassword')" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-field flex items-center justify-between">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2 rounded bg-white/10 border-white/20">
+                            <span class="text-white/80 text-sm">Remember me</span>
+                        </label>
+                        <a href="#" class="text-blue-300 text-sm hover:text-blue-200">Forgot password?</a>
+                    </div>
+
+                    <div class="form-field">
+                        <button type="submit" class="w-full btn-gradient text-white font-semibold py-3 rounded-lg transition-all duration-200 hover:shadow-lg pulse-btn">
+                            Sign In
+                        </button>
+                    </div>
+                </form>
+
+                <form id="signupForm" class="form-slide space-y-4">
+                    <div class="form-field">
+                        <label class="block text-white/90 text-sm font-medium mb-2">Full Name</label>
+                        <div class="relative">
+                            <i class="fas fa-user absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50"></i>
+                            <input type="text" id="signupName" class="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 input-focus" placeholder="Enter your full name" required>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label class="block text-white/90 text-sm font-medium mb-2">Email</label>
+                        <div class="relative">
+                            <i class="fas fa-envelope absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50"></i>
+                            <input type="email" id="signupEmail" class="w-full pl-10 pr-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 input-focus" placeholder="Enter your email" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-field">
+                        <label class="block text-white/90 text-sm font-medium mb-2">Password</label>
+                        <div class="relative">
+                            <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-white/50"></i>
+                            <input type="password" id="signupPassword" class="w-full pl-10 pr-12 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/50 input-focus" placeholder="Create a password" required>
+                            <button type="button" onclick="window.togglePassword('signupPassword')" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-field flex items-start">
+                        <input type="checkbox" class="mt-1 mr-3 rounded bg-white/10 border-white/20" required>
+                        <span class="text-white/80 text-sm">I agree to the <a href="tos.html" class="text-blue-300 hover:text-blue-200">Terms of Service</a> and <a href="privacy.html" class="text-blue-300 hover:text-blue-200">Privacy Policy</a></span>
+                    </div>
+
+                    <div class="form-field">
+                        <button type="submit" class="w-full btn-gradient text-white font-semibold py-3 rounded-lg transition-all duration-200 hover:shadow-lg pulse-btn">
+                            Create Account
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="mt-6">
+                <div class="flex items-center mb-4">
+                    <hr class="flex-1 border-white/20">
+                    <span class="px-4 text-white/60 text-sm">or continue with</span>
+                    <hr class="flex-1 border-white/20">
+                </div>
+
+                <div class="flex justify-center">
+                    <button id="googleSignInBtn" class="flex items-center justify-center py-2.5 px-4 bg-white/10 hover:bg-white/20 border border-white/20 rounded-lg transition-all duration-200">
+                        <i class="fab fa-google text-white mr-2"></i>
+                        <span class="text-white text-sm">Google</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-6">
+            <p class="text-white/60 text-sm">© 2025 Luna AI. All rights reserved.</p>
+        </div>
+    </div>
+
+    <div id="messageModal" class="modal-overlay">
+        <div class="glass-effect rounded-xl p-6 w-11/12 max-w-sm text-center modal-content-transition transform scale-95 opacity-0" id="messageModalContent">
+            <h3 id="modalTitle" class="text-xl font-bold mb-2"></h3>
+            <p id="modalMessage" class="text-white/80 text-sm mb-4"></p>
+            <button id="closeModalBtn" class="w-full btn-gradient text-white font-semibold py-2 rounded-lg">
+                Close
+            </button>
+        </div>
+    </div>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        
+        // This is your Firebase configuration object
+        const firebaseConfig = {
+            apiKey: "AIzaSyAeq9Tuo5CmLRh35thABNj-Qv9V_hpjB9c",
+            authDomain: "study-a25ac.firebaseapp.com",
+            projectId: "study-a25ac",
+            storageBucket: "study-a25ac.firebasestorage.app",
+            messagingSenderId: "173051640117",
+            appId: "1:173051640117:web:2ee34824b54b2e9ba7b47c",
+            measurementId: "G-MCSV02V3Q3"
+        };
+        
+        // Initialize Firebase app first and then get the auth instance
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        
+        // Global variable to track successful authentication for redirection
+        let isSuccessfulAuth = false;
+
+        // This listener ensures the script runs only after the DOM is fully loaded.
+        window.addEventListener('DOMContentLoaded', () => {
+            // Global variables for the DOM elements
+            const signinTab = document.getElementById('signinTab');
+            const signupTab = document.getElementById('signupTab');
+            const signinForm = document.getElementById('signinForm');
+            const signupForm = document.getElementById('signupForm');
+            const googleSignInBtn = document.getElementById('googleSignInBtn');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            const formContainer = document.querySelector('.form-container');
+            const messageModal = document.getElementById('messageModal');
+            const messageModalContent = document.getElementById('messageModalContent');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+            let isAnimating = false;
+
+            // --- UI and Modal Functions ---
+            function setFormContainerHeight(form) {
+                // Set the form container height to the current active form's height for smooth transitions
+                setTimeout(() => {
+                    formContainer.style.height = `${form.scrollHeight}px`;
+                }, 50); 
+            }
+
+            function switchToSignin() {
+                if (isAnimating || signinTab.classList.contains('active')) return;
+                isAnimating = true;
+                
+                signinTab.classList.add('active', 'bg-white/10', 'text-white');
+                signinTab.classList.remove('text-white/70');
+                signupTab.classList.remove('active', 'bg-white/10', 'text-white');
+                signupTab.classList.add('text-white/70');
+                
+                setFormContainerHeight(signinForm);
+                signupForm.classList.remove('active');
+                signinForm.classList.add('active');
+                animateFormFields(signinForm);
+                
+                setTimeout(() => { isAnimating = false; }, 400);
+            }
+
+            function switchToSignup() {
+                if (isAnimating || signupTab.classList.contains('active')) return;
+                isAnimating = true;
+                
+                signupTab.classList.add('active', 'bg-white/10', 'text-white');
+                signupTab.classList.remove('text-white/70');
+                signinTab.classList.remove('active', 'bg-white/10', 'text-white');
+                signinTab.classList.add('text-white/70');
+                
+                setFormContainerHeight(signupForm);
+                signinForm.classList.remove('active');
+                signupForm.classList.add('active');
+                animateFormFields(signupForm);
+
+                setTimeout(() => { isAnimating = false; }, 400);
+            }
+
+            function animateFormFields(form) {
+                const fields = form.querySelectorAll('.form-field');
+                fields.forEach((field, index) => {
+                    field.style.opacity = '0';
+                    field.style.transform = 'translateY(20px)';
+                    field.style.animation = `slideInUp 0.6s ease forwards ${index * 100}ms`;
+                });
+            }
+            
+            function showMessage(title, message, isSuccess = true) {
+                modalTitle.textContent = title;
+                modalMessage.textContent = message;
+
+                if (isSuccess) {
+                    modalTitle.classList.add('text-green-400');
+                    modalTitle.classList.remove('text-red-400');
+                } else {
+                    modalTitle.classList.add('text-red-400');
+                    modalTitle.classList.remove('text-green-400');
+                }
+
+                messageModal.classList.add('show');
+                setTimeout(() => {
+                    messageModalContent.classList.remove('scale-95', 'opacity-0');
+                    messageModalContent.classList.add('scale-100', 'opacity-100');
+                }, 10);
+            }
+
+            function closeModal() {
+                messageModalContent.classList.remove('scale-100', 'opacity-100');
+                messageModalContent.classList.add('scale-95', 'opacity-0');
+                setTimeout(() => {
+                    messageModal.classList.remove('show');
+                    if (isSuccessfulAuth) {
+                        window.location.href = 'dashboard.html';
+                    }
+                }, 300);
+            }
+            
+            // Exposing this function to the global scope for the onclick attribute
+            window.togglePassword = function(inputId) {
+                const input = document.getElementById(inputId);
+                const icon = input.closest('.relative').querySelector('.fa-eye, .fa-eye-slash');
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            }
+            
+            // --- Firebase Authentication Functions ---
+            async function handleSignIn(e) {
+                e.preventDefault();
+                const email = document.getElementById('signinEmail').value;
+                const password = document.getElementById('signinPassword').value;
+
+                try {
+                    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+                    const displayName = user.displayName || user.email.split('@')[0];
+                    localStorage.setItem('username', displayName);
+                    isSuccessfulAuth = true;
+                    showMessage('Success!', `Welcome back, ${displayName}!`, true);
+                } catch (error) {
+                    console.error("Sign-in error:", error);
+                    isSuccessfulAuth = false;
+                    showMessage('Error', `Sign-in failed: ${error.message}`, false);
+                }
+            }
+
+            async function handleSignUp(e) {
+                e.preventDefault();
+                const email = document.getElementById('signupEmail').value;
+                const password = document.getElementById('signupPassword').value;
+                const name = document.getElementById('signupName').value;
+
+                try {
+                    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                    const user = userCredential.user;
+                    const displayName = name || user.email.split('@')[0];
+                    localStorage.setItem('username', displayName);
+                    // For a more complete app, you'd also update the user's display name on Firebase here
+                    // await updateProfile(user, { displayName: name });
+                    isSuccessfulAuth = true;
+                    showMessage('Success!', `Your account has been created, ${displayName}!`, true);
+                } catch (error) {
+                    console.error("Sign-up error:", error);
+                    isSuccessfulAuth = false;
+                    showMessage('Error', `Sign-up failed: ${error.message}`, false);
+                }
+            }
+
+            async function handleGoogleSignIn() {
+                const provider = new GoogleAuthProvider();
+                try {
+                    const userCredential = await signInWithPopup(auth, provider);
+                    const user = userCredential.user;
+                    const displayName = user.displayName || user.email.split('@')[0];
+                    localStorage.setItem('username', displayName);
+                    isSuccessfulAuth = true;
+                    showMessage('Success!', `Welcome back, ${displayName}!`, true);
+                } catch (error) {
+                    console.error("Google Sign-in error:", error);
+                    isSuccessfulAuth = false;
+                    showMessage('Error', `Google Sign-in failed: ${error.message}`, false);
+                }
+            }
+            
+            // --- Event Listeners and Initial Setup ---
+            const authCard = document.querySelector('.glass-effect');
+            authCard.style.opacity = '0';
+            authCard.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                authCard.style.transition = 'all 0.6s ease';
+                authCard.style.opacity = '1';
+                authCard.style.transform = 'translateY(0)';
+                setFormContainerHeight(signinForm);
+                animateFormFields(signinForm);
+            }, 100);
+
+            // Add event listeners for form submissions
+            signinForm.addEventListener('submit', handleSignIn);
+            signupForm.addEventListener('submit', handleSignUp);
+            
+            // Add event listeners for social login buttons
+            googleSignInBtn.addEventListener('click', handleGoogleSignIn);
+
+            // Tab switching event listeners
+            signinTab.addEventListener('click', switchToSignin);
+            signupTab.addEventListener('click', switchToSignup);
+            
+            // Modal close button
+            closeModalBtn.addEventListener('click', closeModal);
+
+            // onAuthStateChanged listener to handle redirects for page reloads or token changes
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    const displayName = user.displayName || user.email.split('@')[0];
+                    localStorage.setItem('username', displayName);
+                    // Check if we are already on the dashboard page to prevent infinite redirects
+                    if (window.location.pathname.endsWith('dashboard.html')) {
+                       // Do nothing, already on the correct page
+                    } else {
+                       window.location.href = 'dashboard.html';
+                    }
+                    console.log("User signed in:", user);
+                } else {
+                    console.log("User signed out.");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
