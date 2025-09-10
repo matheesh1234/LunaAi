@@ -235,7 +235,7 @@
             <button
                 id="signupBtn"
                 class="bg-white text-purple-700 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 hover:text-purple-800 transition-all duration-300 btn-3d pulse-glow"
-                onclick="window.location.href='index.html'"
+                onclick="window.location.href='log.html'"
             >
                 Login
             </button>
@@ -271,7 +271,7 @@
             <button id="ctaStudyAssistant" class="bg-gradient-to-r from-green-400 to-teal-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold hover:from-green-500 hover:to-teal-600 transition-all duration-300 btn-3d pulse-glow text-base sm:text-lg shadow-2xl">
                 ✨ Try Now
             </button>
-            <button id="ctaLogin" class="glass border-2 border-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold hover:bg-white hover:text-purple-700 transition-all duration-300 btn-3d text-base sm:text-lg" onclick="window.location.href='index.html'">
+            <button id="ctaLogin" class="glass border-2 border-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold hover:bg-white hover:text-purple-700 transition-all duration-300 btn-3d text-base sm:text-lg" onclick="window.location.href='log.html'">
                 Login
             </button>
         </div>
@@ -330,7 +330,7 @@
                     <li class="flex items-start"><i data-feather="check" class="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mr-3 mt-0.5 flex-shrink-0"></i><span>Basic study timer</span></li>
                     <li class="flex items-start"><i data-feather="check" class="w-4 h-4 sm:w-5 sm:h-5 text-green-400 mr-3 mt-0.5 flex-shrink-0"></i><span>Progress tracking</span></li>
                 </ul>
-                <button id="getStartedFree" class="bg-gradient-to-r from-green-500 to-green-600 text-white py-3 px-6 rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 w-full btn-3d font-semibold text-sm sm:text-base" onclick="window.location.href='index.html'">
+                <button id="getStartedFree" class="bg-gradient-to-r from-green-500 to-green-600 text-white py-3 px-6 rounded-xl hover:from-green-600 hover:to-green-700 transition-all duration-300 w-full btn-3d font-semibold text-sm sm:text-base" onclick="window.location.href='log.html'">
                     Get Started
                 </button>
             </div>
@@ -617,7 +617,7 @@
         // Function to handle the initial click on the generate button
         function handleGenerateClick() {
             if (hasGeneratedOnce) {
-                window.location.href = 'index.html';
+                window.location.href = 'log.html';
             } else {
                 generateExplanation();
             }
@@ -660,7 +660,7 @@
                     if (!hasGeneratedOnce) {
                         hasGeneratedOnce = true;
                         generateBtn.textContent = 'Signup for more';
-                        generateBtn.onclick = () => window.location.href = 'index.html';
+                        generateBtn.onclick = () => window.location.href = 'log.html';
                     }
                 } else {
                     responseContent.textContent = "Sorry, I couldn't generate a response. Please try again.";
@@ -835,3 +835,4 @@
     </script>
 </body>
 </html>
+
