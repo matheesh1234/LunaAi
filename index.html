@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5782374845716287"
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5782374845716287"
      crossorigin="anonymous"></script>
     
     <style>
@@ -53,7 +53,7 @@
         }
 
         .glass {
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(10px);
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
         }
@@ -100,6 +100,8 @@
         .stagger-4 { animation-delay: 0.4s; }
         .stagger-5 { animation-delay: 0.5s; }
         .stagger-6 { animation-delay: 0.6s; }
+        .stagger-7 { animation-delay: 0.7s; }
+        .stagger-8 { animation-delay: 0.8s; }
 
         .slide-up {
             opacity: 0;
@@ -200,6 +202,23 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.1);
         }
 
+        .faq-chevron {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            opacity: 0;
+        }
+
+        .faq-content:not(.hidden) {
+            max-height: 200px; /* Adjust based on content size */
+            opacity: 1;
+            transition: max-height 0.3s ease-in, opacity 0.3s ease-in;
+        }
+
         @media (max-width: 768px) {
             .hero-bg { background-attachment: scroll; }
             .particle { display: none; }
@@ -208,6 +227,7 @@
             .glass { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); }
             .glass-dark { background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); }
             .animated-subheading { white-space: normal; overflow: visible; border-right: none; animation: none; }
+            .faq-content:not(.hidden) { max-height: 300px; } /* Adjust for smaller screens */
         }
 
         @media (max-width: 640px) {
@@ -215,7 +235,7 @@
         }
     </style>
 </head>
-<body class="hero-bg min-h-screen flex flex-col overflow-x-hidden">
+<body class="hero-bg min-h-screen flex flex-col overflow-x-hidden pt-20">
 
     <!-- Floating Particles -->
     <div class="fixed inset-0 pointer-events-none">
@@ -227,8 +247,8 @@
         <div class="particle w-2 h-2 top-1/2 right-1/3 stagger-6"></div>
     </div>
 
-    <!-- Navbar with Glass Effect -->
-    <nav class="nav-glass flex justify-between items-center px-4 py-4 slide-up stagger-1 relative z-10">
+    <!-- Navbar with Glass Effect - Now Floating -->
+    <nav class="nav-glass fixed top-0 left-0 w-full flex justify-between items-center px-4 py-4 slide-up stagger-1 z-50">
         <!-- Logo -->
         <span class="font-bold text-2xl morphing-text">LunaAi™</span>
 
@@ -315,6 +335,192 @@
         </div>
     </section>
 
+    <!-- How It Works Section -->
+    <section class="slide-up stagger-5 bg-gradient-to-br from-purple-900 to-blue-900 py-16 sm:py-24 px-4 sm:px-16 text-white relative overflow-hidden">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 morphing-text">
+                How LunaAi Works
+            </h2>
+            <p class="text-lg sm:text-xl text-gray-200 mb-16 max-w-3xl mx-auto">
+                Transform your study experience in just three simple steps
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
+                <div class="relative">
+                    <div class="feature-card glass-dark p-8 rounded-2xl h-full">
+                        <div class="relative mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center mx-auto mb-4 premium-glow">
+                                <span class="text-2xl font-bold">1</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Ask Anything</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Simply type your question or topic. Our AI understands context and provides detailed, easy-to-understand explanations tailored to your learning level.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="feature-card glass-dark p-8 rounded-2xl h-full">
+                        <div class="relative mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 premium-glow">
+                                <span class="text-2xl font-bold">2</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Learn Interactively</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Get instant explanations, summaries, and even audio narration. Our AI adapts to your learning style and provides multiple formats for better understanding.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="feature-card glass-dark p-8 rounded-2xl h-full">
+                        <div class="relative mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4 premium-glow">
+                                <span class="text-2xl font-bold">3</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Track Progress</h3>
+                        <p class="text-gray-300 leading-relaxed">
+                            Monitor your learning journey with detailed analytics, focus timers, and personalized recommendations to optimize your study sessions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Success Stories -->
+    <section class="slide-up stagger-6 bg-gray-800 py-16 sm:py-24 px-4 sm:px-16 text-white">
+        <div class="max-w-6xl mx-auto text-center">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
+                Student Success Stories
+            </h2>
+            <p class="text-lg sm:text-xl text-gray-300 mb-16 max-w-3xl mx-auto">
+                See how students worldwide are achieving their academic goals with LunaAi
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="feature-card glass-dark p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-4">
+                            <span class="font-bold">SA</span>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-semibold">Sarah A.</h4>
+                            <p class="text-sm text-gray-400">Medical Student</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        "LunaAi helped me understand complex biochemistry concepts that I struggled with for months. The AI explanations are so clear!"
+                    </p>
+                    <div class="flex mt-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card glass-dark p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mr-4">
+                            <span class="font-bold">MJ</span>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-semibold">Mike J.</h4>
+                            <p class="text-sm text-gray-400">Engineering Student</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        "The focus timer and progress tracking features transformed my study habits. I'm more productive than ever before."
+                    </p>
+                    <div class="flex mt-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                    </div>
+                </div>
+                
+                <div class="feature-card glass-dark p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mr-4">
+                            <span class="font-bold">EL</span>
+                        </div>
+                        <div class="text-left">
+                            <h4 class="font-semibold">Emma L.</h4>
+                            <p class="text-sm text-gray-400">High School Senior</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-300 text-sm leading-relaxed">
+                        "I improved my SAT scores by 200 points using LunaAi's personalized study recommendations. It's like having a tutor 24/7!"
+                    </p>
+                    <div class="flex mt-4">
+                        <span class="text-yellow-400">★★★★★</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="slide-up stagger-7 bg-gray-900 py-16 sm:py-24 px-4 sm:px-16 text-white">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-16 text-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
+                Frequently Asked Questions
+            </h2>
+            
+            <div class="space-y-6">
+                <div class="glass-dark p-6 rounded-xl">
+                    <button class="faq-toggle flex items-center w-full text-left" data-target="faq1">
+                        <h3 class="text-xl font-bold mb-3 flex items-center flex-grow">
+                            <i data-feather="help-circle" class="w-6 h-6 text-blue-400 mr-3"></i>
+                            How does the AI study assistant work?
+                        </h3>
+                        <i data-feather="chevron-down" class="w-6 h-6 text-gray-400 faq-chevron"></i>
+                    </button>
+                    <div id="faq1" class="faq-content hidden text-gray-300 leading-relaxed">
+                        Our AI uses advanced language models to provide personalized explanations, summaries, and study guidance. Simply ask any academic question and receive detailed, easy-to-understand responses tailored to your learning level.
+                    </div>
+                </div>
+                
+                <div class="glass-dark p-6 rounded-xl">
+                    <button class="faq-toggle flex items-center w-full text-left" data-target="faq2">
+                        <h3 class="text-xl font-bold mb-3 flex items-center flex-grow">
+                            <i data-feather="book" class="w-6 h-6 text-green-400 mr-3"></i>
+                            What subjects does LunaAi cover?
+                        </h3>
+                        <i data-feather="chevron-down" class="w-6 h-6 text-gray-400 faq-chevron"></i>
+                    </button>
+                    <div id="faq2" class="faq-content hidden text-gray-300 leading-relaxed">
+                        LunaAi supports all academic subjects including Mathematics, Sciences, Literature, History, Languages, and more. Our AI is trained on comprehensive educational content to help with any topic you're studying.
+                    </div>
+                </div>
+                
+                <div class="glass-dark p-6 rounded-xl">
+                    <button class="faq-toggle flex items-center w-full text-left" data-target="faq3">
+                        <h3 class="text-xl font-bold mb-3 flex items-center flex-grow">
+                            <i data-feather="smartphone" class="w-6 h-6 text-purple-400 mr-3"></i>
+                            Is LunaAi available on mobile?
+                        </h3>
+                        <i data-feather="chevron-down" class="w-6 h-6 text-gray-400 faq-chevron"></i>
+                    </button>
+                    <div id="faq3" class="faq-content hidden text-gray-300 leading-relaxed">
+                        Yes! LunaAi is fully responsive and works perfectly on all devices - desktop, tablet, and mobile. Study anywhere, anytime with the same powerful features across all platforms.
+                    </div>
+                </div>
+                
+                <div class="glass-dark p-6 rounded-xl">
+                    <button class="faq-toggle flex items-center w-full text-left" data-target="faq4">
+                        <h3 class="text-xl font-bold mb-3 flex items-center flex-grow">
+                            <i data-feather="credit-card" class="w-6 h-6 text-yellow-400 mr-3"></i>
+                            Can I cancel my subscription anytime?
+                        </h3>
+                        <i data-feather="chevron-down" class="w-6 h-6 text-gray-400 faq-chevron"></i>
+                    </button>
+                    <div id="faq4" class="faq-content hidden text-gray-300 leading-relaxed">
+                        Absolutely! You can cancel your Pro or Premium subscription at any time with no cancellation fees. Your access will continue until the end of your current billing period.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Modal for Pro/Premium Plans -->
     <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50 p-4 backdrop-blur-sm">
@@ -399,8 +605,8 @@
             <p class="text-gray-300 mb-4">© 2025 AI Study Partner. Empowering students worldwide.</p>
             <div class="flex justify-center space-x-6 text-sm">
                 <a href="privacy.html" class="hover:text-blue-400 transition-colors duration-300">Privacy Policy</a>
-                <a href="#" class="hover:text-blue-400 transition-colors duration-300">Terms of Service</a>
-                <a href="#" class="hover:text-blue-400 transition-colors duration-300">Contact Us</a>
+                <a href="tos.html" class="hover:text-blue-400 transition-colors duration-300">Terms of Service</a>
+                <a href="contact.html" class="hover:text-blue-400 transition-colors duration-300">Contact Us</a>
             </div>
         </div>
     </footer>
@@ -410,9 +616,6 @@
 
         const paymentModal = document.getElementById('paymentModal');
         const closePaymentModalBtn = document.getElementById('closePaymentModal');
-        const buyProBtn = document.getElementById('buyPro');
-        const buyPremiumBtn = document.getElementById('buyPremium');
-        
         const studyAssistantModal = document.getElementById('studyAssistantModal');
         const openStudyAssistantBtn = document.getElementById('ctaStudyAssistant');
         const closeStudyAssistantBtn = document.getElementById('closeStudyAssistantModal');
@@ -515,14 +718,6 @@
             modalContent.classList.add('modal-enter');
         }
 
-        buyProBtn.addEventListener('click', () => {
-            toggleModal(paymentModal, true);
-        });
-
-        buyPremiumBtn.addEventListener('click', () => {
-            toggleModal(paymentModal, true);
-        });
-
         closePaymentModalBtn.addEventListener('click', () => {
             toggleModal(paymentModal, false);
         });
@@ -578,7 +773,7 @@
                 }],
             };
 
-            const apiKey = "AIzaSyA19xjTISq7xJRx8ab3-TGaSlVW7XxWFwQ";
+            const apiKey = "YOUR_API_KEY"; // Replace with your API key or use environment variable
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
             try {
@@ -637,7 +832,7 @@
                 }],
             };
 
-            const apiKey = "AIzaSyA19xjTISq7xJRx8ab3-TGaSlVW7XxWFwQ";
+            const apiKey = "YOUR_API_KEY"; // Replace with your API key or use environment variable
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
             try {
@@ -699,7 +894,7 @@
                 model: "gemini-2.5-flash-preview-tts"
             };
 
-            const apiKey = "AIzaSyA19xjTISq7xJRx8ab3-TGaSlVW7XxWFwQ";
+            const apiKey = "YOUR_API_KEY"; // Replace with your API key or use environment variable
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-tts:generateContent?key=${apiKey}`;
 
             try {
@@ -747,6 +942,28 @@
             }
         });
         
+        // FAQ Toggle functionality
+        document.querySelectorAll('.faq-toggle').forEach(button => {
+            button.addEventListener('click', () => {
+                const targetId = button.getAttribute('data-target');
+                const content = document.getElementById(targetId);
+                const chevron = button.querySelector('.faq-chevron');
+                
+                // Close other FAQs
+                document.querySelectorAll('.faq-content').forEach(otherContent => {
+                    if (otherContent !== content) {
+                        otherContent.classList.add('hidden');
+                        const otherChevron = otherContent.previousElementSibling.querySelector('.faq-chevron');
+                        otherChevron.style.transform = 'rotate(0deg)';
+                    }
+                });
+                
+                // Toggle current FAQ
+                content.classList.toggle('hidden');
+                chevron.style.transform = content.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+            });
+        });
+
         // This is a simple client-side markdown parser to render the AI's response
         // In a real application, you might use a more robust library or server-side rendering
         const marked = {
@@ -773,8 +990,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
