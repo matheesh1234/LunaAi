@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="Icon.png" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
 
-    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=wbZ8zXPTc8wo9VYHl54XthlVabQXPfg-VX5RxWCyRJybt3Ih6nbG2VqpIqgUPCoJgajWicqBTTzsro2B2CoyttOIy4b32L3Lh7rlsOoSqWiIIm-Y0DaPDDzYA6WHlD96O8Ihdd22-PHHflsZ_YSLPpy5j3VoDrvolOqHI_yNphpA4UepTCQYW7m3SKqzc2kUVR2rx8cdmra4ld4L2vzGNfC-dgGjc1DqLdz-czxsHZ9Onub8" charset="UTF-8"></script><script src="https://cdn.tailwindcss.com"></script>
+    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=wbZ8zXPTc8wo9VYHl54XthlVabQXPfg-VX5RxWCyRJybt3Ih6nbG2VqpIqgUPCoJgajWicqBTTzsro2B2CoyttOIy4b32L3Lh7rlsOoSqWiIIm-Y0DaPDDzYA6WHlD96O8Ihdd22-PHHflsZ_YSLPpy5j3VoDrvolOqHI_yNphpA4UepTCQYW7m3SKz-kUVR2rx8cdmra4ld4L2vzGNfC-dgGjc1DqLdz-czxsHZ9Onub8" charset="UTF-8"></script><script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/feather-icons"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5782374845716287"
      crossorigin="anonymous"></script>
@@ -36,6 +36,10 @@
             --tw-gradient-from: #ede9fe; /* Tailwind purple-100 */
             --tw-gradient-to: #c4b5fd;  /* Tailwind purple-300 */
         }
+        .card-bg-gradient-yellow {
+            --tw-gradient-from: #fef3c7; /* Tailwind yellow-100 */
+            --tw-gradient-to: #fcd34d;  /* Tailwind yellow-300 */
+        }
         .dark .card-bg-gradient-blue {
             --tw-gradient-from: #1e3a8a; /* Tailwind blue-900 */
             --tw-gradient-to: #3b82f6;   /* Tailwind blue-500 */
@@ -47,6 +51,10 @@
         .dark .card-bg-gradient-purple {
             --tw-gradient-from: #312e81; /* Tailwind indigo-900 */
             --tw-gradient-to: #6366f1;   /* Tailwind indigo-500 */
+        }
+        .dark .card-bg-gradient-yellow {
+            --tw-gradient-from: #92400e; /* Tailwind yellow-900 */
+            --tw-gradient-to: #f59e0b;   /* Tailwind yellow-500 */
         }
         /* Animated spinner */
         .spinner {
@@ -62,20 +70,18 @@
         }
 
         /* Dropdown menu styles */
-  .dropdown-menu {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.2s ease;
-    /* Remove fixed width to allow for dynamic sizing */
-    /* width: 48px; */
-  }
+        .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+        }
 
-  .dropdown-menu.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-  }
+        .dropdown-menu.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
 
         /* Logout confirmation modal */
         .modal-overlay {
@@ -107,93 +113,175 @@
         .modal-overlay.show .modal-content {
             transform: scale(1);
         }
-          .user-info-section {
-    max-width: 100%; /* Ensure it doesn't overflow its container */
-    overflow-wrap: break-word; /* Allow long words to break and wrap */
-  }
 
-  .user-email-text {
-    white-space: nowrap; /* Keep the email on a single line */
-    overflow: hidden; /* Hide the overflowing part */
-    text-overflow: ellipsis; /* Add "..." at the end of the line */
-  }
-    /* New styles for the disabled card overlay */
-    .pro-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
-      backdrop-filter: blur(4px); /* Blur effect */
-      border-radius: 24px; /* Match card border-radius */
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      text-align: center;
-      opacity: 1;
-      pointer-events: auto; /* Allow clicks on the overlay */
-      z-index: 10;
-    }
+        .user-info-section {
+            max-width: 100%;
+            overflow-wrap: break-word;
+        }
 
-    .pro-overlay-text {
-      font-weight: 700;
-      font-size: 1.5rem; /* text-2xl */
-      line-height: 2rem; /* leading-8 */
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      background-image: linear-gradient(to right, var(--tw-gradient-from), var(--tw-gradient-to));
-      --tw-gradient-from: #60a5fa; /* blue-400 */
-      --tw-gradient-to: #34d399; /* green-400 */
-    }
+        .user-email-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
-    .dark .pro-overlay-text {
-      --tw-gradient-from: #93c5fd; /* blue-300 */
-      --tw-gradient-to: #6ee7b7; /* green-300 */
-    }
-    
-    .card-relative {
-      position: relative;
-    }
+        /* Pro overlay styles */
+        .pro-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 10;
+        }
 
-    /* Styles for the unlock modal */
-    .unlock-modal {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.6);
-        display: none; /* Hidden by default */
-        align-items: center;
-        justify-content: center;
-        z-index: 100;
-    }
-    .unlock-modal.show {
-        display: flex;
-    }
-    .unlock-modal-content {
-        background-color: white;
-        padding: 2rem;
-        border-radius: 1rem;
-        width: 90%;
-        max-width: 400px;
-        text-align: center;
-        position: relative;
-    }
-    .dark .unlock-modal-content {
-        background-color: #1f2937; /* Tailwind gray-800 */
-    }
-    .unlock-modal .close-btn {
-        position: absolute;
-        top: 1rem;
-        right: 1rem;
-        color: #9ca3af; /* Tailwind gray-400 */
-        cursor: pointer;
-    }
+        .pro-overlay-text {
+            font-weight: 700;
+            font-size: 1.5rem;
+            line-height: 2rem;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, var(--tw-gradient-from), var(--tw-gradient-to));
+            --tw-gradient-from: #60a5fa;
+            --tw-gradient-to: #34d399;
+        }
+
+        .dark .pro-overlay-text {
+            --tw-gradient-from: #93c5fd;
+            --tw-gradient-to: #6ee7b7;
+        }
+        
+        .card-relative {
+            position: relative;
+        }
+
+        /* Unlock modal styles */
+        .unlock-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+        }
+        .unlock-modal.show {
+            display: flex;
+        }
+        .unlock-modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+            position: relative;
+        }
+        .dark .unlock-modal-content {
+            background-color: #1f2937;
+        }
+        .unlock-modal .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            color: #9ca3af;
+            cursor: pointer;
+        }
+
+        /* Achievement styles */
+        .achievement-badge {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        .achievement-badge.earned {
+            filter: none;
+        }
+        .achievement-badge.locked {
+            filter: grayscale(100%) opacity(0.5);
+        }
+        .achievement-badge:hover {
+            transform: scale(1.1);
+        }
+
+        /* Profile customization styles */
+        .avatar-container {
+            position: relative;
+            display: inline-block;
+        }
+        .avatar-ring {
+            position: absolute;
+            inset: -2px;
+            border-radius: 50%;
+            padding: 2px;
+            background: linear-gradient(45deg, var(--accent-color, #3b82f6), var(--accent-secondary, #10b981));
+            z-index: -1;
+        }
+        .color-picker {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .color-picker:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .color-picker.selected {
+            border-color: #000;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Accent color variables */
+        :root {
+            --accent-color: #3b82f6;
+            --accent-secondary: #10b981;
+        }
+        [data-accent="blue"] {
+            --accent-color: #3b82f6;
+            --accent-secondary: #1d4ed8;
+        }
+        [data-accent="green"] {
+            --accent-color: #10b981;
+            --accent-secondary: #059669;
+        }
+        [data-accent="purple"] {
+            --accent-color: #8b5cf6;
+            --accent-secondary: #7c3aed;
+        }
+        [data-accent="pink"] {
+            --accent-color: #ec4899;
+            --accent-secondary: #db2777;
+        }
+        [data-accent="orange"] {
+            --accent-color: #f97316;
+            --accent-secondary: #ea580c;
+        }
+        [data-accent="red"] {
+            --accent-color: #ef4444;
+            --accent-secondary: #dc2626;
+        }
+
+        .accent-gradient {
+            background: linear-gradient(to right, var(--accent-color), var(--accent-secondary));
+        }
     </style>
 
     <script>
@@ -209,27 +297,63 @@
             <button id="toggleSidebar" class="mr-4 text-gray-600 dark:text-gray-300 focus:outline-none hover:scale-110 transition" aria-label="Toggle Sidebar">
                 <i data-feather="menu"></i>
             </button>
-            <span class="font-bold text-2xl bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-green-500">LunaAi<sup style="font-size: 12px; color: #666; font-family: Arial;">™</sup></span>
+            <span class="font-bold text-2xl bg-clip-text text-transparent accent-gradient">LunaAi<sup style="font-size: 12px; color: #666; font-family: Arial;">™</sup></span>
         </div>
         <div class="flex items-center space-x-4">
+            
+
+
+
             <button id="toggleDarkMode" class="hover:scale-110 transition text-gray-600 dark:text-gray-300" aria-label="Toggle Dark Mode">
                 <i data-feather="moon"></i>
             </button>
+<div class="relative">
+    <button id="notificationBtn" class="hover:scale-110 transition text-gray-600 dark:text-gray-300 relative" aria-label="Notifications">
+        <i data-feather="bell"></i>
+        <span id="notificationBadge" class="absolute -top-1 -right-1 w-4 h-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center hidden">0</span>
+    </button>
+
+    <div id="notificationDropdown" 
+         class="dropdown-menu absolute right-0 mt-2 w-72 max-w-[90vw] bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 py-2 max-h-80 overflow-y-auto">
+        
+        <div class="flex items-center justify-between px-4 py-2 border-b border-gray-200 dark:border-gray-600">
+            <p class="text-sm text-gray-500 dark:text-gray-400">Notifications</p>
+            <button id="clearNotificationsBtn" class="text-xs text-red-500 hover:underline">Clear All</button>
+        </div>
+
+        <div id="notificationList" class="divide-y divide-gray-200 dark:divide-gray-700">
+            <p class="text-center text-gray-400 dark:text-gray-500 py-4 text-sm">No notifications yet</p>
+        </div>
+    </div>
+</div>
+
+
             <div class="relative">
-                <button id="userProfileBtn" class="w-10 h-10 rounded-full border-2 border-gray-300 dark:border-gray-600 bg-gray-200 dark:bg-gray-700 flex items-center justify-center hover:border-blue-400 dark:hover:border-blue-400 transition" aria-label="User Profile">
-                    <i data-feather="user" class="w-6 h-6 text-gray-500 dark:text-gray-400"></i>
-                </button>
-                <div id="userDropdown" class="dropdown-menu absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 py-2">
-                    <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-600 user-info-section">
-                    <p class="text-sm font-medium text-gray-900 dark:text-gray-100" id="userDisplayName">User Name</p>
-                    <p class="text-sm text-gray-500 dark:text-gray-400 user-email-text" id="userEmail">user@example.com</p>
+                <button id="userProfileBtn" class="avatar-container w-10 h-10 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center hover:border-blue-400 dark:hover:border-blue-400 transition" aria-label="User Profile">
+                    <div class="avatar-ring"></div>
+                    <div id="userAvatar" class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-green-500 flex items-center justify-center text-white font-bold text-lg relative z-10">
+                        U
                     </div>
+                </button>
+                <div id="userDropdown" class="dropdown-menu absolute right-0 mt-2 w-64 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-600 py-2">
+                    <div class="px-4 py-2 border-b border-gray-200 dark:border-gray-600 user-info-section">
+                        <p class="text-sm font-medium text-gray-900 dark:text-gray-100" id="userDisplayName">User Name</p>
+                        <p class="text-sm text-gray-500 dark:text-gray-400 user-email-text" id="userEmail">user@example.com</p>
+                    </div>
+                    <button id="customizeProfileBtn" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center space-x-2">
+                        <i data-feather="settings" class="w-4 h-4"></i>
+                        <span>Customize Profile</span>
+                    </button>
+                    <button id="achievementsBtn" class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center space-x-2">
+                        <i data-feather="award" class="w-4 h-4"></i>
+                        <span>Achievements</span>
+                    </button>
                     <button id="logoutBtn" class="w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center space-x-2">
-                    <i data-feather="log-out" class="w-4 h-4"></i>
-                    <span>Logout</span>
+                        <i data-feather="log-out" class="w-4 h-4"></i>
+                        <span>Logout</span>
                     </button>
                 </div>
-                </div>
+            </div>
         </div>
     </header>
 
@@ -247,43 +371,32 @@
                 </a>
                 <a href="quizzes.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-300 transition hover:bg-blue-50 dark:hover:bg-gray-700">
                     <i data-feather="book-open" class="w-5 h-5"></i><span>Quizzes</span>
-                </a>
+
                 <a href="focus.html" class="flex items-center space-x-3 px-4 py-3 rounded-xl text-gray-600 dark:text-gray-300 transition hover:bg-blue-50 dark:hover:bg-gray-700">
                     <i data-feather="clock" class="w-5 h-5"></i><span>Focus Mode</span>
                 </a>
             </nav>
         </aside>
-        
 
         <main id="mainContent" class="flex-1 p-8 transition-all duration-300">
             <h1 class="text-4xl font-bold mb-8">
-                Welcome back, <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-green-500" id="welcomeUserName">User!</span> 👋
+                Welcome back, <span class="bg-clip-text text-transparent accent-gradient" id="welcomeUserName">User!</span> 👋
             </h1>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 
-                <div class="card-bg-gradient card-bg-gradient-blue p-8 shadow-xl rounded-3xl transition-all duration-300 transform hover:scale-105 card-relative">
+                <div class="card-bg-gradient card-bg-gradient-blue p-8 shadow-xl rounded-3xl transition-all duration-300 transform hover:scale-105">
                     <h2 class="text-xl font-bold text-blue-800 dark:text-blue-200 mb-2">Study Hours</h2>
                     <div id="studyHoursValue" class="text-6xl font-extrabold text-blue-600 dark:text-blue-400">0h</div>
                     <p class="text-sm text-blue-600 dark:text-blue-300 mt-2">logged this week</p>
                     <button id="logHourBtn" class="mt-6 px-6 py-2 text-sm rounded-full bg-blue-600 text-white font-semibold shadow-md transition transform hover:scale-105 hover:bg-blue-700">Log 1 Hour</button>
-
-                    <div class="pro-overlay" onclick="showUnlockModal()">
-                        <span class="pro-overlay-text bg-gradient-to-r from-blue-400 to-green-400 dark:from-blue-300 dark:to-green-300">Unlock Pro</span>
-                        <button class="mt-4 px-6 py-2 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-green-500 hover:scale-105 transition">Buy Pro</button>
-                    </div>
                 </div>
 
-                <div class="card-bg-gradient card-bg-gradient-green p-8 shadow-xl rounded-3xl transition-all duration-300 transform hover:scale-105 card-relative">
+                <div class="card-bg-gradient card-bg-gradient-green p-8 shadow-xl rounded-3xl transition-all duration-300 transform hover:scale-105">
                     <h2 class="text-xl font-bold text-green-800 dark:text-green-200 mb-2">Topics Covered</h2>
                     <div id="topicsCoveredValue" class="text-6xl font-extrabold text-green-600 dark:text-green-400">0</div>
                     <p class="text-sm text-green-600 dark:text-green-300 mt-2">new topics this month</p>
                     <button id="addTopicBtn" class="mt-6 px-6 py-2 text-sm rounded-full bg-green-600 text-white font-semibold shadow-md transition transform hover:scale-105 hover:bg-green-700">Add Topic</button>
-
-                    <div class="pro-overlay" onclick="showUnlockModal()">
-                        <span class="pro-overlay-text bg-gradient-to-r from-blue-400 to-green-400 dark:from-blue-300 dark:to-green-300">Unlock Pro</span>
-                        <button class="mt-4 px-6 py-2 rounded-full text-sm font-semibold text-white bg-gradient-to-r from-blue-500 to-green-500 hover:scale-105 transition">Buy Pro</button>
-                    </div>
                 </div>
 
                 <div class="card-bg-gradient card-bg-gradient-purple p-8 shadow-xl rounded-3xl transition-all duration-300 transform hover:scale-105">
@@ -296,6 +409,18 @@
                     <button id="logDayBtn" class="mt-6 px-6 py-2 text-sm rounded-full bg-purple-600 text-white font-semibold shadow-md transition transform hover:scale-105 hover:bg-purple-700">Log Day</button>
                     <p id="streakMessage" class="mt-4 text-xs text-gray-500 dark:text-gray-400 min-h-[20px]"></p>
                 </div>
+            </div>
+
+            <div class="mt-12 bg-white dark:bg-gray-800 p-8 shadow-xl rounded-3xl">
+                <h2 class="text-2xl font-bold mb-6 accent-gradient bg-clip-text text-transparent flex items-center">
+                    <i data-feather="award" class="w-6 h-6 mr-2 text-yellow-500"></i>
+                    Recent Achievements
+                </h2>
+                <div id="achievementsList" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    </div>
+                <button id="viewAllAchievements" class="mt-6 px-6 py-2 text-sm rounded-full accent-gradient text-white font-semibold shadow-md transition transform hover:scale-105">
+                    View All Achievements
+                </button>
             </div>
             
             <div class="mt-12 bg-white dark:bg-gray-800 p-8 shadow-xl rounded-3xl text-center transition-all duration-300">
@@ -335,30 +460,80 @@
             </div>
         </div>
     </div>
-    
-    <div id="unlockProModal" class="unlock-modal">
-        <div class="unlock-modal-content dark:bg-gray-800">
-            <button class="close-btn" onclick="hideUnlockModal()">
-                <i data-feather="x"></i>
-            </button>
-            <h3 class="text-xl font-bold mb-4">Unlock Pro Features</h3>
-            <p class="text-gray-600 dark:text-gray-400 mb-4">Enter your product key below to unlock these exclusive features.</p>
-            <input type="text" id="proProductKeyInput" placeholder="Enter product key" class="w-full px-4 py-2 mb-4 rounded-lg border border-gray-300 dark:border-gray-600 bg-gray-100 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <p id="unlockError" class="text-red-500 text-sm mb-4 hidden">Invalid product key. Please try again.</p>
-            <button id="unlockProBtn" class="w-full px-4 py-2 rounded-lg text-white font-semibold bg-blue-600 hover:bg-blue-700 transition">Unlock</button>
+
+    <div id="achievementsModal" class="modal-overlay">
+        <div class="modal-content bg-white dark:bg-gray-800 rounded-xl p-6 w-11/12 max-w-4xl shadow-2xl max-h-[80vh] overflow-y-auto">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-100 flex items-center">
+                    <i data-feather="award" class="w-6 h-6 mr-2 text-yellow-500"></i>
+                    All Achievements
+                </h3>
+                <button id="closeAchievementsModal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                    <i data-feather="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            <div id="allAchievementsList" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                </div>
         </div>
     </div>
 
-    <!-- Sidebar Overlay -->
-    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden md:hidden"></div>
+    <div id="profileModal" class="modal-overlay">
+        <div class="modal-content bg-white dark:bg-gray-800 rounded-xl p-6 w-11/12 max-w-md shadow-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">Customize Profile</h3>
+                <button id="closeProfileModal" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200">
+                    <i data-feather="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+            
+            <div class="text-center mb-6">
+                <div class="avatar-container w-20 h-20 mx-auto mb-4 relative">
+                    <div class="avatar-ring"></div>
+                    <div id="profileAvatar" class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-green-500 flex items-center justify-center text-white font-bold text-2xl relative z-10 overflow-hidden">
+                        U
+                    </div>
+                    <button id="changeAvatarBtn" class="absolute bottom-0 right-0 w-6 h-6 bg-blue-500 text-white rounded-full flex items-center justify-center text-xs hover:bg-blue-600 transition z-20">
+                        <i data-feather="camera" class="w-3 h-3"></i>
+                    </button>
+                    <input type="file" id="avatarUpload" accept="image/*" class="hidden">
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-400">Click the camera icon to upload a profile picture</p>
+            </div>
 
+            <div class="mb-6">
+                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Choose Accent Color</label>
+                <div class="grid grid-cols-6 gap-3">
+                    <div class="color-picker bg-blue-500" data-color="blue" title="Blue"></div>
+                    <div class="color-picker bg-green-500" data-color="green" title="Green"></div>
+                    <div class="color-picker bg-purple-500" data-color="purple" title="Purple"></div>
+                    <div class="color-picker bg-pink-500" data-color="pink" title="Pink"></div>
+                    <div class="color-picker bg-orange-500" data-color="orange" title="Orange"></div>
+                    <div class="color-picker bg-red-500" data-color="red" title="Red"></div>
+                </div>
+            </div>
+
+            <div class="flex space-x-3">
+                <button id="resetProfileBtn" class="flex-1 px-4 py-2 text-gray-600 dark:text-gray-400 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition">
+                    Reset to Default
+                </button>
+                <button id="saveProfileBtn" class="flex-1 px-4 py-2 accent-gradient text-white rounded-lg hover:opacity-90 transition">
+                    Save Changes
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-20 hidden md:hidden"></div>
 
     <script type="module">
         // Import Firebase modules
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, collection, query, where, onSnapshot, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
         
         // Firebase configuration
+        // WARNING: Storing API keys client-side is a security risk. In a production app,
+        // these should be stored on a server and accessed via a secure proxy.
         const firebaseConfig = {
             apiKey: "AIzaSyAeq9Tuo5CmLRh35thABNj-Qv9V_hpjB9c",
             authDomain: "study-a25ac.firebaseapp.com",
@@ -372,6 +547,21 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
+
+
+        // Achievement definitions
+        const achievements = [
+            { id: 'first-day', name: 'First Step', description: 'Log your first study day', icon: '🌱', requirement: 1, type: 'streak' },
+            { id: 'week-warrior', name: 'Week Warrior', description: '7 day study streak', icon: '📚', requirement: 7, type: 'streak' },
+            { id: 'dedication', name: 'Dedication', description: '14 day study streak', icon: '🎯', requirement: 14, type: 'streak' },
+            { id: 'unstoppable', name: 'Unstoppable', description: '30 day study streak', icon: '🚀', requirement: 30, type: 'streak' },
+            { id: 'legend', name: 'Study Legend', description: '60 day study streak', icon: '👑', requirement: 60, type: 'streak' },
+            { id: 'hour-hero', name: 'Hour Hero', description: 'Log 10 study hours', icon: '⏰', requirement: 10, type: 'hours' },
+            { id: 'time-master', name: 'Time Master', description: 'Log 50 study hours', icon: '⌚', requirement: 50, type: 'hours' },
+            { id: 'topic-explorer', name: 'Topic Explorer', description: 'Cover 5 topics', icon: '🗺️', requirement: 5, type: 'topics' },
+            { id: 'knowledge-seeker', name: 'Knowledge Seeker', description: 'Cover 20 topics', icon: '🔍', requirement: 20, type: 'topics' },
+        ];
 
         // DOM Elements
         const toggleBtn = document.getElementById('toggleSidebar');
@@ -401,36 +591,253 @@
         const userDisplayName = document.getElementById('userDisplayName');
         const userEmail = document.getElementById('userEmail');
         const welcomeUserName = document.getElementById('welcomeUserName');
+        const userAvatar = document.getElementById('userAvatar');
 
-        // Logout Modal Elements
+        // Modal Elements
         const logoutModal = document.getElementById('logoutModal');
         const cancelLogoutBtn = document.getElementById('cancelLogoutBtn');
         const confirmLogoutBtn = document.getElementById('confirmLogoutBtn');
 
-        // New Pro Unlock Elements
-        const unlockProModal = document.getElementById('unlockProModal');
-        const proProductKeyInput = document.getElementById('proProductKeyInput');
-        const unlockProBtn = document.getElementById('unlockProBtn');
-        const unlockError = document.getElementById('unlockError');
-        const proOverlays = document.querySelectorAll('.pro-overlay');
+        // Achievement Elements
+        const achievementsList = document.getElementById('achievementsList');
+        const viewAllAchievements = document.getElementById('viewAllAchievements');
+        const achievementsModal = document.getElementById('achievementsModal');
+        const allAchievementsList = document.getElementById('allAchievementsList');
+        const closeAchievementsModal = document.getElementById('closeAchievementsModal');
+        const achievementsBtn = document.getElementById('achievementsBtn');
+
+        // Profile Customization Elements
+        const customizeProfileBtn = document.getElementById('customizeProfileBtn');
+        const profileModal = document.getElementById('profileModal');
+        const closeProfileModal = document.getElementById('closeProfileModal');
+        const profileAvatar = document.getElementById('profileAvatar');
+        const colorPickers = document.querySelectorAll('.color-picker');
+        const resetProfileBtn = document.getElementById('resetProfileBtn');
+        const saveProfileBtn = document.getElementById('saveProfileBtn');
+        const changeAvatarBtn = document.getElementById('changeAvatarBtn');
+        const avatarUpload = document.getElementById('avatarUpload');
         
+        // Notification Elements
+        const notificationBtn = document.getElementById('notificationBtn');
+        const notificationDropdown = document.getElementById('notificationDropdown');
+        const notificationList = document.getElementById('notificationList');
+        const notificationBadge = document.getElementById('notificationBadge');
+        const clearNotificationsBtn = document.getElementById('clearNotificationsBtn');
+
         // --- Username Formatting Function ---
         function formatUsername(email) {
-            // Get the part before the @ symbol
             const baseUsername = email.split('@')[0];
+            return baseUsername.charAt(0).toUpperCase() + baseUsername.slice(1);
+        }
+
+        // --- Profile Customization Functions ---
+        function generateAvatar(name) {
+            const colors = [
+                ['#3b82f6', '#1d4ed8'], // blue
+                ['#10b981', '#059669'], // green
+                ['#8b5cf6', '#7c3aed'], // purple
+                ['#ec4899', '#db2777'], // pink
+                ['#f97316', '#ea580c'], // orange
+                ['#ef4444', '#dc2626']  // red
+            ];
             
-            // Remove all numbers and special characters, keep only letters
-            const cleanUsername = baseUsername.replace(/[^a-zA-Z]/g, '');
+            const accentColor = localStorage.getItem('userAccentColor') || 'blue';
+            const colorMap = {
+                blue: colors[0],
+                green: colors[1],
+                purple: colors[2],
+                pink: colors[3],
+                orange: colors[4],
+                red: colors[5]
+            };
             
-            // If the cleaned username is empty or too short, fallback to original logic
-            if (!cleanUsername || cleanUsername.length < 2) {
-                return baseUsername.charAt(0).toUpperCase() + baseUsername.slice(1);
+            const [color1, color2] = colorMap[accentColor] || colors[0];
+            const initial = name.charAt(0).toUpperCase();
+            
+            return {
+                initial,
+                background: `linear-gradient(135deg, ${color1}, ${color2})`
+            };
+        }
+
+        function updateAvatar(name, customImage = null) {
+            const savedImage = customImage || localStorage.getItem('userProfileImage');
+            
+            if (savedImage) {
+                // Use custom uploaded image
+                userAvatar.innerHTML = `<img src="${savedImage}" alt="Profile" class="w-full h-full object-cover rounded-full">`;
+                profileAvatar.innerHTML = `<img src="${savedImage}" alt="Profile" class="w-full h-full object-cover rounded-full">`;
+            } else {
+                // Use generated avatar
+                const avatar = generateAvatar(name);
+                userAvatar.textContent = avatar.initial;
+                userAvatar.style.background = avatar.background;
+                profileAvatar.textContent = avatar.initial;
+                profileAvatar.style.background = avatar.background;
+            }
+        }
+
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                if (file.size > 5 * 1024 * 1024) { // 5MB limit
+                    alert('Please select an image smaller than 5MB');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageData = e.target.result;
+                    localStorage.setItem('userProfileImage', imageData);
+                    const username = localStorage.getItem('username') || 'User';
+                    updateAvatar(username, imageData);
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeProfileImage() {
+            localStorage.removeItem('userProfileImage');
+            const username = localStorage.getItem('username') || 'User';
+            updateAvatar(username);
+        }
+
+        function applyAccentColor(color) {
+            document.documentElement.setAttribute('data-accent', color);
+            localStorage.setItem('userAccentColor', color);
+            
+            // Update color picker selection
+            colorPickers.forEach(picker => {
+                picker.classList.toggle('selected', picker.dataset.color === color);
+            });
+        }
+
+        function loadProfileCustomization() {
+            const savedAccent = localStorage.getItem('userAccentColor') || 'blue';
+            applyAccentColor(savedAccent);
+        }
+
+        // --- Achievement System ---
+        function checkAchievements() {
+            const streak = parseInt(localStorage.getItem('studyStreak')) || 0;
+            const hours = parseInt(localStorage.getItem('studyHours')) || 0;
+            const topics = parseInt(localStorage.getItem('topicsCovered')) || 0;
+            const earnedAchievements = JSON.parse(localStorage.getItem('earnedAchievements')) || [];
+            
+            let newAchievements = [];
+            
+            achievements.forEach(achievement => {
+                if (!earnedAchievements.includes(achievement.id)) {
+                    let earned = false;
+                    
+                    switch(achievement.type) {
+                        case 'streak':
+                            earned = streak >= achievement.requirement;
+                            break;
+                        case 'hours':
+                            earned = hours >= achievement.requirement;
+                            break;
+                        case 'topics':
+                            earned = topics >= achievement.requirement;
+                            break;
+                    }
+                    
+                    if (earned) {
+                        earnedAchievements.push(achievement.id);
+                        newAchievements.push(achievement);
+                    }
+                }
+            });
+            
+            if (newAchievements.length > 0) {
+                localStorage.setItem('earnedAchievements', JSON.stringify(earnedAchievements));
+                showNewAchievements(newAchievements);
             }
             
-            // Capitalize the first letter and make the rest lowercase
-            return cleanUsername.charAt(0).toUpperCase() + cleanUsername.slice(1).toLowerCase();
+            updateAchievementsDisplay();
         }
-        
+
+        function showNewAchievements(newAchievements) {
+            newAchievements.forEach((achievement, index) => {
+                setTimeout(() => {
+                    // Create achievement notification
+                    const notification = document.createElement('div');
+                    notification.className = 'fixed top-20 right-4 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg border-l-4 border-yellow-500 z-50 transform translate-x-full transition-transform duration-300';
+                    notification.innerHTML = `
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">${achievement.icon}</span>
+                            <div>
+                                <p class="font-bold text-sm">Achievement Unlocked!</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">${achievement.name}</p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.body.appendChild(notification);
+                    
+                    // Animate in
+                    setTimeout(() => {
+                        notification.style.transform = 'translateX(0)';
+                    }, 100);
+                    
+                    // Remove after 3 seconds
+                    setTimeout(() => {
+                        notification.style.transform = 'translateX(full)';
+                        setTimeout(() => notification.remove(), 300);
+                    }, 3000);
+                }, index * 500);
+            });
+        }
+
+        function updateAchievementsDisplay() {
+            const earnedAchievements = JSON.parse(localStorage.getItem('earnedAchievements')) || [];
+            const recentAchievements = achievements.filter(a => earnedAchievements.includes(a.id)).slice(-4);
+            
+            achievementsList.innerHTML = '';
+            
+            if (recentAchievements.length === 0) {
+                achievementsList.innerHTML = '<div class="col-span-full text-center text-gray-500 dark:text-gray-400 py-8">No achievements yet. Keep studying to unlock your first badge!</div>';
+                return;
+            }
+            
+            recentAchievements.forEach(achievement => {
+                const achievementEl = document.createElement('div');
+                achievementEl.className = 'achievement-badge earned text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl';
+                achievementEl.innerHTML = `
+                    <div class="text-3xl mb-2">${achievement.icon}</div>
+                    <h3 class="font-bold text-sm text-gray-900 dark:text-gray-100">${achievement.name}</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">${achievement.description}</p>
+                `;
+                achievementsList.appendChild(achievementEl);
+            });
+        }
+
+        function showAllAchievements() {
+            const earnedAchievements = JSON.parse(localStorage.getItem('earnedAchievements')) || [];
+            
+            allAchievementsList.innerHTML = '';
+            
+            achievements.forEach(achievement => {
+                const isEarned = earnedAchievements.includes(achievement.id);
+                const achievementEl = document.createElement('div');
+                achievementEl.className = `achievement-badge ${isEarned ? 'earned' : 'locked'} text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-xl`;
+                achievementEl.innerHTML = `
+                    <div class="text-4xl mb-2">${achievement.icon}</div>
+                    <h3 class="font-bold text-sm text-gray-900 dark:text-gray-100">${achievement.name}</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">${achievement.description}</p>
+                    <div class="mt-2">
+                        ${isEarned ? 
+                            '<span class="inline-block px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs rounded-full">Earned</span>' : 
+                            '<span class="inline-block px-2 py-1 bg-gray-200 dark:bg-gray-600 text-gray-700 dark:text-gray-300 text-xs rounded-full">Locked</span>'
+                        }
+                    </div>
+                `;
+                allAchievementsList.appendChild(achievementEl);
+            });
+            
+            achievementsModal.classList.add('show');
+        }
+
         // --- Authentication Functions ---
         function updateUserInfo(user) {
             if (user) {
@@ -441,7 +848,7 @@
                 userEmail.textContent = email;
                 welcomeUserName.textContent = formattedDisplayName;
                 
-                // Store formatted username for consistency
+                updateAvatar(formattedDisplayName);
                 localStorage.setItem('username', formattedDisplayName);
             }
         }
@@ -449,10 +856,8 @@
         async function handleLogout() {
             try {
                 await signOut(auth);
-                // Clear stored user data
                 localStorage.removeItem('username');
-                // Redirect to login page
-                window.location.href = 'index.html'; // or your login page
+                window.location.href = 'index.html';
             } catch (error) {
                 console.error("Logout error:", error);
                 alert("Error signing out. Please try again.");
@@ -497,32 +902,20 @@
             feather.replace();
         }
 
-        // --- Dashboard Data Logic with localStorage ---
+        // --- Dashboard Data Logic ---
         function loadDashboardData() {
-            // Check if Pro is unlocked
-            const isPro = localStorage.getItem('isProUnlocked') === 'true';
-            if (isPro) {
-                proOverlays.forEach(overlay => overlay.style.display = 'none');
-                logHourBtn.style.pointerEvents = 'auto';
-                addTopicBtn.style.pointerEvents = 'auto';
-            } else {
-                proOverlays.forEach(overlay => overlay.style.display = 'flex');
-                logHourBtn.style.pointerEvents = 'none';
-                addTopicBtn.style.pointerEvents = 'none';
-            }
-
-            // Load and update Study Hours
             let studyHours = parseInt(localStorage.getItem('studyHours')) || 0;
             studyHoursValue.textContent = `${studyHours}h`;
 
-            // Load and update Topics Covered
             let topicsCovered = parseInt(localStorage.getItem('topicsCovered')) || 0;
             topicsCoveredValue.textContent = topicsCovered;
 
-            // Load and update Study Streak (existing logic)
             let studyStreak = parseInt(localStorage.getItem('studyStreak')) || 0;
             studyStreakValue.textContent = studyStreak;
+            
             checkStudyStreak();
+            checkAchievements();
+            updateAchievementsDisplay();
         }
 
         function logStudyHour() {
@@ -530,6 +923,7 @@
             studyHours++;
             localStorage.setItem('studyHours', studyHours);
             studyHoursValue.textContent = `${studyHours}h`;
+            checkAchievements();
         }
 
         function addTopic() {
@@ -537,9 +931,9 @@
             topicsCovered++;
             localStorage.setItem('topicsCovered', topicsCovered);
             topicsCoveredValue.textContent = topicsCovered;
+            checkAchievements();
         }
 
-        // Existing Study Streak Logic
         function checkStudyStreak() {
             let streak = parseInt(localStorage.getItem('studyStreak')) || 0;
             let lastLogTimestamp = parseInt(localStorage.getItem('lastLogTimestamp')) || 0;
@@ -567,6 +961,7 @@
             localStorage.setItem('studyStreak', streak + 1);
             localStorage.setItem('lastLogTimestamp', Date.now());
             checkStudyStreak();
+            checkAchievements();
         }
 
         // --- AI Motivational Quote Generator ---
@@ -576,10 +971,10 @@
             getQuoteBtn.disabled = true;
 
             const prompt = "Generate a single, short, and inspiring motivational quote for a student.";
-
             const payload = {
                 contents: [{ role: "user", parts: [{ text: prompt }] }]
             };
+            // WARNING: Storing API keys client-side is a security risk.
             const apiKey = "AIzaSyA19xjTISq7xJRx8ab3-TGaSlVW7XxWFwQ";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
@@ -608,49 +1003,139 @@
             }
         }
         
-        // --- Pro Unlock Modal Functions ---
-        window.showUnlockModal = function() {
-            unlockProModal.classList.add('show');
-            proProductKeyInput.value = '';
-            unlockError.classList.add('hidden');
-        }
+        // Listen for notifications targeted at this user OR to "all"
+let notificationsUnsubscribe = null;
+function listenForNotifications(userEmail) {
+    if (notificationsUnsubscribe) notificationsUnsubscribe();
 
-        window.hideUnlockModal = function() {
-            unlockProModal.classList.remove('show');
-        }
+    try {
+        const qToAll = query(collection(db, 'notifications'), where('targetEmail', '==', 'all'));
+        const qToUser = query(collection(db, 'notifications'), where('targetEmail', '==', userEmail));
 
-        function handleProUnlock() {
-            const productKey = proProductKeyInput.value.trim();
-            const validKey = 'Admin'; // The example product key
+        const unsubAll = onSnapshot(qToAll, snapshot => {
+            snapshot.docChanges().forEach(change => {
+                if (change.type === 'added') {
+                    const data = change.doc.data();
+                    // Pass both the unique document ID and the message
+                    processRemoteNotification(change.doc.id, data.message);
+                }
+            });
+        });
 
-            if (productKey === validKey) {
-                localStorage.setItem('isProUnlocked', 'true');
-                hideUnlockModal();
-                alert('Pro features unlocked successfully!');
-                loadDashboardData(); // Reload data and hide overlays
-            } else {
-                unlockError.classList.remove('hidden');
-            }
-        }
+        const unsubUser = onSnapshot(qToUser, snapshot => {
+            snapshot.docChanges().forEach(change => {
+                if (change.type === 'added') {
+                    const data = change.doc.data();
+                     // Pass both the unique document ID and the message
+                    processRemoteNotification(change.doc.id, data.message);
+                }
+            });
+        });
+
+        notificationsUnsubscribe = () => { unsubAll(); unsubUser(); };
+    } catch (err) {
+        console.error('listenForNotifications error:', err);
+    }
+}
+
+// This new function processes notifications from Firestore
+function processRemoteNotification(docId, message) {
+    // Get the list of notifications the user has already dismissed
+    const dismissedIds = JSON.parse(localStorage.getItem('dismissedNotificationIds')) || [];
+
+    // If the notification's ID is in the dismissed list, do nothing
+    if (dismissedIds.includes(docId)) {
+        return;
+    }
+
+    // Otherwise, add the new notification to the display
+    addNotification({ id: docId, message: message });
+}
+
+async function saveUserToFirestore(user) {
+    try {
+        // Use uid as doc id
+        const userDocRef = doc(db, 'users', user.uid);
+        await setDoc(userDocRef, {
+            uid: user.uid,
+            email: user.email || null,
+            displayName: user.displayName || formatUsername(user.email || 'User'),
+            lastSeen: serverTimestamp()
+        }, { merge: true });
+    } catch (err) {
+        console.error('Error saving user to Firestore:', err);
+    }
+}
+
+// --- Notification-related functions and logic ---
+function loadNotifications() {
+    const saved = JSON.parse(localStorage.getItem('notifications')) || [];
+    renderNotifications(saved);
+}
+
+function renderNotifications(notifications) {
+    notificationList.innerHTML = '';
+    if (notifications.length === 0) {
+        notificationList.innerHTML = '<p class="text-center text-gray-400 dark:text-gray-500 py-4 text-sm">No notifications yet</p>';
+        notificationBadge.classList.add('hidden');
+        notificationBadge.textContent = '0';
+    } else {
+        notifications.forEach(n => {
+            const item = document.createElement('div');
+            item.className = 'px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-700 text-sm text-gray-700 dark:text-gray-300';
+            item.textContent = n.message; // Render the message property
+            notificationList.appendChild(item);
+        });
+        notificationBadge.textContent = notifications.length;
+        notificationBadge.classList.remove('hidden');
+    }
+}
+
+function addNotification(newNotification) {
+    // newNotification is now an object: { id: docId, message: '...' }
+    const saved = JSON.parse(localStorage.getItem('notifications')) || [];
+
+    // Prevent adding a notification if its ID is already in the list
+    const isAlreadyAdded = saved.some(n => n.id === newNotification.id);
+    if (isAlreadyAdded) {
+        return; // Exit if the notification is a duplicate
+    }
+
+    saved.unshift(newNotification); // Add newest notification to the front
+    localStorage.setItem('notifications', JSON.stringify(saved));
+    renderNotifications(saved);
+}
+
+function toggleNotificationDropdown(show = null) {
+    if (show === null) {
+        notificationDropdown.classList.toggle('show');
+    } else if (show) {
+        notificationDropdown.classList.add('show');
+    } else {
+        notificationDropdown.classList.remove('show');
+    }
+}
 
         // --- Event Listeners and Initial Setup ---
         document.addEventListener('DOMContentLoaded', () => {
             setInitialTheme();
+            loadProfileCustomization();
             loadDashboardData();
             updateDarkModeIcon();
             feather.replace();
+            loadNotifications();
 
-            // Check authentication state
             onAuthStateChanged(auth, (user) => {
                 if (user) {
                     updateUserInfo(user);
+                    saveUserToFirestore(user);
+                    listenForNotifications(user.email);
                 } else {
-                    // User is not authenticated, redirect to login
                     window.location.href = 'index.html';
                 }
             });
 
-            // --- NEW RESPONSIVE SIDEBAR LOGIC ---
+            // Sidebar functionality
             if (toggleBtn) {
                 const overlay = document.getElementById('sidebar-overlay');
 
@@ -685,16 +1170,14 @@
                     }
                 };
 
-                setInitialState(); // Set state on initial load
+                setInitialState();
                 toggleBtn.addEventListener('click', toggleSidebar);
                 overlay.addEventListener('click', toggleSidebar);
 
-                // Adjust on window resize
                 let isDesktop = window.innerWidth >= 768;
                 window.addEventListener('resize', () => {
                     const wasDesktop = isDesktop;
                     isDesktop = window.innerWidth >= 768;
-                    // Only reset state if we cross the breakpoint
                     if (isDesktop !== wasDesktop) {
                         setInitialState();
                     }
@@ -719,14 +1202,13 @@
                 });
             }
 
-            // Close dropdown when clicking outside
             document.addEventListener('click', (e) => {
                 if (!userDropdown.contains(e.target) && !userProfileBtn.contains(e.target)) {
                     toggleUserDropdown(false);
                 }
             });
 
-            // Logout button
+            // Button event listeners
             if (logoutBtn) {
                 logoutBtn.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -735,7 +1217,6 @@
                 });
             }
 
-            // Logout modal buttons
             if (cancelLogoutBtn) {
                 cancelLogoutBtn.addEventListener('click', hideLogoutModal);
             }
@@ -747,55 +1228,142 @@
                 });
             }
 
-            // Close modal when clicking outside
+            if (logDayBtn) {
+                logDayBtn.addEventListener('click', logStudyDay);
+            }
+
+            if (logHourBtn) {
+                logHourBtn.addEventListener('click', logStudyHour);
+            }
+
+            if (addTopicBtn) {
+                addTopicBtn.addEventListener('click', addTopic);
+            }
+            
+            if (getQuoteBtn) {
+                getQuoteBtn.addEventListener('click', getNewQuote);
+            }
+
+            // Achievement modal events
+            if (viewAllAchievements) {
+                viewAllAchievements.addEventListener('click', showAllAchievements);
+            }
+
+            if (achievementsBtn) {
+                achievementsBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    toggleUserDropdown(false);
+                    showAllAchievements();
+                });
+            }
+
+            if (closeAchievementsModal) {
+                closeAchievementsModal.addEventListener('click', () => {
+                    achievementsModal.classList.remove('show');
+                });
+            }
+
+            // Profile customization events
+            if (customizeProfileBtn) {
+                customizeProfileBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    toggleUserDropdown(false);
+                    profileModal.classList.add('show');
+                });
+            }
+
+            if (closeProfileModal) {
+                closeProfileModal.addEventListener('click', () => {
+                    profileModal.classList.remove('show');
+                });
+            }
+
+            colorPickers.forEach(picker => {
+                picker.addEventListener('click', () => {
+                    const color = picker.dataset.color;
+                    applyAccentColor(color);
+                });
+            });
+
+            if (resetProfileBtn) {
+                resetProfileBtn.addEventListener('click', () => {
+                    applyAccentColor('blue');
+                    removeProfileImage();
+                    const username = localStorage.getItem('username') || 'User';
+                    updateAvatar(username);
+                });
+            }
+
+            if (saveProfileBtn) {
+                saveProfileBtn.addEventListener('click', () => {
+                    profileModal.classList.remove('show');
+                    const username = localStorage.getItem('username') || 'User';
+                    updateAvatar(username);
+                });
+            }
+
+            if (changeAvatarBtn) {
+                changeAvatarBtn.addEventListener('click', () => {
+                    avatarUpload.click();
+                });
+            }
+
+            if (avatarUpload) {
+                avatarUpload.addEventListener('change', handleImageUpload);
+            }
+            // Close modals when clicking outside
             logoutModal.addEventListener('click', (e) => {
                 if (e.target === logoutModal) {
                     hideLogoutModal();
                 }
             });
-            
-            // Log Day button for Study Streak
-            if (logDayBtn) {
-                logDayBtn.addEventListener('click', logStudyDay);
-            }
 
-            // Log 1 Hour button (re-enabled for Pro users)
-            if (logHourBtn) {
-                logHourBtn.addEventListener('click', () => {
-                    if (localStorage.getItem('isProUnlocked') === 'true') {
-                        logStudyHour();
-                    }
+            achievementsModal.addEventListener('click', (e) => {
+                if (e.target === achievementsModal) {
+                    achievementsModal.classList.remove('show');
+                }
+            });
+
+            profileModal.addEventListener('click', (e) => {
+                if (e.target === profileModal) {
+                    profileModal.classList.remove('show');
+                }
+            });
+
+            if (notificationBtn) {
+                notificationBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    toggleNotificationDropdown();
                 });
             }
 
-            // Add Topic button (re-enabled for Pro users)
-            if (addTopicBtn) {
-                addTopicBtn.addEventListener('click', () => {
-                    if (localStorage.getItem('isProUnlocked') === 'true') {
-                        addTopic();
-                    }
-                });
-            }
-            
-            // Get New Quote button
-            if (getQuoteBtn) {
-                getQuoteBtn.addEventListener('click', getNewQuote);
-            }
-            
-            // Unlock Pro modal event listeners
-            unlockProBtn.addEventListener('click', handleProUnlock);
-            proProductKeyInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    handleProUnlock();
+            document.addEventListener('click', (e) => {
+                if (!notificationDropdown.contains(e.target) && !notificationBtn.contains(e.target)) {
+                    toggleNotificationDropdown(false);
                 }
             });
-            unlockProModal.addEventListener('click', (e) => {
-                if (e.target === unlockProModal) {
-                    hideUnlockModal();
-                }
-            });
+            
+if (clearNotificationsBtn) {
+    clearNotificationsBtn.addEventListener('click', () => {
+        const currentNotifications = JSON.parse(localStorage.getItem('notifications')) || [];
+        const dismissedIds = JSON.parse(localStorage.getItem('dismissedNotificationIds')) || [];
+
+        // Get the unique IDs of the notifications currently being displayed
+        const idsToDismiss = currentNotifications.map(n => n.id);
+
+        // Add these IDs to the list of dismissed notifications
+        const allDismissedIds = [...new Set([...dismissedIds, ...idsToDismiss])];
+        localStorage.setItem('dismissedNotificationIds', JSON.stringify(allDismissedIds));
+
+        // Clear the visible notifications list from storage
+        localStorage.removeItem('notifications');
+
+        // Update the UI to show it's empty
+        renderNotifications([]);
+    });
+}
+
         });
     </script>
 </body>
 </html>
-
