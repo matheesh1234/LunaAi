@@ -7,7 +7,6 @@
     <link rel="icon" type="image/png" href="Icon.png" />
     <!-- Poppins font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
-
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Feather Icons -->
@@ -17,50 +16,40 @@
         body {
             font-family: 'Poppins', sans-serif;
         }
-
         .option-btn {
             transition: background-color 0.3s, color 0.3s, transform 0.2s, box-shadow 0.2s;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
         }
-
         .option-btn:hover:not([disabled]) {
-            background-color: #e0f2fe; /* Tailwind light blue */
+            background-color: #e0f2fe;
             transform: translateY(-2px);
             box-shadow: 0 6px 10px -1px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
-
         .correct {
-            background-color: #22c55e !important; /* green-500 */
+            background-color: #22c55e !important;
             color: white !important;
         }
-
         .wrong {
-            background-color: #ef4444 !important; /* red-500 */
+            background-color: #ef4444 !important;
             color: white !important;
         }
-
         .disabled {
             cursor: not-allowed;
             opacity: 0.7;
         }
-
-        /* Progress bar */
         #progressBarContainer {
-            background-color: #e5e7eb; /* gray-200 */
+            background-color: #e5e7eb;
             height: 12px;
             border-radius: 9999px;
             overflow: hidden;
             margin-bottom: 1rem;
         }
-
         #progressBar {
-            background-color: #3b82f6; /* blue-500 */
+            background-color: #3b82f6;
             height: 100%;
             width: 0%;
             transition: width 0.4s ease;
         }
-
-        /* Confetti container */
         #confetti {
             pointer-events: none;
             position: fixed;
@@ -71,6 +60,34 @@
             overflow: visible;
             z-index: 9999;
         }
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .text-3xl {
+                font-size: 1.5rem;
+            }
+            .text-2xl {
+                font-size: 1.25rem;
+            }
+            .text-xl {
+                font-size: 1rem;
+            }
+            .p-8 {
+                padding: 1.5rem;
+            }
+            .px-8 {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .py-3 {
+                padding-top: 0.5rem;
+                padding-bottom: 0.5rem;
+            }
+            .max-w-3xl {
+                max-width: 100%;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
     </style>
 
     <script>
@@ -80,74 +97,38 @@
     </script>
 </head>
 <body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
-
     <!-- Header -->
-    <header
-        class="bg-gradient-to-r from-blue-600 to-green-500 text-white shadow-lg flex items-center justify-between px-6 py-4 dark:from-gray-800 dark:to-gray-900"
-    >
+    <header class="bg-gradient-to-r from-blue-600 to-green-500 text-white shadow-lg flex items-center justify-between px-6 py-4 dark:from-gray-800 dark:to-gray-900">
         <div class="flex items-center space-x-3">
             <a href="dashboard.html" onclick="showSetup()" class="flex items-center space-x-2 font-semibold hover:underline">
                 <i data-feather="arrow-left"></i><span>Back</span>
             </a>
         </div>
-        <h1 class="text-2xl font-bold">Ai Quizzes</h1>
+        <h1 class="text-2xl font-bold">AI Quizzes</h1>
         <div class="flex items-center space-x-4">
             <button id="themeToggle" class="p-2 rounded-full hover:bg-white hover:bg-opacity-20 transition-colors">
                 <i id="themeIcon" data-feather="sun" class="w-6 h-6"></i>
             </button>
-            <div
-                class="w-10 h-10 rounded-full border-2 border-white bg-gray-300 dark:bg-gray-700 flex items-center justify-center"
-                aria-label="User Profile"
-            >
-                <i data-feather="user" class="text-gray-600 dark:text-gray-300"></i>
-            </div>
         </div>
     </header>
 
     <main class="max-w-3xl mx-auto p-6">
         <!-- Quiz Setup Section -->
-        <section
-            id="quizSetup"
-            class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg transition-all duration-300"
-        >
+        <section id="quizSetup" class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg transition-all duration-300">
             <h2 class="text-3xl font-bold mb-6 text-center text-blue-600 dark:text-green-400">Create a New Quiz</h2>
-            <p class="text-gray-600 dark:text-gray-300 text-center mb-8">
-                Let our AI generate a custom quiz for you!
-            </p>
-
+            <p class="text-gray-600 dark:text-gray-300 text-center mb-8">Let our AI generate a custom quiz for you!</p>
             <form id="quizForm" class="space-y-6">
                 <div>
                     <label for="subject" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Subject</label>
-                    <input
-                        type="text"
-                        id="subject"
-                        name="subject"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition"
-                        placeholder="e.g., Biology, History"
-                        required
-                    />
+                    <input type="text" id="subject" name="subject" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition" placeholder="e.g., Biology, History" required />
                 </div>
-
                 <div>
                     <label for="topic" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Topic</label>
-                    <input
-                        type="text"
-                        id="topic"
-                        name="topic"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition"
-                        placeholder="e.g., Photosynthesis, World War II"
-                        required
-                    />
+                    <input type="text" id="topic" name="topic" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition" placeholder="e.g., Photosynthesis, World War II" required />
                 </div>
-
                 <div>
                     <label for="grade" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Grade Level</label>
-                    <select
-                        id="grade"
-                        name="grade"
-                        class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition"
-                        required
-                    >
+                    <select id="grade" name="grade" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition" required>
                         <option value="">Select a grade level</option>
                         <option value="Elementary">Elementary (Grades 1-5)</option>
                         <option value="Middle School">Middle School (Grades 6-8)</option>
@@ -155,14 +136,35 @@
                         <option value="College">College</option>
                     </select>
                 </div>
-
-                <div class="flex justify-center">
-                    <button
-                        type="submit"
-                        class="w-full bg-gradient-to-r from-blue-600 to-green-500 hover:from-blue-700 hover:to-green-600 text-white px-8 py-3 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                    >
-                        Generate Quiz
-                    </button>
+                <div>
+                    <label for="questionCount" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Number of Questions</label>
+                    <select id="questionCount" name="questionCount" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition" required>
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                        <option value="20">20</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="difficulty" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Difficulty Level</label>
+                    <select id="difficulty" name="difficulty" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition" required>
+                        <option value="Easy">Easy</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Hard">Hard</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="questionType" class="block text-sm font-medium text-gray-700 dark:text-gray-200 mb-2">Question Type</label>
+                    <select id="questionType" name="questionType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm p-3 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 transition" required>
+                        <option value="Multiple Choice">Multiple Choice</option>
+                        <option value="True/False">True/False</option>
+                        <option value="Mixed">Mixed (Multiple Choice + True/False)</option>
+                    </select>
+                </div>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button type="submit" class="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-green-500 hover:from-blue-700 hover:to-green-600 text-white px-8 py-3 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300">Generate Quiz</button>
+                    <button type="button" id="viewHistoryBtn" class="w-full sm:w-auto bg-gray-600 hover:bg-gray-700 text-white px-8 py-3 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300">View Past Quizzes</button>
+                    <button type="button" id="resumeQuizBtn" class="hidden w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300">Resume Quiz</button>
                 </div>
             </form>
         </section>
@@ -173,364 +175,480 @@
             <p class="mt-4 text-lg text-gray-600 dark:text-gray-300">Generating your quiz...</p>
         </div>
 
-
         <!-- Progress Bar -->
         <div id="progressBarContainer" class="hidden">
             <div id="progressBar"></div>
         </div>
 
-        <!-- Question container -->
-        <section
-            id="quizContainer"
-            class="hidden bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg"
-            aria-live="polite"
-            aria-atomic="true"
-        >
+        <!-- Question Container -->
+        <section id="quizContainer" class="hidden bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg" aria-live="polite" aria-atomic="true">
             <div id="questionNumber" class="text-gray-600 dark:text-gray-300 font-semibold mb-2"></div>
             <h2 id="questionText" class="text-2xl font-semibold mb-6"></h2>
-
-            <div id="options" class="grid gap-4">
-                <!-- Option buttons inserted here -->
-            </div>
-
-            <div class="mt-6 flex justify-between items-center">
-                <button
-                    id="nextBtn"
-                    class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition font-semibold shadow-md"
-                    disabled
-                >
-                    Next Question
-                </button>
-
+            <div id="options" class="grid gap-4"></div>
+            <div id="explanation" class="hidden mt-4 text-gray-600 dark:text-gray-300"></div>
+            <div class="mt-6 flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-4 sm:space-y-0">
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <button id="nextBtn" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition font-semibold shadow-md">Next Question</button>
+                    <button id="saveProgressBtn" class="w-full sm:w-auto bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition font-semibold shadow-md">Save Progress</button>
+                </div>
                 <div id="scoreDisplay" class="text-gray-700 dark:text-gray-300 font-semibold"></div>
             </div>
         </section>
 
-        <!-- Quiz summary -->
-        <section
-            id="quizSummary"
-            class="hidden bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg text-center"
-            aria-live="polite"
-        >
+        <!-- Quiz Summary -->
+        <section id="quizSummary" class="hidden bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg text-center" aria-live="polite">
             <h2 class="text-3xl font-bold mb-4 text-green-500">Quiz Completed!</h2>
             <p class="text-xl mb-6">Your score: <span id="finalScore"></span> / <span id="totalQuestions"></span></p>
-            <button
-                id="restartBtn"
-                class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition shadow-md"
-            >
-                Start New Quiz
-            </button>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <button id="restartBtn" class="w-full sm:w-auto bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold transition shadow-md">Start New Quiz</button>
+                <button id="exportBtn" class="w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-semibold transition shadow-md">Export Results</button>
+            </div>
         </section>
-    </main>
 
-    <div id="confetti"></div>
+        <!-- Quiz History Section -->
+        <section id="quizHistory" class="hidden bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+            <h2 class="text-3xl font-bold mb-6 text-center text-blue-600 dark:text-green-400">Quiz History</h2>
+            <div id="historyList" class="space-y-4"></div>
+            <div class="flex justify-center mt-6">
+                <button id="backToSetupBtn" class="w-full sm:w-auto bg-gray-600 hover:bg-gray-700 text-white px-8 py-3 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition-all duration-300">Back to Setup</button>
+            </div>
+        </section>
 
-    <script>
-        feather.replace();
+        <div id="confetti"></div>
 
-        // DOM elements
-        const quizSetupEl = document.getElementById('quizSetup');
-        const quizForm = document.getElementById('quizForm');
-        const loadingEl = document.getElementById('loading');
-        const quizContainer = document.getElementById('quizContainer');
-        const quizSummary = document.getElementById('quizSummary');
-        const questionNumberEl = document.getElementById('questionNumber');
-        const questionTextEl = document.getElementById('questionText');
-        const optionsEl = document.getElementById('options');
-        const nextBtn = document.getElementById('nextBtn');
-        const scoreDisplay = document.getElementById('scoreDisplay');
-        const finalScoreEl = document.getElementById('finalScore');
-        const totalQuestionsEl = document.getElementById('totalQuestions');
-        const restartBtn = document.getElementById('restartBtn');
-        const progressBar = document.getElementById('progressBar');
-        const progressBarContainer = document.getElementById('progressBarContainer');
-        const confettiContainer = document.getElementById('confetti');
-        const themeToggle = document.getElementById('themeToggle');
-        const themeIcon = document.getElementById('themeIcon');
-        const html = document.documentElement;
+        <script>
+            feather.replace();
 
-        // State variables
-        let questions = [];
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let answered = false;
+            // DOM elements
+            const quizSetupEl = document.getElementById('quizSetup');
+            const quizForm = document.getElementById('quizForm');
+            const loadingEl = document.getElementById('loading');
+            const quizContainer = document.getElementById('quizContainer');
+            const quizSummary = document.getElementById('quizSummary');
+            const quizHistory = document.getElementById('quizHistory');
+            const questionNumberEl = document.getElementById('questionNumber');
+            const questionTextEl = document.getElementById('questionText');
+            const optionsEl = document.getElementById('options');
+            const explanationEl = document.getElementById('explanation');
+            const nextBtn = document.getElementById('nextBtn');
+            const saveProgressBtn = document.getElementById('saveProgressBtn');
+            const scoreDisplay = document.getElementById('scoreDisplay');
+            const finalScoreEl = document.getElementById('finalScore');
+            const totalQuestionsEl = document.getElementById('totalQuestions');
+            const restartBtn = document.getElementById('restartBtn');
+            const exportBtn = document.getElementById('exportBtn');
+            const viewHistoryBtn = document.getElementById('viewHistoryBtn');
+            const backToSetupBtn = document.getElementById('backToSetupBtn');
+            const resumeQuizBtn = document.getElementById('resumeQuizBtn');
+            const progressBar = document.getElementById('progressBar');
+            const progressBarContainer = document.getElementById('progressBarContainer');
+            const confettiContainer = document.getElementById('confetti');
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const html = document.documentElement;
 
-        // API Key for the Gemini API. This is automatically provided by the Canvas environment.
-        const apiKey = "AIzaSyA19xjTISq7xJRx8ab3-TGaSlVW7XxWFwQ";
-        const apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=" + apiKey;
+            // State variables
+            let questions = [];
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let answered = false;
+            let userAnswers = [];
+            let quizState = null;
 
-        // Function to show the setup form and hide other sections
-        function showSetup() {
-            quizSetupEl.classList.remove('hidden');
-            loadingEl.classList.add('hidden');
-            quizContainer.classList.add('hidden');
-            quizSummary.classList.add('hidden');
-            progressBarContainer.classList.add('hidden');
-        }
+            // API Key
+            const apiKey = "AIzaSyA19xjTISq7xJRx8ab3-TGaSlVW7XxWFwQ";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
-        // Handle the form submission to generate the quiz
-        quizForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
+            // Show setup form
+            function showSetup() {
+                quizSetupEl.classList.remove('hidden');
+                loadingEl.classList.add('hidden');
+                quizContainer.classList.add('hidden');
+                quizSummary.classList.add('hidden');
+                quizHistory.classList.add('hidden');
+                progressBarContainer.classList.add('hidden');
+                clearSavedQuiz();
+                resumeQuizBtn.classList.toggle('hidden', !localStorage.getItem('savedQuiz'));
+            }
 
-            const subject = document.getElementById('subject').value;
-            const topic = document.getElementById('topic').value;
-            const grade = document.getElementById('grade').value;
-            
-            // Hide the setup form and show the loading spinner
-            quizSetupEl.classList.add('hidden');
-            loadingEl.classList.remove('hidden');
-            
-            try {
-                questions = await generateQuiz(subject, topic, grade);
-                if (questions.length > 0) {
-                    currentQuestionIndex = 0;
-                    score = 0;
-                    loadingEl.classList.add('hidden');
+            // Show quiz history
+            function showHistory() {
+                quizSetupEl.classList.add('hidden');
+                quizHistory.classList.remove('hidden');
+                displayHistory();
+            }
+
+            // Handle form submission
+            quizForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const subject = document.getElementById('subject').value;
+                const topic = document.getElementById('topic').value;
+                const grade = document.getElementById('grade').value;
+                const questionCount = document.getElementById('questionCount').value;
+                const difficulty = document.getElementById('difficulty').value;
+                const questionType = document.getElementById('questionType').value;
+
+                quizSetupEl.classList.add('hidden');
+                loadingEl.classList.remove('hidden');
+
+                try {
+                    questions = await generateQuiz(subject, topic, grade, questionCount, difficulty, questionType);
+                    if (questions.length > 0) {
+                        currentQuestionIndex = 0;
+                        score = 0;
+                        userAnswers = [];
+                        loadingEl.classList.add('hidden');
+                        quizContainer.classList.remove('hidden');
+                        progressBarContainer.classList.remove('hidden');
+                        loadQuestion();
+                    } else {
+                        console.error('Could not generate a quiz. Please try again with different parameters.');
+                        showSetup();
+                    }
+                } catch (error) {
+                    console.error('Error generating quiz:', error);
+                    showSetup();
+                }
+            });
+
+            // Generate quiz via API
+            async function generateQuiz(subject, topic, grade, questionCount, difficulty, questionType) {
+                const prompt = `Generate a ${questionCount}-question quiz about ${topic} in ${subject} for a ${grade} student with ${difficulty} difficulty. Question type: ${questionType}. For multiple-choice questions, provide 4 options with the correct answer index (0-3). For true/false questions, provide 2 options ("True", "False") with the correct answer index (0-1). Include an explanation for each question. Respond with a JSON array of objects, each with 'type' ("multiple-choice" or "true-false"), 'question', 'options' (array of strings), 'answer' (integer), and 'explanation' (string).`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: prompt }] }],
+                    generationConfig: {
+                        responseMimeType: 'application/json',
+                        responseSchema: {
+                            type: 'ARRAY',
+                            items: {
+                                type: 'OBJECT',
+                                properties: {
+                                    type: { type: 'STRING' },
+                                    question: { type: 'STRING' },
+                                    options: { type: 'ARRAY', items: { type: 'STRING' } },
+                                    answer: { type: 'INTEGER' },
+                                    explanation: { type: 'STRING' }
+                                },
+                                propertyOrdering: ['type', 'question', 'options', 'answer', 'explanation']
+                            }
+                        }
+                    }
+                };
+
+                let delay = 1000;
+                const maxRetries = 5;
+
+                for (let i = 0; i < maxRetries; i++) {
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+                        if (!response.ok) {
+                            if (response.status === 429 && i < maxRetries - 1) {
+                                console.warn(`API call failed with status ${response.status}. Retrying in ${delay}ms...`);
+                                await new Promise(resolve => setTimeout(resolve, delay));
+                                delay *= 2;
+                                continue;
+                            }
+                            throw new Error(`API call failed with status: ${response.status}`);
+                        }
+                        const result = await response.json();
+                        const jsonString = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+                        return JSON.parse(jsonString);
+                    } catch (error) {
+                        if (i === maxRetries - 1) throw error;
+                    }
+                }
+                return [];
+            }
+
+            // Load question
+            function loadQuestion() {
+                answered = false;
+                nextBtn.disabled = true;
+                optionsEl.innerHTML = '';
+                explanationEl.classList.add('hidden');
+
+                if (questions.length === 0) return;
+
+                const currentQ = questions[currentQuestionIndex];
+                questionNumberEl.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+                questionTextEl.textContent = currentQ.question;
+
+                currentQ.options.forEach((option, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn bg-gray-100 dark:bg-gray-700 rounded-lg px-4 py-3 text-left text-gray-900 dark:text-gray-100 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500';
+                    btn.textContent = option;
+                    btn.type = 'button';
+                    btn.disabled = false;
+                    btn.dataset.index = index;
+                    btn.addEventListener('click', () => selectOption(btn, index));
+                    optionsEl.appendChild(btn);
+                });
+
+                updateProgressBar();
+                updateScoreDisplay();
+            }
+
+            // Handle option selection
+            function selectOption(button, selectedIndex) {
+                if (answered) return;
+                answered = true;
+                nextBtn.disabled = false;
+
+                const currentQ = questions[currentQuestionIndex];
+                const buttons = [...optionsEl.children];
+                buttons.forEach(btn => btn.disabled = true);
+
+                userAnswers[currentQuestionIndex] = { selected: selectedIndex, correct: currentQ.answer };
+
+                if (selectedIndex === currentQ.answer) {
+                    score++;
+                    button.classList.add('correct');
+                    launchConfetti();
+                } else {
+                    button.classList.add('wrong');
+                    buttons[currentQ.answer].classList.add('correct');
+                }
+
+                explanationEl.textContent = currentQ.explanation;
+                explanationEl.classList.remove('hidden');
+                updateScoreDisplay();
+            }
+
+            // Update progress bar
+            function updateProgressBar() {
+                const percent = ((currentQuestionIndex) / questions.length) * 100;
+                progressBar.style.width = `${percent}%`;
+            }
+
+            // Update score display
+            function updateScoreDisplay() {
+                scoreDisplay.textContent = `Score: ${score} / ${questions.length}`;
+            }
+
+            // Show quiz summary
+            function showSummary() {
+                quizContainer.classList.add('hidden');
+                quizSummary.classList.remove('hidden');
+                finalScoreEl.textContent = score;
+                totalQuestionsEl.textContent = questions.length;
+                progressBar.style.width = '100%';
+                saveQuizHistory();
+                clearSavedQuiz();
+            }
+
+            // Save quiz progress
+            function saveQuizProgress() {
+                quizState = {
+                    questions,
+                    currentQuestionIndex,
+                    score,
+                    userAnswers,
+                    subject: document.getElementById('subject').value,
+                    topic: document.getElementById('topic').value,
+                    grade: document.getElementById('grade').value,
+                    difficulty: document.getElementById('difficulty').value,
+                    questionCount: document.getElementById('questionCount').value,
+                    questionType: document.getElementById('questionType').value
+                };
+                localStorage.setItem('savedQuiz', JSON.stringify(quizState));
+                resumeQuizBtn.classList.remove('hidden');
+            }
+
+            // Clear saved quiz
+            function clearSavedQuiz() {
+                localStorage.removeItem('savedQuiz');
+                quizState = null;
+                resumeQuizBtn.classList.add('hidden');
+            }
+
+            // Resume saved quiz
+            function resumeQuiz() {
+                const savedQuiz = localStorage.getItem('savedQuiz');
+                if (savedQuiz) {
+                    quizState = JSON.parse(savedQuiz);
+                    questions = quizState.questions;
+                    currentQuestionIndex = quizState.currentQuestionIndex;
+                    score = quizState.score;
+                    userAnswers = quizState.userAnswers || [];
+                    quizSetupEl.classList.add('hidden');
                     quizContainer.classList.remove('hidden');
                     progressBarContainer.classList.remove('hidden');
                     loadQuestion();
-                } else {
-                    // Use a custom modal or message box instead of alert
-                    console.error('Could not generate a quiz. Please try again with different parameters.');
-                    showSetup();
                 }
-            } catch (error) {
-                console.error("Error generating quiz:", error);
-                // Use a custom modal or message box instead of alert
-                console.error('An error occurred while generating the quiz. Please check the console for details.');
-                showSetup();
             }
-        });
 
-        // Function to call the Gemini API to generate the quiz questions
-        async function generateQuiz(subject, topic, grade) {
-            const prompt = `Generate a 5-question multiple-choice quiz about ${topic} in ${subject} for a ${grade} student. The questions should have 4 options each, and you must specify the index of the correct answer (0-3). Respond with a JSON array of objects. Each object should have 'question', 'options' (an array of strings), and 'answer' (an integer).`;
+            // Save quiz history
+            function saveQuizHistory() {
+                const history = JSON.parse(localStorage.getItem('quizHistory') || '[]');
+                const quizData = {
+                    subject: document.getElementById('subject').value,
+                    topic: document.getElementById('topic').value,
+                    grade: document.getElementById('grade').value,
+                    difficulty: document.getElementById('difficulty').value,
+                    questionCount: document.getElementById('questionCount').value,
+                    questionType: document.getElementById('questionType').value,
+                    score,
+                    total: questions.length,
+                    answers: userAnswers,
+                    questions,
+                    date: new Date().toLocaleString()
+                };
+                history.push(quizData);
+                localStorage.setItem('quizHistory', JSON.stringify(history));
+            }
 
-            const payload = {
-                contents: [
-                    {
-                        parts: [{ text: prompt }]
-                    }
-                ],
-                generationConfig: {
-                    responseMimeType: "application/json",
-                    responseSchema: {
-                        type: "ARRAY",
-                        items: {
-                            type: "OBJECT",
-                            properties: {
-                                "question": { "type": "STRING" },
-                                "options": {
-                                    "type": "ARRAY",
-                                    "items": { "type": "STRING" }
-                                },
-                                "answer": { "type": "INTEGER" }
-                            },
-                            "propertyOrdering": ["question", "options", "answer"]
-                        }
-                    }
+            // Display quiz history
+            function displayHistory() {
+                const history = JSON.parse(localStorage.getItem('quizHistory') || '[]');
+                historyList.innerHTML = '';
+                if (history.length === 0) {
+                    historyList.innerHTML = '<p class="text-gray-600 dark:text-gray-300">No quiz history available.</p>';
+                    return;
                 }
-            };
-            
-            let delay = 1000; // 1 second
-            const maxRetries = 5;
+                history.forEach((quiz, index) => {
+                    const div = document.createElement('div');
+                    div.className = 'bg-gray-100 dark:bg-gray-700 p-4 rounded-lg';
+                    div.innerHTML = `
+                        <p><strong>Date:</strong> ${quiz.date}</p>
+                        <p><strong>Subject:</strong> ${quiz.subject}</p>
+                        <p><strong>Topic:</strong> ${quiz.topic}</p>
+                        <p><strong>Grade:</strong> ${quiz.grade}</p>
+                        <p><strong>Difficulty:</strong> ${quiz.difficulty}</p>
+                        <p><strong>Score:</strong> ${quiz.score}/${quiz.total}</p>
+                        <button class="review-btn w-full sm:w-auto bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg mt-2" data-index="${index}">Review Answers</button>
+                    `;
+                    historyList.appendChild(div);
+                });
 
-            for (let i = 0; i < maxRetries; i++) {
-                try {
-                    const response = await fetch(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
+                document.querySelectorAll('.review-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const index = btn.dataset.index;
+                        showReview(history[index]);
                     });
-            
-                    if (!response.ok) {
-                        if (response.status === 429 && i < maxRetries - 1) { // 429 Too Many Requests
-                            console.warn(`API call failed with status ${response.status}. Retrying in ${delay}ms...`);
-                            await new Promise(resolve => setTimeout(resolve, delay));
-                            delay *= 2; // Exponential backoff
-                            continue;
-                        } else {
-                            throw new Error(`API call failed with status: ${response.status}`);
-                        }
-                    }
+                });
+            }
 
-                    const result = await response.json();
-                    const jsonString = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-                    const parsedJson = JSON.parse(jsonString);
-                    return parsedJson;
+            // Show review of past quiz
+            function showReview(quiz) {
+                quizHistory.classList.add('hidden');
+                quizContainer.classList.remove('hidden');
+                questions = quiz.answers.map((answer, i) => ({
+                    question: quiz.questions[i]?.question || 'Question not available',
+                    options: quiz.questions[i]?.options || ['N/A'],
+                    answer: quiz.questions[i]?.answer || 0,
+                    explanation: quiz.questions[i]?.explanation || 'No explanation available',
+                    type: quiz.questions[i]?.type || 'multiple-choice'
+                }));
+                currentQuestionIndex = 0;
+                loadQuestion();
+                optionsEl.querySelectorAll('button').forEach(btn => btn.disabled = true);
+                nextBtn.disabled = false;
+            }
 
-                } catch (error) {
-                    console.error("Error in generateQuiz function:", error);
-                    // If the last retry fails or the error is not a 429, we break the loop
-                    if (i === maxRetries - 1 || error.message.includes('429') === false) {
-                        throw error;
-                    }
+            // Export quiz results
+            function exportResults() {
+                const quizData = {
+                    subject: document.getElementById('subject').value,
+                    topic: document.getElementById('topic').value,
+                    grade: document.getElementById('grade').value,
+                    difficulty: document.getElementById('difficulty').value,
+                    score,
+                    total: questions.length,
+                    date: new Date().toLocaleString()
+                };
+                const text = `Quiz Results\nDate: ${quizData.date}\nSubject: ${quizData.subject}\nTopic: ${quizData.topic}\nGrade: ${quizData.grade}\nDifficulty: ${quizData.difficulty}\nScore: ${quizData.score}/${quizData.total}`;
+                const blob = new Blob([text], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'quiz_results.txt';
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+
+            // Confetti effect
+            function launchConfetti() {
+                const confettiCount = 30;
+                for (let i = 0; i < confettiCount; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.textContent = '🎉';
+                    confetti.style.position = 'fixed';
+                    confetti.style.zIndex = 9999;
+                    confetti.style.fontSize = `${Math.random() * 20 + 10}px`;
+                    confetti.style.left = `${Math.random() * window.innerWidth}px`;
+                    confetti.style.top = `${Math.random() * window.innerHeight}px`;
+                    confetti.style.opacity = 1;
+                    confetti.style.pointerEvents = 'none';
+                    confetti.style.userSelect = 'none';
+                    confetti.style.transition = 'all 1s ease-out';
+                    confetti.style.transform = `translateY(0) rotate(${Math.random() * 360}deg)`;
+                    confettiContainer.appendChild(confetti);
+
+                    setTimeout(() => {
+                        confetti.style.opacity = 0;
+                        confetti.style.transform = `translateY(100px) rotate(${Math.random() * 360}deg)`;
+                    }, 100);
+
+                    setTimeout(() => confetti.remove(), 1100);
                 }
             }
-            return [];
-        }
 
-
-        // Function to load the current question
-        function loadQuestion() {
-            answered = false;
-            nextBtn.disabled = true;
-            optionsEl.innerHTML = '';
-            
-            if (questions.length === 0) {
-                return;
+            // Theme toggle
+            function toggleTheme() {
+                if (html.classList.contains('dark')) {
+                    html.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    themeIcon.setAttribute('data-feather', 'moon');
+                } else {
+                    html.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeIcon.setAttribute('data-feather', 'sun');
+                }
+                feather.replace();
             }
 
-            const currentQ = questions[currentQuestionIndex];
+            // Load theme
+            function loadTheme() {
+                const savedTheme = localStorage.getItem('theme');
+                const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+                    html.classList.add('dark');
+                    themeIcon.setAttribute('data-feather', 'sun');
+                } else {
+                    html.classList.remove('dark');
+                    themeIcon.setAttribute('data-feather', 'moon');
+                }
+                feather.replace();
+            }
 
-            questionNumberEl.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
-            questionTextEl.textContent = currentQ.question;
-
-            currentQ.options.forEach((option, index) => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn bg-gray-100 dark:bg-gray-700 rounded-lg px-4 py-3 text-left text-gray-900 dark:text-gray-100 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500';
-                btn.textContent = option;
-                btn.type = 'button';
-                btn.disabled = false;
-                btn.dataset.index = index;
-
-                btn.addEventListener('click', () => selectOption(btn, index));
-
-                optionsEl.appendChild(btn);
+            // Event listeners
+            themeToggle.addEventListener('click', toggleTheme);
+            nextBtn.addEventListener('click', () => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex >= questions.length) {
+                    showSummary();
+                } else {
+                    loadQuestion();
+                }
             });
+            restartBtn.addEventListener('click', showSetup);
+            viewHistoryBtn.addEventListener('click', showHistory);
+            backToSetupBtn.addEventListener('click', showSetup);
+            saveProgressBtn.addEventListener('click', saveQuizProgress);
+            resumeQuizBtn.addEventListener('click', resumeQuiz);
+            exportBtn.addEventListener('click', exportResults);
 
-            updateProgressBar();
-            updateScoreDisplay();
-        }
-
-        // Handle option selection
-        function selectOption(button, selectedIndex) {
-            if (answered) return;
-            answered = true;
-            nextBtn.disabled = false;
-
-            const currentQ = questions[currentQuestionIndex];
-
-            const buttons = [...optionsEl.children];
-            buttons.forEach((btn) => {
-                btn.disabled = true;
+            // Initial setup
+            document.addEventListener('DOMContentLoaded', () => {
+                loadTheme();
+                showSetup();
+                resumeQuizBtn.classList.toggle('hidden', !localStorage.getItem('savedQuiz'));
             });
-
-            if (selectedIndex === currentQ.answer) {
-                score++;
-                button.classList.add('correct');
-                launchConfetti();
-            } else {
-                button.classList.add('wrong');
-                // Highlight correct answer as well
-                buttons[currentQ.answer].classList.add('correct');
-            }
-
-            updateScoreDisplay();
-        }
-
-        // Update the progress bar
-        function updateProgressBar() {
-            const percent = ((currentQuestionIndex) / questions.length) * 100;
-            progressBar.style.width = `${percent}%`;
-        }
-
-        // Update the score display
-        function updateScoreDisplay() {
-            scoreDisplay.textContent = `Score: ${score} / ${questions.length}`;
-        }
-
-        // Handle next question button click
-        nextBtn.addEventListener('click', () => {
-            currentQuestionIndex++;
-            if (currentQuestionIndex >= questions.length) {
-                showSummary();
-            } else {
-                loadQuestion();
-            }
-        });
-
-        // Show the final quiz summary
-        function showSummary() {
-            quizContainer.classList.add('hidden');
-            quizSummary.classList.remove('hidden');
-            finalScoreEl.textContent = score;
-            totalQuestionsEl.textContent = questions.length;
-            progressBar.style.width = '100%';
-        }
-
-        // Handle restart button click
-        restartBtn.addEventListener('click', () => {
-            showSetup();
-        });
-
-        // Simple confetti effect using emojis
-        function launchConfetti() {
-            const confettiCount = 30;
-            for (let i = 0; i < confettiCount; i++) {
-                const confetti = document.createElement('div');
-                confetti.textContent = '🎉';
-                confetti.style.position = 'fixed';
-                confetti.style.zIndex = 9999;
-                confetti.style.fontSize = `${Math.random() * 20 + 10}px`;
-                confetti.style.left = `${Math.random() * window.innerWidth}px`;
-                confetti.style.top = `${Math.random() * window.innerHeight}px`;
-                confetti.style.opacity = 1;
-                confetti.style.pointerEvents = 'none';
-                confetti.style.userSelect = 'none';
-                confetti.style.transition = 'all 1s ease-out';
-                confetti.style.transform = `translateY(0) rotate(${Math.random() * 360}deg)`;
-                confettiContainer.appendChild(confetti);
-
-                setTimeout(() => {
-                    confetti.style.opacity = 0;
-                    confetti.style.transform = `translateY(100px) rotate(${Math.random() * 360}deg)`;
-                }, 100);
-
-                setTimeout(() => {
-                    confetti.remove();
-                }, 1100);
-            }
-        }
-
-        // Dark mode toggle functionality
-        function toggleTheme() {
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                themeIcon.setAttribute('data-feather', 'moon');
-            } else {
-                html.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                themeIcon.setAttribute('data-feather', 'sun');
-            }
-            // Re-render icons after changing the theme icon
-            feather.replace();
-        }
-
-        // Load theme from localStorage on page load
-        function loadTheme() {
-            const savedTheme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-            
-            if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
-                html.classList.add('dark');
-                themeIcon.setAttribute('data-feather', 'sun');
-            } else {
-                html.classList.remove('dark');
-                themeIcon.setAttribute('data-feather', 'moon');
-            }
-            feather.replace();
-        }
-
-        // Event listeners
-        themeToggle.addEventListener('click', toggleTheme);
-
-        // Initial setup on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            loadTheme();
-            showSetup();
-        });
-    </script>
-</body>
+        </script>
+    </body>
 </html>
