@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Manager Portal - Notifications</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen p-6">
+  <header class="flex items-center justify-between mb-6">
+    <h1 class="text-2xl font-bold">Manager Portal — Notifications</h1>
+    <div class="flex items-center gap-3">
+      <button id="signOutBtn" class="px-3 py-2 bg-red-500 text-white rounded">Sign Out</button>
+    </div>
+  </header>
+
+  <main class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Users list -->
+    <section class="md:col-span-1 bg-white dark:bg-gray-800 rounded-lg p-4 shadow">
+      <h2 class="font-semibold mb-3">Logged users</h2>
+      <div id="usersList" class="space-y-2 max-h-[60vh] overflow-y-auto">
+        <p class="text-sm text-gray-500">Loading users…</p>
+      </div>
+      <button id="refreshUsersBtn" class="mt-4 px-4 py-2 text-sm rounded bg-blue-600 text-white">Refresh</button>
+    </section>
+
+    <!-- Send notification -->
+    <section class="md:col-span-2 bg-white dark:bg-gray-800 rounded-lg p-4 shadow">
+      <h2 class="font-semibold mb-3">Send notification</h2>
+
+      <div class="mb-4">
+        <label class="block text-sm mb-1">Send to</label>
+        <select id="recipientSelect" class="w-full p-2 rounded border dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+          <option value="all">All users</option>
+          <!-- user options appended here -->
+        </select>
+      </div>
+
+      <div class="mb-4">
+        <label class="block text-sm mb-1">Message</label>
+        <textarea id="notificationMessage" rows="4" class="w-full p-2 rounded border dark:border-gray-700 bg-gray-50 dark:bg-gray-700" placeholder="Type your message"></textarea>
+      </div>
+
+      <div class="flex gap-3">
+        <button id="sendBtn" class="px-4 py-2 bg-green-600 text-white rounded">Send</button>
+        <button id="sendTestBtn" class="px-4 py-2 bg-yellow-500 text-white rounded">Send Test to Self</button>
+      </div>
+
+      <div id="status" class="mt-4 text-sm text-gray-500"></div>
+    </section>
+  </main>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import { getFirestore, collection, doc, setDoc, addDoc, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // Paste same firebase config used in dashboard.html
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyAeq9Tuo5CmLRh35thABNj-Qv9V_hpjB9c",
+  authDomain: "study-a25ac.firebaseapp.com",
+  projectId: "study-a25ac",
+  storageBucket: "study-a25ac.firebasestorage.app",
+  messagingSenderId: "173051640117",
+  appId: "1:173051640117:web:2ee34824b54b2e9ba7b47c",
+  measurementId: "G-MCSV02V3Q3"
+};
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    const usersListEl = document.getElementById('usersList');
+    const recipientSelect = document.getElementById('recipientSelect');
+    const notificationMessage = document.getElementById('notificationMessage');
+    const sendBtn = document.getElementById('sendBtn');
+    const statusEl = document.getElementById('status');
+    const refreshUsersBtn = document.getElementById('refreshUsersBtn');
+    const sendTestBtn = document.getElementById('sendTestBtn');
+    const signOutBtn = document.getElementById('signOutBtn');
+
+    // Simple sign-in for manager using Google Popup - change as you prefer
+    async function signInManager() {
+      try {
+        const provider = new GoogleAuthProvider();
+        await signInWithPopup(auth, provider);
+      } catch (err) {
+        statusEl.textContent = 'Sign-in failed: ' + err.message;
+        console.error(err);
+      }
+    }
+
+    onAuthStateChanged(auth, async user => {
+      if (!user) {
+        // prompt sign-in
+        await signInManager();
+      } else {
+        // optionally allow only certain emails
+        console.log('Manager signed in as', user.email);
+        populateUsersList();
+      }
+    });
+
+    signOutBtn.addEventListener('click', async () => {
+      await signOut(auth);
+      location.reload();
+    });
+
+    async function populateUsersList() {
+      try {
+        usersListEl.innerHTML = '<p class="text-sm text-gray-500">Loading users…</p>';
+        const col = collection(db, 'users');
+        // we will fetch all user docs
+        const snapshot = await getDocs(query(col, orderBy('lastSeen', 'desc')));
+        const users = [];
+        recipientSelect.innerHTML = '<option value="all">All users</option>';
+        snapshot.forEach(docSnap => {
+          const data = docSnap.data();
+          users.push(data);
+          const email = data.email || 'unknown';
+          // append to UI list
+          const li = document.createElement('div');
+          li.className = 'p-2 rounded hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center justify-between';
+          li.innerHTML = `<div class="text-sm">${email}</div><div class="text-xs text-gray-400">${data.displayName || ''}</div>`;
+          usersListEl.appendChild(li);
+
+          // add option to select
+          const opt = document.createElement('option');
+          opt.value = email;
+          opt.textContent = email;
+          recipientSelect.appendChild(opt);
+        });
+
+        if (users.length === 0) {
+          usersListEl.innerHTML = '<p class="text-sm text-gray-500">No users found (none have logged in yet).</p>';
+        }
+
+      } catch (err) {
+        console.error(err);
+        usersListEl.innerHTML = '<p class="text-sm text-red-500">Failed to load users.</p>';
+      }
+    }
+
+    refreshUsersBtn.addEventListener('click', populateUsersList);
+
+    // send a notification doc to Firestore
+    sendBtn.addEventListener('click', async () => {
+      const target = recipientSelect.value;
+      const message = notificationMessage.value.trim();
+      if (!message) {
+        statusEl.textContent = 'Write a message first.';
+        return;
+      }
+      try {
+        await addDoc(collection(db, 'notifications'), {
+          message,
+          targetEmail: target, // 'all' or specific email
+          createdAt: serverTimestamp()
+        });
+        statusEl.textContent = 'Notification sent to ' + target;
+        notificationMessage.value = '';
+      } catch (err) {
+        console.error('send error', err);
+        statusEl.textContent = 'Send failed: ' + err.message;
+      }
+    });
+
+    // quick test: send to manager email only
+    sendTestBtn.addEventListener('click', async () => {
+      const user = auth.currentUser;
+      if (!user) return;
+      try {
+        await addDoc(collection(db, 'notifications'), {
+          message: 'Test message (manager -> self) at ' + new Date().toLocaleString(),
+          targetEmail: user.email,
+          createdAt: serverTimestamp()
+        });
+        statusEl.textContent = 'Test sent to ' + user.email;
+      } catch (err) {
+        statusEl.textContent = 'Test failed: ' + err.message;
+      }
+    });
+
+    // initial populate
+    // populateUsersList();  // already called after auth
+  </script>
+</body>
+</html>
