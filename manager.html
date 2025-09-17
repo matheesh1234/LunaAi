@@ -3,70 +3,77 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Manager Portal - Notifications</title>
+  <title>LunaAi Management Console</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/feather-icons"></script>
 </head>
-<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen p-6">
-  <header class="flex items-center justify-between mb-6">
-    <h1 class="text-2xl font-bold">Manager Portal — Notifications</h1>
+<body class="bg-black text-gray-200 min-h-screen p-6 font-sans">
+  <header class="flex items-center justify-between mb-8 pb-4 border-b border-gray-800">
+    <div>
+        <h1 class="text-3xl font-bold text-white">LunaAi Management Console</h1>
+        <p class="text-sm text-gray-500">Manage and view user activity of LunaAi.</p>
+    </div>
     <div class="flex items-center gap-3">
-      <button id="signOutBtn" class="px-3 py-2 bg-red-500 text-white rounded">Sign Out</button>
+      <button id="signOutBtn" class="px-4 py-2 border border-gray-700 text-gray-300 rounded-md text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors">Sign Out</button>
     </div>
   </header>
 
-  <main class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <!-- Users list -->
-    <section class="md:col-span-1 bg-white dark:bg-gray-800 rounded-lg p-4 shadow">
-      <h2 class="font-semibold mb-3">Logged users</h2>
-      <div id="usersList" class="space-y-2 max-h-[60vh] overflow-y-auto">
-        <p class="text-sm text-gray-500">Loading users…</p>
+  <main class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section class="md:col-span-1 bg-gray-900 border border-gray-800 rounded-lg p-4 shadow-sm flex flex-col">
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-lg font-semibold text-white">Active Users</h2>
+        <button id="refreshUsersBtn" title="Refresh Users" class="p-2 rounded-md text-gray-400 hover:bg-gray-800 hover:text-white transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+        </button>
       </div>
-      <button id="refreshUsersBtn" class="mt-4 px-4 py-2 text-sm rounded bg-blue-600 text-white">Refresh</button>
+      
+      <div class="mb-2">
+          <input type="search" id="userSearchInput" placeholder="Search by email..." class="w-full p-2 text-sm rounded-md border border-gray-700 bg-gray-800 text-white placeholder-gray-500 focus:ring-1 focus:ring-gray-400 focus:border-gray-400 outline-none">
+      </div>
+
+      <div id="usersList" class="space-y-1 max-h-[60vh] overflow-y-auto">
+        <p class="text-sm text-gray-500 p-2">Loading users…</p>
+      </div>
     </section>
 
-    <!-- Send notification -->
-    <section class="md:col-span-2 bg-white dark:bg-gray-800 rounded-lg p-4 shadow">
-      <h2 class="font-semibold mb-3">Send notification</h2>
+    <section class="md:col-span-2 bg-gray-900 border border-gray-800 rounded-lg p-4 shadow-sm">
+      <h2 class="text-lg font-semibold text-white mb-4">Send Notification</h2>
 
       <div class="mb-4">
-        <label class="block text-sm mb-1">Send to</label>
-        <select id="recipientSelect" class="w-full p-2 rounded border dark:border-gray-700 bg-gray-50 dark:bg-gray-700">
+        <label for="recipientSelect" class="block text-sm font-medium text-gray-300 mb-1">Send to</label>
+        <select id="recipientSelect" class="w-full p-2 rounded-md border border-gray-700 bg-gray-800 text-white focus:ring-1 focus:ring-gray-400 focus:border-gray-400 outline-none transition-shadow">
           <option value="all">All users</option>
-          <!-- user options appended here -->
-        </select>
+          </select>
       </div>
 
       <div class="mb-4">
-        <label class="block text-sm mb-1">Message</label>
-        <textarea id="notificationMessage" rows="4" class="w-full p-2 rounded border dark:border-gray-700 bg-gray-50 dark:bg-gray-700" placeholder="Type your message"></textarea>
+        <label for="notificationMessage" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
+        <textarea id="notificationMessage" rows="5" class="w-full p-2 rounded-md border border-gray-700 bg-gray-800 text-white focus:ring-1 focus:ring-gray-400 focus:border-gray-400 outline-none transition-shadow" placeholder="Type your message here..."></textarea>
       </div>
 
-      <div class="flex gap-3">
-        <button id="sendBtn" class="px-4 py-2 bg-green-600 text-white rounded">Send</button>
-        <button id="sendTestBtn" class="px-4 py-2 bg-yellow-500 text-white rounded">Send Test to Self</button>
+      <div class="flex items-center gap-4">
+        <button id="sendBtn" class="px-5 py-2 bg-white text-black rounded-md font-semibold hover:bg-gray-200 transition-colors disabled:bg-gray-400 disabled:text-gray-600">Send</button>
+        <button id="sendTestBtn" class="px-5 py-2 border border-gray-700 text-gray-300 rounded-md font-semibold hover:bg-gray-800 transition-colors disabled:bg-gray-900 disabled:text-gray-500 disabled:border-gray-800">Send Test to Self</button>
       </div>
 
-      <div id="status" class="mt-4 text-sm text-gray-500"></div>
+      <div id="status" class="mt-4 text-sm font-medium"></div>
     </section>
   </main>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-    import { getFirestore, collection, doc, setDoc, addDoc, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+    import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    // Paste same firebase config used in dashboard.html
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyAeq9Tuo5CmLRh35thABNj-Qv9V_hpjB9c",
-  authDomain: "study-a25ac.firebaseapp.com",
-  projectId: "study-a25ac",
-  storageBucket: "study-a25ac.firebasestorage.app",
-  messagingSenderId: "173051640117",
-  appId: "1:173051640117:web:2ee34824b54b2e9ba7b47c",
-  measurementId: "G-MCSV02V3Q3"
-};
+    // IMPORTANT: Paste your Firebase config here
+    const firebaseConfig = {
+      apiKey: "AIzaSyAeq9Tuo5CmLRh35thABNj-Qv9V_hpjB9c",
+      authDomain: "study-a25ac.firebaseapp.com",
+      projectId: "study-a25ac",
+      storageBucket: "study-a25ac.firebasestorage.app",
+      messagingSenderId: "173051640117",
+      appId: "1:173051640117:web:2ee34824b54b2e9ba7b47c",
+      measurementId: "G-MCSV02V3Q3"
+    };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
@@ -80,13 +87,15 @@ const firebaseConfig = {
     const refreshUsersBtn = document.getElementById('refreshUsersBtn');
     const sendTestBtn = document.getElementById('sendTestBtn');
     const signOutBtn = document.getElementById('signOutBtn');
+    const userSearchInput = document.getElementById('userSearchInput');
 
-    // Simple sign-in for manager using Google Popup - change as you prefer
+    // --- Authentication ---
     async function signInManager() {
       try {
         const provider = new GoogleAuthProvider();
         await signInWithPopup(auth, provider);
       } catch (err) {
+        statusEl.className = 'text-sm font-medium text-red-500';
         statusEl.textContent = 'Sign-in failed: ' + err.message;
         console.error(err);
       }
@@ -94,10 +103,8 @@ const firebaseConfig = {
 
     onAuthStateChanged(auth, async user => {
       if (!user) {
-        // prompt sign-in
         await signInManager();
       } else {
-        // optionally allow only certain emails
         console.log('Manager signed in as', user.email);
         populateUsersList();
       }
@@ -108,83 +115,160 @@ const firebaseConfig = {
       location.reload();
     });
 
+    // --- Core Functionality ---
     async function populateUsersList() {
+      const ONLINE_THRESHOLD_MINUTES = 5;
+      
+      // Clear search input on refresh
+      userSearchInput.value = '';
+
       try {
-        usersListEl.innerHTML = '<p class="text-sm text-gray-500">Loading users…</p>';
+        usersListEl.innerHTML = '<p class="text-sm text-gray-500 p-2">Loading users…</p>';
         const col = collection(db, 'users');
-        // we will fetch all user docs
         const snapshot = await getDocs(query(col, orderBy('lastSeen', 'desc')));
-        const users = [];
+        
+        usersListEl.innerHTML = '';
         recipientSelect.innerHTML = '<option value="all">All users</option>';
+        
+        if (snapshot.empty) {
+            usersListEl.innerHTML = '<p class="text-sm text-gray-500 p-2">No users have logged in yet.</p>';
+            return;
+        }
+
+        const now = new Date();
         snapshot.forEach(docSnap => {
           const data = docSnap.data();
-          users.push(data);
           const email = data.email || 'unknown';
-          // append to UI list
-          const li = document.createElement('div');
-          li.className = 'p-2 rounded hover:bg-gray-50 dark:hover:bg-gray-700 flex items-center justify-between';
-          li.innerHTML = `<div class="text-sm">${email}</div><div class="text-xs text-gray-400">${data.displayName || ''}</div>`;
-          usersListEl.appendChild(li);
+          
+          const lastSeenDate = data.lastSeen?.toDate();
+          const lastSeenFormatted = lastSeenDate ? lastSeenDate.toLocaleString() : 'Never';
 
-          // add option to select
+          let isOnline = false;
+          if (lastSeenDate) {
+              const timeDiff = now.getTime() - lastSeenDate.getTime();
+              isOnline = (timeDiff < ONLINE_THRESHOLD_MINUTES * 60 * 1000);
+          }
+          const statusIndicator = isOnline
+            ? '<span class="w-2.5 h-2.5 bg-green-500 rounded-full" title="Online"></span>'
+            : '<span class="w-2.5 h-2.5 bg-gray-600 rounded-full" title="Offline"></span>';
+
+          const userDiv = document.createElement('div');
+          userDiv.className = 'p-2 rounded-md hover:bg-gray-800 cursor-pointer flex items-center justify-between transition-colors';
+          userDiv.dataset.email = email;
+          userDiv.innerHTML = `
+            <div class="flex items-center gap-3">
+                ${statusIndicator}
+                <div>
+                    <div class="text-sm font-medium text-gray-200">${email}</div>
+                    <div class="text-xs text-gray-500">${data.displayName || ''}</div>
+                </div>
+            </div>
+            <div class="text-xs text-gray-500 text-right">${lastSeenFormatted}</div>
+          `;
+          usersListEl.appendChild(userDiv);
+
           const opt = document.createElement('option');
           opt.value = email;
           opt.textContent = email;
           recipientSelect.appendChild(opt);
         });
-
-        if (users.length === 0) {
-          usersListEl.innerHTML = '<p class="text-sm text-gray-500">No users found (none have logged in yet).</p>';
-        }
+        
+        // Trigger input event to ensure list is correctly filtered (especially if search was pre-filled)
+        userSearchInput.dispatchEvent(new Event('input'));
 
       } catch (err) {
         console.error(err);
-        usersListEl.innerHTML = '<p class="text-sm text-red-500">Failed to load users.</p>';
+        usersListEl.innerHTML = '<p class="text-sm text-red-500 p-2">Failed to load users.</p>';
       }
     }
 
     refreshUsersBtn.addEventListener('click', populateUsersList);
+    
+    usersListEl.addEventListener('click', (event) => {
+        const userItem = event.target.closest('[data-email]');
+        if (userItem) {
+            recipientSelect.value = userItem.dataset.email;
+        }
+    });
 
-    // send a notification doc to Firestore
-    sendBtn.addEventListener('click', async () => {
+    // --- NEW: Search/Filter Logic ---
+    userSearchInput.addEventListener('input', () => {
+        const searchTerm = userSearchInput.value.toLowerCase();
+        const allUserDivs = usersListEl.querySelectorAll('[data-email]');
+        let usersFound = false;
+
+        allUserDivs.forEach(userDiv => {
+            const userEmail = userDiv.dataset.email.toLowerCase();
+            if (userEmail.includes(searchTerm)) {
+                userDiv.style.display = 'flex';
+                usersFound = true;
+            } else {
+                userDiv.style.display = 'none';
+            }
+        });
+        
+        let noResultsEl = usersListEl.querySelector('#noResultsMessage');
+        if (!usersFound && searchTerm) {
+            if (!noResultsEl) {
+                const p = document.createElement('p');
+                p.id = 'noResultsMessage';
+                p.className = 'text-sm text-gray-500 p-2';
+                p.textContent = 'No users found.';
+                usersListEl.appendChild(p);
+            }
+        } else {
+            if (noResultsEl) {
+                noResultsEl.remove();
+            }
+        }
+    });
+
+    // --- Notification Sending Logic ---
+    async function sendNotification(target, message) {
+        sendBtn.disabled = true;
+        sendTestBtn.disabled = true;
+        statusEl.className = 'text-sm font-medium text-gray-500';
+        statusEl.textContent = 'Sending...';
+
+        try {
+            await addDoc(collection(db, 'notifications'), {
+                message,
+                targetEmail: target,
+                createdAt: serverTimestamp()
+            });
+            statusEl.className = 'text-sm font-medium text-green-500';
+            statusEl.textContent = `Notification sent successfully to ${target}.`;
+            if (target !== auth.currentUser.email) {
+                notificationMessage.value = '';
+            }
+        } catch (err) {
+            console.error('Send error', err);
+            statusEl.className = 'text-sm font-medium text-red-500';
+            statusEl.textContent = 'Send failed: ' + err.message;
+        } finally {
+            sendBtn.disabled = false;
+            sendTestBtn.disabled = false;
+        }
+    }
+
+    sendBtn.addEventListener('click', () => {
       const target = recipientSelect.value;
       const message = notificationMessage.value.trim();
       if (!message) {
-        statusEl.textContent = 'Write a message first.';
+        statusEl.className = 'text-sm font-medium text-red-500';
+        statusEl.textContent = 'Please write a message before sending.';
         return;
       }
-      try {
-        await addDoc(collection(db, 'notifications'), {
-          message,
-          targetEmail: target, // 'all' or specific email
-          createdAt: serverTimestamp()
-        });
-        statusEl.textContent = 'Notification sent to ' + target;
-        notificationMessage.value = '';
-      } catch (err) {
-        console.error('send error', err);
-        statusEl.textContent = 'Send failed: ' + err.message;
-      }
+      sendNotification(target, message);
     });
 
-    // quick test: send to manager email only
-    sendTestBtn.addEventListener('click', async () => {
+    sendTestBtn.addEventListener('click', () => {
       const user = auth.currentUser;
       if (!user) return;
-      try {
-        await addDoc(collection(db, 'notifications'), {
-          message: 'Test message (manager -> self) at ' + new Date().toLocaleString(),
-          targetEmail: user.email,
-          createdAt: serverTimestamp()
-        });
-        statusEl.textContent = 'Test sent to ' + user.email;
-      } catch (err) {
-        statusEl.textContent = 'Test failed: ' + err.message;
-      }
+      const message = `Test message (manager -> self) at ${new Date().toLocaleString()}`;
+      sendNotification(user.email, message);
     });
 
-    // initial populate
-    // populateUsersList();  // already called after auth
   </script>
 </body>
 </html>
