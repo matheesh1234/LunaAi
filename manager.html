@@ -7,64 +7,80 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-black text-gray-200 min-h-screen p-6 font-sans">
-  <header class="flex items-center justify-between mb-8 pb-4 border-b border-gray-800">
-    <div>
-        <h1 class="text-3xl font-bold text-white">LunaAi Management Console</h1>
-        <p class="text-sm text-gray-500">Manage and view user activity of LunaAi.</p>
+
+  <!-- Login Screen -->
+  <div id="loginScreen" class="flex items-center justify-center min-h-screen">
+    <div class="bg-gray-900 p-8 rounded-xl shadow-lg text-center">
+      <h1 class="text-2xl font-bold text-white mb-4">LunaAi Management Console</h1>
+      <p class="text-gray-400 mb-6">Sign in to continue</p>
+      <button id="signInBtn" class="px-5 py-2 bg-white text-black rounded-md font-semibold hover:bg-gray-200 transition-colors">
+        Sign in with Google
+      </button>
+      <div id="loginStatus" class="mt-4 text-sm font-medium"></div>
     </div>
-    <div class="flex items-center gap-3">
-      <button id="signOutBtn" class="px-4 py-2 border border-gray-700 text-gray-300 rounded-md text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors">Sign Out</button>
-    </div>
-  </header>
+  </div>
 
-  <main class="grid grid-cols-1 md:grid-cols-3 gap-8">
-    <section class="md:col-span-1 bg-gray-900 border border-gray-800 rounded-lg p-4 shadow-sm flex flex-col">
-      <div class="flex justify-between items-center mb-3">
-        <h2 class="text-lg font-semibold text-white">Active Users</h2>
-        <button id="refreshUsersBtn" title="Refresh Users" class="p-2 rounded-md text-gray-400 hover:bg-gray-800 hover:text-white transition-colors">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
-        </button>
+  <!-- Dashboard (hidden by default) -->
+  <div id="dashboard" class="hidden">
+    <header class="flex items-center justify-between mb-8 pb-4 border-b border-gray-800">
+      <div>
+          <h1 class="text-3xl font-bold text-white">LunaAi Management Console</h1>
+          <p class="text-sm text-gray-500">Manage and view user activity of LunaAi.</p>
       </div>
-      
-      <div class="mb-2">
-          <input type="search" id="userSearchInput" placeholder="Search by email..." class="w-full p-2 text-sm rounded-md border border-gray-700 bg-gray-800 text-white placeholder-gray-500 focus:ring-1 focus:ring-gray-400 focus:border-gray-400 outline-none">
+      <div class="flex items-center gap-3">
+        <button id="signOutBtn" class="px-4 py-2 border border-gray-700 text-gray-300 rounded-md text-sm font-semibold hover:bg-gray-800 hover:text-white transition-colors">Sign Out</button>
       </div>
+    </header>
 
-      <div id="usersList" class="space-y-1 max-h-[60vh] overflow-y-auto">
-        <p class="text-sm text-gray-500 p-2">Loading users…</p>
-      </div>
-    </section>
+    <main class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section class="md:col-span-1 bg-gray-900 border border-gray-800 rounded-lg p-4 shadow-sm flex flex-col">
+        <div class="flex justify-between items-center mb-3">
+          <h2 class="text-lg font-semibold text-white">Active Users</h2>
+          <button id="refreshUsersBtn" title="Refresh Users" class="p-2 rounded-md text-gray-400 hover:bg-gray-800 hover:text-white transition-colors">
+              ⟳
+          </button>
+        </div>
+        
+        <div class="mb-2">
+            <input type="search" id="userSearchInput" placeholder="Search by email..." class="w-full p-2 text-sm rounded-md border border-gray-700 bg-gray-800 text-white placeholder-gray-500 focus:ring-1 focus:ring-gray-400 focus:border-gray-400 outline-none">
+        </div>
 
-    <section class="md:col-span-2 bg-gray-900 border border-gray-800 rounded-lg p-4 shadow-sm">
-      <h2 class="text-lg font-semibold text-white mb-4">Send Notification</h2>
+        <div id="usersList" class="space-y-1 max-h-[60vh] overflow-y-auto">
+          <p class="text-sm text-gray-500 p-2">Loading users…</p>
+        </div>
+      </section>
 
-      <div class="mb-4">
-        <label for="recipientSelect" class="block text-sm font-medium text-gray-300 mb-1">Send to</label>
-        <select id="recipientSelect" class="w-full p-2 rounded-md border border-gray-700 bg-gray-800 text-white focus:ring-1 focus:ring-gray-400 focus:border-gray-400 outline-none transition-shadow">
-          <option value="all">All users</option>
+      <section class="md:col-span-2 bg-gray-900 border border-gray-800 rounded-lg p-4 shadow-sm">
+        <h2 class="text-lg font-semibold text-white mb-4">Send Notification</h2>
+
+        <div class="mb-4">
+          <label for="recipientSelect" class="block text-sm font-medium text-gray-300 mb-1">Send to</label>
+          <select id="recipientSelect" class="w-full p-2 rounded-md border border-gray-700 bg-gray-800 text-white focus:ring-1 focus:ring-gray-400 focus:border-gray-400 outline-none transition-shadow">
+            <option value="all">All users</option>
           </select>
-      </div>
+        </div>
 
-      <div class="mb-4">
-        <label for="notificationMessage" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
-        <textarea id="notificationMessage" rows="5" class="w-full p-2 rounded-md border border-gray-700 bg-gray-800 text-white focus:ring-1 focus:ring-gray-400 focus:border-gray-400 outline-none transition-shadow" placeholder="Type your message here..."></textarea>
-      </div>
+        <div class="mb-4">
+          <label for="notificationMessage" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
+          <textarea id="notificationMessage" rows="5" class="w-full p-2 rounded-md border border-gray-700 bg-gray-800 text-white focus:ring-1 focus:ring-gray-400 focus:border-gray-400 outline-none transition-shadow" placeholder="Type your message here..."></textarea>
+        </div>
 
-      <div class="flex items-center gap-4">
-        <button id="sendBtn" class="px-5 py-2 bg-white text-black rounded-md font-semibold hover:bg-gray-200 transition-colors disabled:bg-gray-400 disabled:text-gray-600">Send</button>
-        <button id="sendTestBtn" class="px-5 py-2 border border-gray-700 text-gray-300 rounded-md font-semibold hover:bg-gray-800 transition-colors disabled:bg-gray-900 disabled:text-gray-500 disabled:border-gray-800">Send Test to Self</button>
-      </div>
+        <div class="flex items-center gap-4">
+          <button id="sendBtn" class="px-5 py-2 bg-white text-black rounded-md font-semibold hover:bg-gray-200 transition-colors disabled:bg-gray-400 disabled:text-gray-600">Send</button>
+          <button id="sendTestBtn" class="px-5 py-2 border border-gray-700 text-gray-300 rounded-md font-semibold hover:bg-gray-800 transition-colors disabled:bg-gray-900 disabled:text-gray-500 disabled:border-gray-800">Send Test to Self</button>
+        </div>
 
-      <div id="status" class="mt-4 text-sm font-medium"></div>
-    </section>
-  </main>
+        <div id="status" class="mt-4 text-sm font-medium"></div>
+      </section>
+    </main>
+  </div>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { getAuth, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import { getFirestore, collection, addDoc, getDocs, query, orderBy, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    // IMPORTANT: Paste your Firebase config here
+    // --- Firebase Config ---
     const firebaseConfig = {
       apiKey: "AIzaSyAeq9Tuo5CmLRh35thABNj-Qv9V_hpjB9c",
       authDomain: "study-a25ac.firebaseapp.com",
@@ -79,47 +95,62 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    // --- Elements ---
+    const dashboard = document.getElementById("dashboard");
+    const loginScreen = document.getElementById("loginScreen");
+    const signInBtn = document.getElementById("signInBtn");
+    const loginStatus = document.getElementById("loginStatus");
+    const signOutBtn = document.getElementById("signOutBtn");
     const usersListEl = document.getElementById('usersList');
     const recipientSelect = document.getElementById('recipientSelect');
     const notificationMessage = document.getElementById('notificationMessage');
     const sendBtn = document.getElementById('sendBtn');
-    const statusEl = document.getElementById('status');
     const refreshUsersBtn = document.getElementById('refreshUsersBtn');
     const sendTestBtn = document.getElementById('sendTestBtn');
-    const signOutBtn = document.getElementById('signOutBtn');
     const userSearchInput = document.getElementById('userSearchInput');
+    const statusEl = document.getElementById('status');
 
-    // --- Authentication ---
+    // Only these emails can access
+    const ALLOWED_MANAGERS = ["kaweeja12@gmail.com"];
+
+    // --- Sign In Logic ---
     async function signInManager() {
       try {
         const provider = new GoogleAuthProvider();
         await signInWithPopup(auth, provider);
       } catch (err) {
-        statusEl.className = 'text-sm font-medium text-red-500';
-        statusEl.textContent = 'Sign-in failed: ' + err.message;
+        loginStatus.className = 'text-sm font-medium text-red-500';
+        loginStatus.textContent = 'Sign-in failed: ' + err.message;
         console.error(err);
       }
     }
+    signInBtn.addEventListener("click", signInManager);
 
+    // --- Auth State ---
     onAuthStateChanged(auth, async user => {
       if (!user) {
-        await signInManager();
+        dashboard.classList.add("hidden");
+        loginScreen.classList.remove("hidden");
       } else {
-        console.log('Manager signed in as', user.email);
+        if (!ALLOWED_MANAGERS.includes(user.email)) {
+          alert("Access denied. You are not authorized to enter.");
+          await signOut(auth);
+          return;
+        }
+        console.log("Manager signed in as", user.email);
+        loginScreen.classList.add("hidden");
+        dashboard.classList.remove("hidden");
         populateUsersList();
       }
     });
 
     signOutBtn.addEventListener('click', async () => {
       await signOut(auth);
-      location.reload();
     });
 
     // --- Core Functionality ---
     async function populateUsersList() {
       const ONLINE_THRESHOLD_MINUTES = 5;
-      
-      // Clear search input on refresh
       userSearchInput.value = '';
 
       try {
@@ -139,7 +170,6 @@
         snapshot.forEach(docSnap => {
           const data = docSnap.data();
           const email = data.email || 'unknown';
-          
           const lastSeenDate = data.lastSeen?.toDate();
           const lastSeenFormatted = lastSeenDate ? lastSeenDate.toLocaleString() : 'Never';
 
@@ -172,9 +202,6 @@
           opt.textContent = email;
           recipientSelect.appendChild(opt);
         });
-        
-        // Trigger input event to ensure list is correctly filtered (especially if search was pre-filled)
-        userSearchInput.dispatchEvent(new Event('input'));
 
       } catch (err) {
         console.error(err);
@@ -183,7 +210,7 @@
     }
 
     refreshUsersBtn.addEventListener('click', populateUsersList);
-    
+
     usersListEl.addEventListener('click', (event) => {
         const userItem = event.target.closest('[data-email]');
         if (userItem) {
@@ -191,7 +218,6 @@
         }
     });
 
-    // --- NEW: Search/Filter Logic ---
     userSearchInput.addEventListener('input', () => {
         const searchTerm = userSearchInput.value.toLowerCase();
         const allUserDivs = usersListEl.querySelectorAll('[data-email]');
@@ -223,7 +249,7 @@
         }
     });
 
-    // --- Notification Sending Logic ---
+    // --- Notification Sending ---
     async function sendNotification(target, message) {
         sendBtn.disabled = true;
         sendTestBtn.disabled = true;
@@ -268,7 +294,6 @@
       const message = `Test message (manager -> self) at ${new Date().toLocaleString()}`;
       sendNotification(user.email, message);
     });
-
   </script>
 </body>
 </html>
