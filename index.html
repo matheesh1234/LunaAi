@@ -24,12 +24,23 @@
     
     <title>LunaAi | Free AI Study Assistant & Homework Help for Students Worldwide</title>
     <link rel="icon" type="image/png" href="Icon.png" />
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" as="style">
+    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    
+    <!-- Load fonts with font-display: swap for better performance -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=aXz6l4RoG257TUj91ERqBXxwX21v7hQXmyiLUYurp53abiZjsyQqtGVVR9vlwT_LniXSxHPl8c5fsEIichXAdw" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly9sdW5hYWlvZmZpY2lhbC5uZXRsaWZ5LmFwcC8"/><script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Feather Icons - Load async -->
+    <script src="https://unpkg.com/feather-icons" async></script>
+    
+    <!-- Google Ads - Load async -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5782374845716287"
      crossorigin="anonymous"></script>
-    
     
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -64,8 +75,9 @@
     </script>
     
     <style>
+        /* Critical CSS inlined for faster loading */
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
         }
@@ -74,6 +86,7 @@
             background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe);
             background-size: 400% 400%;
             animation: gradientShift 15s ease infinite;
+            will-change: background-position;
         }
 
         @keyframes gradientShift {
@@ -82,12 +95,14 @@
             100% { background-position: 0% 50%; }
         }
 
+        /* Simplified particle animation for better performance */
         .particle {
             position: absolute;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
             animation: float 6s ease-in-out infinite;
             pointer-events: none;
+            will-change: transform, opacity;
         }
 
         @keyframes float {
@@ -101,7 +116,6 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: textShimmer 3s ease-in-out infinite;
         }
 
         .glass {
@@ -117,13 +131,12 @@
         }
 
         .feature-card {
-            transform-style: preserve-3d;
-            transition: all 0.5s cubic-bezier(0.23, 1, 0.320, 1);
+            transition: transform 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+            will-change: transform;
         }
 
         .feature-card:hover {
-            transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            transform: translateY(-10px);
         }
         
         .pulse-glow {
@@ -146,6 +159,7 @@
             left: 100%;
         }
 
+        /* Staggered animation delays */
         .stagger-1 { animation-delay: 0.1s; }
         .stagger-2 { animation-delay: 0.2s; }
         .stagger-3 { animation-delay: 0.3s; }
@@ -157,8 +171,8 @@
 
         .slide-up {
             opacity: 0;
-            transform: translateY(50px);
-            animation: slideUp 1s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+            transform: translateY(30px);
+            animation: slideUp 0.8s cubic-bezier(0.23, 1, 0.320, 1) forwards;
         }
 
         @keyframes slideUp {
@@ -176,11 +190,11 @@
         }
 
         .modal-enter {
-            animation: modalSlideIn 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+            animation: modalSlideIn 0.3s cubic-bezier(0.23, 1, 0.320, 1);
         }
 
         @keyframes modalSlideIn {
-            from { opacity: 0; transform: scale(0.8) translateY(-50px); }
+            from { opacity: 0; transform: scale(0.9) translateY(-20px); }
             to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
@@ -191,26 +205,15 @@
         }
 
         .btn-3d {
-            transform-style: preserve-3d;
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+            transition: transform 0.2s cubic-bezier(0.23, 1, 0.320, 1);
         }
 
         .btn-3d:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px);
         }
 
         .btn-3d:active {
             transform: translateY(-1px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .icon-rotate {
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.320, 1);
-        }
-
-        .feature-card:hover .icon-rotate {
-            transform: rotateY(360deg);
         }
 
         .responsive-text {
@@ -218,14 +221,15 @@
             line-height: 1.1;
         }
         
+        /* Simplified typing animation */
         .animated-subheading {
             display: inline-block;
             overflow: hidden;
-            border-right: 2px solid rgba(255, 255, 255, 0.75);
             white-space: nowrap;
             margin: 0 auto;
             letter-spacing: 0.15em;
-            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+            border-right: 2px solid rgba(255, 255, 255, 0.75);
+            animation: typing 3s steps(40, end), blink-caret 1s step-end infinite;
         }
 
         @keyframes typing {
@@ -247,11 +251,11 @@
             height: 80px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
-            transition: all 0.5s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
 
         .feature-card:hover .feature-icon-wrapper {
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2), inset 0 0 10px rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
         }
 
         .faq-chevron {
@@ -271,32 +275,45 @@
             transition: max-height 0.3s ease-in, opacity 0.3s ease-in;
         }
 
+        /* Optimized media queries */
         @media (max-width: 768px) {
             .hero-bg { background-attachment: scroll; }
             .particle { display: none; }
-            .feature-card { transform: none !important; }
-            .feature-card:hover { transform: translateY(-5px) !important; }
-            .glass { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(10px); }
-            .glass-dark { background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(10px); }
-            .animated-subheading { white-space: normal; overflow: visible; border-right: none; animation: none; }
+            .feature-card:hover { transform: translateY(-5px); }
+            .glass { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(8px); }
+            .glass-dark { background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(8px); }
+            .animated-subheading { 
+                white-space: normal; 
+                overflow: visible; 
+                border-right: none; 
+                animation: none; 
+            }
             .faq-content:not(.hidden) { max-height: 300px; }
         }
 
         @media (max-width: 640px) {
             .responsive-text { font-size: 2rem; line-height: 1.2; }
         }
+
+        /* Hide elements that aren't critical for initial load */
+        .lazy-load {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .lazy-load.loaded {
+            opacity: 1;
+        }
     </style>
 </head>
 <body class="hero-bg min-h-screen flex flex-col overflow-x-hidden pt-20">
 
-    <!-- Floating Particles -->
+    <!-- Reduced number of particles for better performance -->
     <div class="fixed inset-0 pointer-events-none">
         <div class="particle w-3 h-3 top-10 left-10 stagger-1"></div>
         <div class="particle w-2 h-2 top-20 right-20 stagger-2"></div>
         <div class="particle w-4 h-4 top-32 left-1/4 stagger-3"></div>
         <div class="particle w-2 h-2 bottom-20 right-10 stagger-4"></div>
-        <div class="particle w-3 h-3 bottom-32 left-20 stagger-5"></div>
-        <div class="particle w-2 h-2 top-1/2 right-1/3 stagger-6"></div>
     </div>
 
     <!-- Navbar with Glass Effect -->
@@ -343,7 +360,6 @@
         </div>
         
         <div class="slide-up stagger-3 flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-6 w-full max-w-sm sm:max-w-none px-4 mx-auto justify-center">
-
             <button id="ctaLogin" class="glass border-2 border-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold hover:bg-white hover:text-purple-700 transition-all duration-300 btn-3d text-base sm:text-lg" onclick="window.location.href='log.html'" aria-label="Login to student account">
                 Get Started
             </button>
@@ -358,7 +374,9 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 justify-items-center px-4">
             <article class="feature-card glass p-6 sm:p-8 rounded-xl sm:rounded-2xl cursor-pointer group">
                 <div class="feature-icon-wrapper mx-auto mb-4 sm:mb-6">
-                    <i data-feather="zap" class="w-12 h-12 sm:w-16 sm:h-16 text-yellow-400 group-hover:text-yellow-300"></i>
+                    <svg class="w-12 h-12 sm:w-16 sm:h-16 text-yellow-400 group-hover:text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                    </svg>
                 </div>
                 <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4 text-white">Personalized AI Study Recommendations</h3>
                 <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
@@ -367,7 +385,10 @@
             </article>
             <article class="feature-card glass p-6 sm:p-8 rounded-xl sm:rounded-2xl cursor-pointer group">
                 <div class="feature-icon-wrapper mx-auto mb-4 sm:mb-6">
-                    <i data-feather="clock" class="w-12 h-12 sm:w-16 sm:h-16 text-green-400 group-hover:text-green-300"></i>
+                    <svg class="w-12 h-12 sm:w-16 sm:h-16 text-green-400 group-hover:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12,6 12,12 16,14"/>
+                    </svg>
                 </div>
                 <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4 text-white">Smart Focus Timer & Study Sessions</h3>
                 <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
@@ -376,7 +397,10 @@
             </article>
             <article class="feature-card glass p-6 sm:p-8 rounded-xl sm:rounded-2xl cursor-pointer group">
                 <div class="feature-icon-wrapper mx-auto mb-4 sm:mb-6">
-                    <i data-feather="trending-up" class="w-12 h-12 sm:w-16 sm:h-16 text-purple-400 group-hover:text-purple-300"></i>
+                    <svg class="w-12 h-12 sm:w-16 sm:h-16 text-purple-400 group-hover:text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                        <polyline points="17 6 23 6 23 12"/>
+                    </svg>
                 </div>
                 <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4 text-white">Academic Progress Analytics</h3>
                 <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
@@ -387,7 +411,7 @@
     </section>
 
     <!-- How AI Tutoring Works -->
-    <section class="slide-up stagger-5 bg-gradient-to-br from-purple-900 to-blue-900 py-16 sm:py-24 px-4 sm:px-16 text-white relative overflow-hidden">
+    <section class="lazy-load slide-up stagger-5 bg-gradient-to-br from-purple-900 to-blue-900 py-16 sm:py-24 px-4 sm:px-16 text-white relative overflow-hidden">
         <div class="max-w-6xl mx-auto text-center">
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 morphing-text">
                 How Our AI Study Assistant Works
@@ -443,7 +467,7 @@
     </section>
 
     <!-- Student Success Stories -->
-    <section class="slide-up stagger-6 bg-gray-800 py-16 sm:py-24 px-4 sm:px-16 text-white">
+    <section class="lazy-load slide-up stagger-6 bg-gray-800 py-16 sm:py-24 px-4 sm:px-16 text-white">
         <div class="max-w-6xl mx-auto text-center">
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
                 Student Success Stories with AI Tutoring
@@ -511,7 +535,7 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="slide-up stagger-7 bg-gray-900 py-16 sm:py-24 px-4 sm:px-16 text-white">
+    <section class="lazy-load slide-up stagger-7 bg-gray-900 py-16 sm:py-24 px-4 sm:px-16 text-white">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-16 text-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
                 Frequently Asked Questions About AI Study Assistant
@@ -521,428 +545,181 @@
                 <article class="glass-dark p-6 rounded-xl">
                     <button class="faq-toggle flex items-center w-full text-left" data-target="faq1">
                         <h3 class="text-xl font-bold mb-3 flex items-center flex-grow">
-                            <i data-feather="help-circle" class="w-6 h-6 text-blue-400 mr-3"></i>
+                            <svg class="w-6 h-6 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M9,9h0a3,3,0,0,1,6,0c0,2-3,3-3,3"/>
+                                <path d="M12,17h0"/>
+                            </svg>
                             How does the AI homework help assistant work?
                         </h3>
-                        <i data-feather="chevron-down" class="w-6 h-6 text-gray-400 faq-chevron"></i>
+                        <svg class="w-6 h-6 text-gray-400 faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
                     </button>
-                    <div id="faq1" class="faq-content hidden text-gray-300 leading-relaxed">
-                        Our AI study assistant uses advanced natural language processing to provide personalized homework help, step-by-step problem solutions, and detailed explanations across all academic subjects. Simply ask any study question and receive instant, curriculum-aligned responses tailored to your grade level.
+                    <div id="faq1" class="faq-content hidden text-gray-300 text-sm sm:text-base leading-relaxed mt-4">
+                        <p>
+                            LunaAi’s AI homework help assistant uses advanced natural language processing and machine learning to understand your questions and provide accurate, step-by-step solutions. Simply input your question or upload a problem, and our AI delivers detailed explanations, examples, and resources tailored to your academic level and subject.
+                        </p>
                     </div>
                 </article>
-                
+
                 <article class="glass-dark p-6 rounded-xl">
                     <button class="faq-toggle flex items-center w-full text-left" data-target="faq2">
                         <h3 class="text-xl font-bold mb-3 flex items-center flex-grow">
-                            <i data-feather="book" class="w-6 h-6 text-green-400 mr-3"></i>
-                            What subjects does our AI tutoring platform cover?
+                            <svg class="w-6 h-6 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M9,9h0a3,3,0,0,1,6,0c0,2-3,3-3,3"/>
+                                <path d="M12,17h0"/>
+                            </svg>
+                            Is LunaAi free to use for students?
                         </h3>
-                        <i data-feather="chevron-down" class="w-6 h-6 text-gray-400 faq-chevron"></i>
+                        <svg class="w-6 h-6 text-gray-400 faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
                     </button>
-                    <div id="faq2" class="faq-content hidden text-gray-300 leading-relaxed">
-                        LunaAi provides comprehensive AI tutoring across all academic subjects including Mathematics, Physics, Chemistry, Biology, Literature, History, Languages, Computer Science, Economics, and more. Our AI homework help supports K-12 through college-level coursework with subject-specific expertise.
+                    <div id="faq2" class="faq-content hidden text-gray-300 text-sm sm:text-base leading-relaxed mt-4">
+                        <p>
+                            Yes, LunaAi is completely free for students! Our platform offers unlimited access to AI-powered homework help, study tools, and personalized learning resources without any subscription fees. Optional premium features may be available, but the core tutoring and study tools are always free.
+                        </p>
                     </div>
                 </article>
-                
+
                 <article class="glass-dark p-6 rounded-xl">
                     <button class="faq-toggle flex items-center w-full text-left" data-target="faq3">
                         <h3 class="text-xl font-bold mb-3 flex items-center flex-grow">
-                            <i data-feather="smartphone" class="w-6 h-6 text-purple-400 mr-3"></i>
-                            Is the AI study assistant available on mobile devices?
+                            <svg class="w-6 h-6 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M9,9h0a3,3,0,0,1,6,0c0,2-3,3-3,3"/>
+                                <path d="M12,17h0"/>
+                            </svg>
+                            What subjects does LunaAi cover?
                         </h3>
-                        <i data-feather="chevron-down" class="w-6 h-6 text-gray-400 faq-chevron"></i>
+                        <svg class="w-6 h-6 text-gray-400 faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
                     </button>
-                    <div id="faq3" class="faq-content hidden text-gray-300 leading-relaxed">
-                        Yes! Our AI homework help platform is fully responsive and optimized for mobile devices, tablets, and desktops. Access personalized tutoring, study tools, and academic support anywhere, anytime across all platforms with seamless synchronization.
+                    <div id="faq3" class="faq-content hidden text-gray-300 text-sm sm:text-base leading-relaxed mt-4">
+                        <p>
+                            LunaAi supports a wide range of subjects, including mathematics, science, literature, history, computer science, and more. Whether you’re in high school or college, our AI tutor provides comprehensive support for all academic levels and curricula.
+                        </p>
                     </div>
                 </article>
-                
+
                 <article class="glass-dark p-6 rounded-xl">
                     <button class="faq-toggle flex items-center w-full text-left" data-target="faq4">
                         <h3 class="text-xl font-bold mb-3 flex items-center flex-grow">
-                            <i data-feather="credit-card" class="w-6 h-6 text-yellow-400 mr-3"></i>
-                            Is the AI study assistant really free for students?
+                            <svg class="w-6 h-6 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M9,9h0a3,3,0,0,1,6,0c0,2-3,3-3,3"/>
+                                <path d="M12,17h0"/>
+                            </svg>
+                            Can LunaAi help with exam preparation?
                         </h3>
-                        <i data-feather="chevron-down" class="w-6 h-6 text-gray-400 faq-chevron"></i>
-                    </button>
-                    <div id="faq4" class="faq-content hidden text-gray-300 leading-relaxed">
-                        Yes! LunaAi offers free AI homework help and basic tutoring features for all students. Premium subscriptions provide advanced features like unlimited questions, priority support, and enhanced study analytics. Cancel anytime with no fees.
-                    </div>
-                </article>
-
-                <article class="glass-dark p-6 rounded-xl">
-                    <button class="faq-toggle flex items-center w-full text-left" data-target="faq5">
-                        <h3 class="text-xl font-bold mb-3 flex items-center flex-grow">
-                            <i data-feather="shield" class="w-6 h-6 text-red-400 mr-3"></i>
-                            How accurate is the AI homework help?
-                        </h3>
-                        <i data-feather="chevron-down" class="w-6 h-6 text-gray-400 faq-chevron"></i>
-                    </button>
-                    <div id="faq5" class="faq-content hidden text-gray-300 leading-relaxed">
-                        Our AI tutoring system maintains high accuracy through continuous learning and validation against academic standards. While highly reliable for homework help and study support, we always recommend cross-referencing important information and using our AI as a learning tool rather than a replacement for critical thinking.
-                    </div>
-                </article>
-
-                <article class="glass-dark p-6 rounded-xl">
-                    <button class="faq-toggle flex items-center w-full text-left" data-target="faq6">
-                        <h3 class="text-xl font-bold mb-3 flex items-center flex-grow">
-                            <i data-feather="clock" class="w-6 h-6 text-orange-400 mr-3"></i>
-                            Can I get instant homework help 24/7?
-                        </h3>
-                        <i data-feather="chevron-down" class="w-6 h-6 text-gray-400 faq-chevron"></i>
-                    </button>
-                    <div id="faq6" class="faq-content hidden text-gray-300 leading-relaxed">
-                        Absolutely! Our AI study assistant provides instant homework help and tutoring support 24 hours a day, 7 days a week. Perfect for last-minute assignments, late-night study sessions, and exam preparation across different time zones.
-                    </div>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <!-- Subject Coverage Section -->
-    <section class="slide-up stagger-8 bg-gradient-to-br from-indigo-900 to-purple-900 py-16 sm:py-24 px-4 sm:px-16 text-white">
-        <div class="max-w-6xl mx-auto text-center">
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 morphing-text">
-                Comprehensive AI Homework Help Across All Subjects
-            </h2>
-            <p class="text-lg sm:text-xl text-gray-200 mb-16 max-w-3xl mx-auto">
-                Get expert AI tutoring and homework assistance for every academic subject from elementary to graduate level
-            </p>
-            
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6 lg:gap-8">
-                <div class="glass-dark p-4 rounded-xl text-center">
-                    <i data-feather="calculator" class="w-8 h-8 text-blue-400 mx-auto mb-2"></i>
-                    <h4 class="font-semibold text-sm">Mathematics</h4>
-                    <p class="text-xs text-gray-400">Algebra to Calculus</p>
-                </div>
-                <div class="glass-dark p-4 rounded-xl text-center">
-                    <i data-feather="zap" class="w-8 h-8 text-yellow-400 mx-auto mb-2"></i>
-                    <h4 class="font-semibold text-sm">Physics</h4>
-                    <p class="text-xs text-gray-400">All Physics Levels</p>
-                </div>
-                <div class="glass-dark p-4 rounded-xl text-center">
-                    <i data-feather="activity" class="w-8 h-8 text-green-400 mx-auto mb-2"></i>
-                    <h4 class="font-semibold text-sm">Chemistry</h4>
-                    <p class="text-xs text-gray-400">Organic & Inorganic</p>
-                </div>
-                <div class="glass-dark p-4 rounded-xl text-center">
-                    <i data-feather="heart" class="w-8 h-8 text-red-400 mx-auto mb-2"></i>
-                    <h4 class="font-semibold text-sm">Biology</h4>
-                    <p class="text-xs text-gray-400">Life Sciences</p>
-                </div>
-                <div class="glass-dark p-4 rounded-xl text-center">
-                    <i data-feather="book-open" class="w-8 h-8 text-purple-400 mx-auto mb-2"></i>
-                    <h4 class="font-semibold text-sm">Literature</h4>
-                    <p class="text-xs text-gray-400">Essay Writing</p>
-                </div>
-                <div class="glass-dark p-4 rounded-xl text-center">
-                    <i data-feather="globe" class="w-8 h-8 text-cyan-400 mx-auto mb-2"></i>
-                    <h4 class="font-semibold text-sm">History</h4>
-                    <p class="text-xs text-gray-400">World History</p>
-                </div>
-                <div class="glass-dark p-4 rounded-xl text-center">
-                    <i data-feather="code" class="w-8 h-8 text-orange-400 mx-auto mb-2"></i>
-                    <h4 class="font-semibold text-sm">Computer Science</h4>
-                    <p class="text-xs text-gray-400">Programming Help</p>
-                </div>
-                <div class="glass-dark p-4 rounded-xl text-center">
-                    <i data-feather="trending-up" class="w-8 h-8 text-pink-400 mx-auto mb-2"></i>
-                    <h4 class="font-semibold text-sm">Economics</h4>
-                    <p class="text-xs text-gray-400">Micro & Macro</p>
-                </div>
-                <div class="glass-dark p-4 rounded-xl text-center">
-                    <i data-feather="message-circle" class="w-8 h-8 text-indigo-400 mx-auto mb-2"></i>
-                    <h4 class="font-semibold text-sm">Languages</h4>
-                    <p class="text-xs text-gray-400">Multiple Languages</p>
-                </div>
-                <div class="glass-dark p-4 rounded-xl text-center">
-                    <i data-feather="users" class="w-8 h-8 text-teal-400 mx-auto mb-2"></i>
-                    <h4 class="font-semibold text-sm">Social Studies</h4>
-                    <p class="text-xs text-gray-400">Civics & More</p>
-                </div>
-                <div class="glass-dark p-4 rounded-xl text-center">
-                    <i data-feather="music" class="w-8 h-8 text-yellow-400 mx-auto mb-2"></i>
-                    <h4 class="font-semibold text-sm">Arts</h4>
-                    <p class="text-xs text-gray-400">Creative Subjects</p>
-                </div>
-                <div class="glass-dark p-4 rounded-xl text-center">
-                    <i data-feather="plus" class="w-8 h-8 text-gray-400 mx-auto mb-2"></i>
-                    <h4 class="font-semibold text-sm">And More</h4>
-                    <p class="text-xs text-gray-400">All Subjects</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Modal for Pro/Premium Plans -->
-    <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50 p-4 backdrop-blur-sm">
-        <div class="glass-dark rounded-xl sm:rounded-2xl shadow-2xl max-w-sm sm:max-w-md w-full p-6 sm:p-10 relative modal-enter text-white">
-            <button
-                id="closePaymentModal"
-                class="absolute top-3 sm:top-4 right-3 sm:right-4 text-gray-300 hover:text-white transition-colors duration-300"
-                aria-label="Close Modal"
-            >
-                <i data-feather="x" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-            </button>
-            <div class="text-center">
-                <i data-feather="credit-card" class="mx-auto mb-4 w-16 h-16 text-yellow-400"></i>
-                <h3 class="text-xl sm:text-2xl font-bold mb-4">Premium AI Tutoring Plans Coming Soon</h3>
-                <p class="mb-6 text-gray-300 text-sm sm:text-base">
-                    For now, please contact us directly to purchase a premium plan with unlimited AI homework help.
-                </p>
-                <a href="https://wa.me/94764101397" target="_blank" class="block bg-gradient-to-r from-green-500 to-blue-500 text-white py-3 sm:py-4 rounded-xl hover:from-green-600 hover:to-blue-600 transition-all duration-300 font-semibold btn-3d pulse-glow text-sm sm:text-base">
-                    Contact via WhatsApp: +94 076 410 1397
-                </a>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Study Assistant Modal -->
-    <div id="studyAssistantModal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center hidden z-50 p-4 backdrop-blur-sm">
-        <div class="glass-dark rounded-xl sm:rounded-2xl shadow-2xl max-w-2xl w-full h-[90vh] flex flex-col p-6 sm:p-10 relative modal-enter text-white">
-            <button
-                id="closeStudyAssistantModal"
-                class="absolute top-3 sm:top-4 right-3 sm:right-4 text-gray-300 hover:text-white transition-colors duration-300"
-                aria-label="Close Modal"
-            >
-                <i data-feather="x" class="w-5 h-5 sm:w-6 sm:h-6"></i>
-            </button>
-            <h3 class="text-xl sm:text-2xl font-bold mb-4 bg-gradient-to-r from-green-400 to-teal-500 bg-clip-text text-transparent">
-                Free AI Homework Help Assistant
-            </h3>
-            
-            <div class="flex-grow flex flex-col space-y-4 overflow-y-auto mb-4 hide-scrollbar">
-                <!-- Response Display Area -->
-                <div id="responseContainer" class="flex-grow p-4 sm:p-6 rounded-lg glass-dark overflow-y-auto text-sm sm:text-base leading-relaxed text-gray-200">
-                    <p id="responseContent" class="hidden">
-                        Hello! I am your personal AI study assistant and homework helper. Ask me any academic question and I will provide detailed explanations, step-by-step solutions, and study guidance. Try asking me to "Explain photosynthesis" or "Help me solve this math problem."
-                    </p>
-                    <div id="loadingIndicator" class="hidden flex items-center justify-center text-green-400">
-                        <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        <svg class="w-6 h-6 text-gray-400 faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"/>
                         </svg>
-                        Generating AI homework help...
+                    </button>
+                    <div id="faq4" class="faq-content hidden text-gray-300 text-sm sm:text-base leading-relaxed mt-4">
+                        <p>
+                            Absolutely! LunaAi offers personalized study plans, practice questions, and detailed explanations to help you prepare for exams like SAT, ACT, AP courses, and college finals. Our AI tracks your progress and provides targeted recommendations to boost your scores.
+                        </p>
                     </div>
-                </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="lazy-load slide-up stagger-8 bg-gray-900 text-white py-12 sm:py-16 px-4 sm:px-16">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <!-- About LunaAi -->
+            <div>
+                <h3 class="text-xl font-bold mb-4 morphing-text">LunaAi™</h3>
+                <p class="text-gray-300 text-sm leading-relaxed">
+                    LunaAi is a free AI-powered study assistant designed to help students excel academically. Get instant homework help, personalized study plans, and progress tracking—all for free.
+                </p>
             </div>
 
-            <!-- Input area and buttons -->
-            <div class="space-y-4">
-                <textarea
-                    id="studyPromptInput"
-                    class="w-full h-20 p-4 rounded-lg bg-gray-800 border border-gray-700 text-white placeholder-gray-400 focus:ring focus:ring-blue-500 focus:border-blue-500 transition-all duration-300 resize-none text-sm sm:text-base"
-                    placeholder="E.g., Explain supply and demand, solve this equation, help with essay writing..."
-                ></textarea>
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <button id="generateBtn" class="flex-grow bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 px-6 rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 font-bold btn-3d text-sm sm:text-base">
-                        Get AI Homework Help
+            <!-- Navigation Links -->
+            <div>
+                <h3 class="text-xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Quick Links</h3>
+                <ul class="space-y-2 text-gray-300 text-sm">
+                    <li><a href="#features" class="hover:text-blue-400 transition-colors duration-300">Features</a></li>
+                    <li><a href="#how-it-works" class="hover:text-blue-400 transition-colors duration-300">How It Works</a></li>
+                    <li><a href="#success-stories" class="hover:text-blue-400 transition-colors duration-300">Success Stories</a></li>
+                    <li><a href="#faq" class="hover:text-blue-400 transition-colors duration-300">FAQ</a></li>
+                    <li><a href="log.html" class="hover:text-blue-400 transition-colors duration-300">Login</a></li>
+                </ul>
+            </div>
+
+            <!-- Newsletter Signup -->
+            <div>
+                <h3 class="text-xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Stay Updated</h3>
+                <p class="text-gray-300 text-sm mb-4">Subscribe to our newsletter for study tips, updates, and exclusive offers.</p>
+                <form class="flex flex-col sm:flex-row gap-2">
+                    <input
+                        type="email"
+                        placeholder="Enter your email"
+                        class="glass-dark px-4 py-2 rounded-lg text-sm text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                        aria-label="Email for newsletter subscription"
+                    />
+                    <button
+                        type="submit"
+                        class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all duration-300 btn-3d"
+                        aria-label="Subscribe to newsletter"
+                    >
+                        Subscribe
                     </button>
-                    <button id="summarizeBtn" class="bg-yellow-500 text-white py-3 px-6 rounded-xl hover:bg-yellow-600 transition-all duration-300 font-bold btn-3d text-sm sm:text-base">
-                        Summarize
-                    </button>
-                    <button id="readAloudBtn" class="bg-red-500 text-white py-3 px-6 rounded-xl hover:bg-red-600 transition-all duration-300 font-bold btn-3d text-sm sm:text-base">
-                        Read Aloud
-                    </button>
+                </form>
+               
+   
+                    
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="slide-up stagger-6 bg-gray-900 bg-opacity-80 text-white py-8 px-4 text-center mt-16 relative z-10">
-        <div class="max-w-4xl mx-auto">
-            <h3 class="text-lg font-semibold mb-4">LunaAi - Free AI Study Assistant & Homework Help Platform</h3>
-            <p class="text-gray-300 mb-4">Empowering students worldwide with AI-powered tutoring, homework assistance, and personalized learning tools. Join thousands of students improving their academic performance with our free AI study assistant.</p>
-            <p class="text-gray-300 mb-4">Made With ❤️ In Sri Lanka for students everywhere.</p>
-            <div class="flex justify-center space-x-6 text-sm mb-4">
-                <a class='hover:text-blue-400 transition-colors duration-300' href='/privacy' rel="nofollow">Privacy Policy</a>
-                <a class='hover:text-blue-400 transition-colors duration-300' href='/tos' rel="nofollow">Terms of Service</a>
-                <a class='hover:text-blue-400 transition-colors duration-300' href='/contact' rel="nofollow">Contact Us</a>
-            </div>
-            <p class="text-xs text-gray-400">© 2025 LunaAi. All rights reserved. AI study assistant, homework help, online tutoring platform.</p>
+        <div class="mt-12 text-center text-gray-400 text-sm">
+            <p>&copy; 2025 LunaAi. All rights reserved.</p>
         </div>
     </footer>
-        <!-- JavaScript for Interactivity -->
-    <script>
-        // Initialize Feather Icons
-        feather.replace();
 
+    <!-- JavaScript for Interactive Features -->
+    <script>
         // FAQ Toggle Functionality
         document.querySelectorAll('.faq-toggle').forEach(button => {
             button.addEventListener('click', () => {
                 const targetId = button.getAttribute('data-target');
                 const content = document.getElementById(targetId);
                 const chevron = button.querySelector('.faq-chevron');
-
+                
                 content.classList.toggle('hidden');
                 chevron.classList.toggle('rotate-180');
             });
         });
 
-        // Modal Toggle Functions
-        const paymentModal = document.getElementById('paymentModal');
-        const studyAssistantModal = document.getElementById('studyAssistantModal');
-        const closePaymentModal = document.getElementById('closePaymentModal');
-        const closeStudyAssistantModal = document.getElementById('closeStudyAssistantModal');
-        const ctaStudyAssistant = document.getElementById('ctaStudyAssistant');
-
-        // Open Study Assistant Modal
-        ctaStudyAssistant.addEventListener('click', () => {
-            studyAssistantModal.classList.remove('hidden');
-            document.getElementById('responseContent').classList.remove('hidden');
-            document.getElementById('studyPromptInput').focus();
-        });
-
-        // Close Modals
-        closePaymentModal.addEventListener('click', () => {
-            paymentModal.classList.add('hidden');
-        });
-
-        closeStudyAssistantModal.addEventListener('click', () => {
-            studyAssistantModal.classList.add('hidden');
-            document.getElementById('responseContent').classList.add('hidden');
-            document.getElementById('studyPromptInput').value = '';
-        });
-
-        // Close modals on outside click
-        window.addEventListener('click', (e) => {
-            if (e.target === paymentModal) {
-                paymentModal.classList.add('hidden');
-            }
-            if (e.target === studyAssistantModal) {
-                studyAssistantModal.classList.add('hidden');
-                document.getElementById('responseContent').classList.add('hidden');
-                document.getElementById('studyPromptInput').value = '';
-            }
-        });
-
-        // AI Study Assistant Functionality
-        const generateBtn = document.getElementById('generateBtn');
-        const summarizeBtn = document.getElementById('summarizeBtn');
-        const readAloudBtn = document.getElementById('readAloudBtn');
-        const studyPromptInput = document.getElementById('studyPromptInput');
-        const responseContent = document.getElementById('responseContent');
-        const loadingIndicator = document.getElementById('loadingIndicator');
-
-        generateBtn.addEventListener('click', async () => {
-            const prompt = studyPromptInput.value.trim();
-            if (!prompt) {
-                responseContent.innerHTML = 'Please enter a study question or topic.';
-                responseContent.classList.remove('hidden');
-                return;
-            }
-
-            responseContent.classList.add('hidden');
-            loadingIndicator.classList.remove('hidden');
-
-            try {
-                // Placeholder for AI API call (replace with your actual API endpoint)
-                const response = await fetch('YOUR_AI_API_ENDPOINT', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt })
+        // Lazy Load Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const lazyLoadElements = document.querySelectorAll('.lazy-load');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('loaded');
+                        observer.unobserve(entry.target);
+                    }
                 });
-                const data = await response.json();
+            }, { threshold: 0.1 });
 
-                // Display AI response (modify based on your API response structure)
-                responseContent.innerHTML = data.answer || 'Sorry, I couldn’t process your request. Try again!';
-                responseContent.classList.remove('hidden');
-            } catch (error) {
-                responseContent.innerHTML = 'Error fetching AI response. Please try again later.';
-                responseContent.classList.remove('hidden');
-            } finally {
-                loadingIndicator.classList.add('hidden');
-            }
+            lazyLoadElements.forEach(element => observer.observe(element));
         });
 
-        summarizeBtn.addEventListener('click', async () => {
-            const prompt = studyPromptInput.value.trim();
-            if (!prompt) {
-                responseContent.innerHTML = 'Please enter a topic to summarize.';
-                responseContent.classList.remove('hidden');
-                return;
-            }
-
-            responseContent.classList.add('hidden');
-            loadingIndicator.classList.remove('hidden');
-
-            try {
-                // Placeholder for summarization API call
-                const response = await fetch('YOUR_SUMMARIZATION_API_ENDPOINT', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ prompt, action: 'summarize' })
+        // Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
                 });
-                const data = await response.json();
-
-                responseContent.innerHTML = data.summary || 'Unable to summarize. Try a different topic!';
-                responseContent.classList.remove('hidden');
-            } catch (error) {
-                responseContent.innerHTML = 'Error summarizing content. Please try again later.';
-                responseContent.classList.remove('hidden');
-            } finally {
-                loadingIndicator.classList.add('hidden');
-            }
-        });
-
-        readAloudBtn.addEventListener('click', () => {
-            const text = responseContent.innerText;
-            if (!text || text.includes('Please enter') || text.includes('Error')) {
-                responseContent.innerHTML = 'No content available to read aloud.';
-                responseContent.classList.remove('hidden');
-                return;
-            }
-
-            const utterance = new SpeechSynthesisUtterance(text);
-            utterance.rate = 1;
-            utterance.pitch = 1;
-            window.speechSynthesis.speak(utterance);
-        });
-
-        // Firebase Authentication (Example)
-        // Uncomment and configure with your Firebase setup
-        /*
-        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js';
-        import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js';
-
-        const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_AUTH_DOMAIN",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_STORAGE_BUCKET",
-            messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-            appId: "YOUR_APP_ID"
-        };
-
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-
-        onAuthStateChanged(auth, (user) => {
-            const userGreeting = document.getElementById('userGreeting');
-            const signupBtn = document.getElementById('signupBtn');
-            const welcomeUser = document.getElementById('welcomeUser');
-
-            if (user) {
-                signupBtn.classList.add('hidden');
-                userGreeting.classList.remove('hidden');
-                welcomeUser.textContent = `Welcome, ${user.displayName || user.email}`;
-            } else {
-                signupBtn.classList.remove('hidden');
-                userGreeting.classList.add('hidden');
-            }
-        });
-
-        document.getElementById('logoutBtn').addEventListener('click', () => {
-            signOut(auth).then(() => {
-                window.location.href = 'log.html';
-            }).catch((error) => {
-                console.error('Logout error:', error);
             });
         });
-        */
-
     </script>
-
 </body>
 </html>
