@@ -3,148 +3,146 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="LunaAi - Free AI study assistant and tutoring platform for students. Get instant homework help, personalized study plans, AI-powered explanations, and academic support across all subjects. Boost exam scores with our smart learning tools.">
-    <meta name="keywords" content="AI study assistant, free AI tutor, homework help, online tutoring, study app, AI learning platform, exam preparation, academic support, student productivity, personalized learning, AI education tool, study partner">
-    <meta name="author" content="LunaAi">
+    <meta name="description" content="LunaAi - 100% Free AI study assistant and educational platform for students. Get study help, learning resources, and academic support tools completely free forever.">
+    <meta name="keywords" content="free AI study assistant, free educational platform, free study help, free learning tools, free homework assistance, free academic support">
+    <meta name="author" content="LunaAi Educational Technology">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://lunaaiofficial.netlify.app/">
+    <link rel="canonical" href="https://studywithluna.netlify.app/">
     
     <!-- Open Graph Meta Tags -->
-    <meta property="og:title" content="LunaAi | Free AI Study Assistant & Homework Help for Students">
-    <meta property="og:description" content="Get instant AI-powered homework help, personalized study plans, and academic support. Free AI tutor available 24/7 for all subjects.">
+    <meta property="og:title" content="LunaAi | 100% Free AI Study Assistant & Educational Platform">
+    <meta property="og:description" content="Completely free AI-powered study tools and educational resources to support your learning journey. No premium plans, no hidden costs.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://lunaaiofficial.netlify.app/">
-    <meta property="og:image" content="https://lunaaiofficial.netlify.app/Icon.png">
+    <meta property="og:url" content="https://studywithluna.netlify.app/">
+    <meta property="og:image" content="https://studywithluna.netlify.app/Icon.png">
+    <meta property="og:site_name" content="LunaAi">
     
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="LunaAi | Free AI Study Assistant & Homework Help">
-    <meta name="twitter:description" content="AI-powered study assistant providing instant homework help and personalized learning for students worldwide.">
-    <meta name="twitter:image" content="https://lunaaiofficial.netlify.app/Icon.png">
-    
-    <title>LunaAi | Free AI Study Assistant & Homework Help for Students Worldwide</title>
+    <title>LunaAi | 100% Free AI Study Assistant & Educational Learning Platform</title>
     <link rel="icon" type="image/png" href="Icon.png" />
     
-    <!-- Preload critical resources -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" as="style">
-    <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
     
-    <!-- Load fonts with font-display: swap for better performance -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-    
-    <!-- Load Tailwind CSS -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Feather Icons - Load async -->
-    <script src="https://unpkg.com/feather-icons" async></script>
-    
-    <!-- Google Ads - Load async -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5782374845716287"
-     crossorigin="anonymous"></script>
-    
-    <!-- JSON-LD Structured Data -->
+    <!-- Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "SoftwareApplication",
         "name": "LunaAi",
-        "description": "Free AI study assistant and tutoring platform providing instant homework help, personalized study plans, and academic support for students worldwide.",
-        "url": "https://lunaaiofficial.netlify.app/",
+        "description": "100% free AI-powered educational platform providing study assistance and learning tools for students.",
+        "url": "https://studywithluna.netlify.app",
         "applicationCategory": "EducationalApplication",
         "operatingSystem": "Web Browser",
+        "author": {
+            "@type": "Organization",
+            "name": "LunaAi Educational Technology"
+        },
         "offers": {
             "@type": "Offer",
+            "name": "Free Plan",
             "price": "0",
             "priceCurrency": "USD"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "5.0",
-            "reviewCount": "1000"
-        },
-        "featureList": [
-            "Ai study helper free",
-            "Ai study helper online",
-            "Best ai study helper",
-            "AI study tools",
-            "Best AI for studying",
-            "Best AI for studying",
-            "Study AI free"
-        ]
+        }
     }
     </script>
     
     <style>
-        /* Critical CSS inlined for faster loading */
         body {
-            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            background: #0a0a0a;
+            color: #ffffff;
         }
 
+        /* Dark theme with vibrant blue accents */
         .hero-bg {
-            background: linear-gradient(-45deg, #667eea, #764ba2, #f093fb, #f5576c, #4facfe, #00f2fe);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            will-change: background-position;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* Simplified particle animation for better performance */
-        .particle {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            animation: float 6s ease-in-out infinite;
-            pointer-events: none;
-            will-change: transform, opacity;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 1; }
-            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.5; }
-        }
-
-        .morphing-text {
-            background: linear-gradient(45deg, #fff, #f0f0f0, #fff);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .glass {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .glass-dark {
-            backdrop-filter: blur(20px);
-            background: rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .feature-card {
-            transition: transform 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-            will-change: transform;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .pulse-glow {
+            background: radial-gradient(ellipse at top, #1a1a2e 0%, #0f0f23 50%, #000000 100%);
+            min-height: 100vh;
             position: relative;
             overflow: hidden;
         }
 
-        .pulse-glow::before {
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(30, 58, 138, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(59, 130, 246, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Animated particles */
+        .floating-orbs {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            background: rgba(59, 130, 246, 0.15);
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .orb:nth-child(1) { width: 80px; height: 80px; left: 10%; animation-delay: 0s; }
+        .orb:nth-child(2) { width: 60px; height: 60px; right: 10%; animation-delay: 2s; }
+        .orb:nth-child(3) { width: 100px; height: 100px; left: 50%; animation-delay: 4s; }
+        .orb:nth-child(4) { width: 40px; height: 40px; right: 30%; animation-delay: 6s; }
+
+        @keyframes float {
+            0%, 100% { 
+                transform: translateY(0px) scale(1);
+                opacity: 0.4;
+            }
+            50% { 
+                transform: translateY(-40px) scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        /* Glass morphism effects */
+        .glass {
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(30, 58, 138, 0.4);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-glass {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(25px);
+            border-bottom: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        /* Enhanced button animations */
+        .btn-primary {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-primary::before {
             content: '';
             position: absolute;
             top: 0;
@@ -152,476 +150,694 @@
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.8s;
+            transition: left 0.7s;
         }
 
-        .pulse-glow:hover::before {
+        .btn-primary:hover::before {
             left: 100%;
         }
 
-        /* Staggered animation delays */
-        .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.2s; }
-        .stagger-3 { animation-delay: 0.3s; }
-        .stagger-4 { animation-delay: 0.4s; }
-        .stagger-5 { animation-delay: 0.5s; }
-        .stagger-6 { animation-delay: 0.6s; }
-        .stagger-7 { animation-delay: 0.7s; }
-        .stagger-8 { animation-delay: 0.8s; }
-
-        .slide-up {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: slideUp 0.8s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(59, 130, 246, 0.5);
         }
 
-        @keyframes slideUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .premium-glow {
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
-            animation: premiumPulse 2s ease-in-out infinite;
-        }
-
-        @keyframes premiumPulse {
-            0%, 100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.5); }
-            50% { box-shadow: 0 0 50px rgba(59, 130, 246, 0.8); }
-        }
-
-        .modal-enter {
-            animation: modalSlideIn 0.3s cubic-bezier(0.23, 1, 0.320, 1);
-        }
-
-        @keyframes modalSlideIn {
-            from { opacity: 0; transform: scale(0.9) translateY(-20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        .nav-glass {
-            backdrop-filter: blur(10px);
-            background: rgba(255, 255, 255, 0.05);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .btn-3d {
-            transition: transform 0.2s cubic-bezier(0.23, 1, 0.320, 1);
-        }
-
-        .btn-3d:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn-3d:active {
-            transform: translateY(-1px);
-        }
-
-        .responsive-text {
-            font-size: clamp(1.5rem, 6vw, 3.5rem);
-            line-height: 1.1;
-        }
-        
-        /* Simplified typing animation */
-        .animated-subheading {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: 0.15em;
-            border-right: 2px solid rgba(255, 255, 255, 0.75);
-            animation: typing 3s steps(40, end), blink-caret 1s step-end infinite;
-        }
-
-        @keyframes typing {
-            from { width: 0 }
-            to { width: 100% }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: rgba(255, 255, 255, 0.75); }
-        }
-
-        .feature-icon-wrapper {
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #3b82f6;
+            color: #3b82f6;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             position: relative;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease-in-out;
+            overflow: hidden;
         }
 
-        .feature-card:hover .feature-icon-wrapper {
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #3b82f6;
+            transition: left 0.4s ease;
+            z-index: -1;
         }
 
-        .faq-chevron {
-            transition: transform 0.3s ease;
+        .btn-secondary:hover::before {
+            left: 0;
+        }
+
+        .btn-secondary:hover {
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
+        }
+
+        /* Enhanced feature card hover effects */
+        .feature-card {
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(30, 58, 138, 0.15) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px) scale(1.03);
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow: 0 25px 60px rgba(59, 130, 246, 0.2);
+        }
+
+        /* Text gradient effects */
+        .gradient-text {
+            background: linear-gradient(135deg, #ffffff 0%, #60a5fa 40%, #3b82f6 70%, #1d4ed8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-blue {
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 50%, #1d4ed8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .gradient-text-free {
+            background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Scroll reveal animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(80px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0px);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-80px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-left.active {
+            opacity: 1;
+            transform: translateX(0px);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(80px);
+            transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0px);
+        }
+
+        /* Staggered animations */
+        .reveal:nth-child(1) { transition-delay: 0.1s; }
+        .reveal:nth-child(2) { transition-delay: 0.2s; }
+        .reveal:nth-child(3) { transition-delay: 0.3s; }
+        .reveal:nth-child(4) { transition-delay: 0.4s; }
+        .reveal:nth-child(5) { transition-delay: 0.5s; }
+        .reveal:nth-child(6) { transition-delay: 0.6s; }
+
+        /* Free badge animation */
+        .free-badge {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+            }
+            50% {
+                transform: scale(1.05);
+                box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+            }
+        }
+
+        /* FAQ animations */
+        .faq-item {
+            transition: all 0.4s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .faq-item:hover {
+            background: rgba(15, 23, 42, 0.8);
+            border-left-color: #3b82f6;
         }
 
         .faq-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+            transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             opacity: 0;
         }
 
-        .faq-content:not(.hidden) {
-            max-height: 200px;
+        .faq-content.open {
+            max-height: 400px;
             opacity: 1;
-            transition: max-height 0.3s ease-in, opacity 0.3s ease-in;
+            transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.5s ease 0.1s;
         }
 
-        /* Optimized media queries */
+        /* Enhanced responsive design */
         @media (max-width: 768px) {
-            .hero-bg { background-attachment: scroll; }
-            .particle { display: none; }
-            .feature-card:hover { transform: translateY(-5px); }
-            .glass { background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(8px); }
-            .glass-dark { background: rgba(0, 0, 0, 0.2); backdrop-filter: blur(8px); }
-            .animated-subheading { 
-                white-space: normal; 
-                overflow: visible; 
-                border-right: none; 
-                animation: none; 
+            .hero-bg::before {
+                background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.12) 0%, transparent 50%);
             }
-            .faq-content:not(.hidden) { max-height: 300px; }
+            
+            h1 { 
+                font-size: 2.5rem !important; 
+                line-height: 1.1 !important;
+            }
+            
+            .btn-primary, .btn-secondary {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+                width: 100%;
+                margin-bottom: 0.75rem;
+            }
+            
+            .feature-card {
+                padding: 2rem;
+            }
+            
+            .feature-card:hover {
+                transform: translateY(-8px) scale(1.01);
+            }
         }
 
-        @media (max-width: 640px) {
-            .responsive-text { font-size: 2rem; line-height: 1.2; }
+        /* Progress bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+            z-index: 9999;
+            transition: width 0.1s ease;
         }
 
-        /* Hide elements that aren't critical for initial load */
-        .lazy-load {
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
         }
 
-        .lazy-load.loaded {
-            opacity: 1;
+        ::-webkit-scrollbar-track {
+            background: #1a1a2e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #3b82f6, #1d4ed8);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #2563eb, #1e40af);
         }
     </style>
 </head>
-<body class="hero-bg min-h-screen flex flex-col overflow-x-hidden pt-20">
+<body class="bg-black text-white overflow-x-hidden">
+    <!-- Progress bar -->
+    <div class="progress-bar" id="progressBar"></div>
 
-    <!-- Reduced number of particles for better performance -->
-    <div class="fixed inset-0 pointer-events-none">
-        <div class="particle w-3 h-3 top-10 left-10 stagger-1"></div>
-        <div class="particle w-2 h-2 top-20 right-20 stagger-2"></div>
-        <div class="particle w-4 h-4 top-32 left-1/4 stagger-3"></div>
-        <div class="particle w-2 h-2 bottom-20 right-10 stagger-4"></div>
+    <!-- Hero Background -->
+    <div class="hero-bg">
+        <!-- Floating orbs -->
+        <div class="floating-orbs">
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+            <div class="orb"></div>
+        </div>
+
+        <!-- Navigation -->
+        <nav class="nav-glass fixed top-0 left-0 w-full flex justify-between items-center px-4 sm:px-6 lg:px-8 py-4 z-50">
+            <div class="flex items-center">
+                <h1 class="font-bold text-xl sm:text-2xl gradient-text">LunaAi™</h1>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#features" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Features</a>
+                <a href="#about" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">About</a>
+                <a href="#faq" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">FAQ</a>
+                <a href="#contact" class="text-gray-300 hover:text-blue-400 transition-colors duration-300">Contact</a>
+            </div>
+
+            <!-- Mobile Navigation Button -->
+            <button class="md:hidden text-white p-2" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+
+            <!-- Desktop CTA Button -->
+            <div class="hidden md:flex items-center space-x-4">
+                <button class="btn-primary px-6 py-3 rounded-xl font-bold text-sm sm:text-base" onclick="window.location.href='log.html'">
+                    Start Free Forever
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-95 z-40 hidden md:hidden">
+            <div class="flex flex-col items-center justify-center h-full space-y-8 text-center">
+                <button class="absolute top-6 right-6 text-white" onclick="toggleMobileMenu()">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <a href="#features" class="text-2xl text-gray-300 hover:text-blue-400 transition-colors duration-300" onclick="toggleMobileMenu()">Features</a>
+                <a href="#about" class="text-2xl text-gray-300 hover:text-blue-400 transition-colors duration-300" onclick="toggleMobileMenu()">About</a>
+                <a href="#faq" class="text-2xl text-gray-300 hover:text-blue-400 transition-colors duration-300" onclick="toggleMobileMenu()">FAQ</a>
+                <a href="#contact" class="text-2xl text-gray-300 hover:text-blue-400 transition-colors duration-300" onclick="toggleMobileMenu()">Contact</a>
+                <button class="btn-primary px-8 py-4 rounded-lg font-semibold text-lg mt-8" onclick="window.location.href='log.html'">
+                    Start Free Now
+                </button>
+            </div>
+        </div>
+
+        <!-- Hero Section -->
+        <header class="flex flex-col justify-center items-center text-center px-4 sm:px-6 max-w-6xl mx-auto text-white pb-16 relative z-10 min-h-screen pt-20">
+            <div class="reveal max-w-5xl w-full">
+                
+                <br>
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black mb-6 leading-tight">
+                    <span class="gradient-text block">100% Free AI Study Assistant</span>
+
+                    <span class="text-white">& Educational Platform</span>
+                </h1>
+                
+                <p class="text-xl lg:text-2xl xl:text-3xl font-light text-gray-300 mb-8 max-w-4xl mx-auto leading-relaxed">
+                    Get unlimited AI-powered study help, educational resources, and academic support completely free forever
+                </p>
+                
+                <div class="flex flex-wrap justify-center items-center gap-6 mb-10 text-gray-400">
+                    <span class="flex items-center">
+                        <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        Unlimited Usage
+                    </span>
+                    <span class="flex items-center">
+                        <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                        </svg>
+                        All Subjects
+                    </span>
+
+                </div>
+            </div>
+            
+            <div class="reveal flex flex-col sm:flex-row gap-4 w-full max-w-md sm:max-w-none justify-center">
+                <button class="btn-primary px-8 py-4 rounded-xl font-bold text-lg" onclick="window.location.href='log.html'">
+                    Start Learning Free Now
+                </button>
+                <button class="btn-secondary px-8 py-4 rounded-xl font-bold text-lg" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">
+                    Explore Features
+                </button>
+            </div>
+        </header>
     </div>
 
-    <!-- Navbar with Glass Effect -->
-    <nav class="nav-glass fixed top-0 left-0 w-full flex justify-between items-center px-4 py-4 slide-up stagger-1 z-50" role="navigation" aria-label="Main navigation">
-        <!-- Logo -->
-        <h1 class="font-bold text-2xl morphing-text">LunaAi™</h1>
-
-        <!-- Navigation Buttons -->
-        <div class="flex items-center space-x-4">
-            <button
-                id="signupBtn"
-                class="bg-white text-purple-700 px-6 py-3 rounded-lg font-semibold hover:bg-yellow-300 hover:text-purple-800 transition-all duration-300 btn-3d pulse-glow"
-                onclick="window.location.href='log.html'"
-                aria-label="Login to AI study platform"
-            >
-                Login
-            </button>
-        </div>
-
-        <!-- User Greeting (Hidden by default) -->
-        <div
-            id="userGreeting"
-            class="hidden items-center space-x-4 text-white font-semibold select-none"
-        >
-            <span id="welcomeUser" class="morphing-text text-sm sm:text-base"></span>
-            <button
-                id="logoutBtn"
-                class="bg-white text-purple-700 px-4 py-2 rounded-lg hover:bg-red-100 transition-all duration-300 btn-3d text-sm"
-            >
-                Logout
-            </button>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="flex-grow flex flex-col justify-center items-center text-center px-4 sm:px-6 max-w-6xl mx-auto text-white pb-16 sm:pb-32 relative z-10 min-h-[60vh] sm:min-h-0">
-        <div class="slide-up stagger-2 max-w-4xl">
-            <h2 class="responsive-text font-extrabold mb-4 sm:mb-6 morphing-text leading-tight px-2">
-                Free AI Study Assistant & Homework Help for Students
-            </h2>
-            <p class="text-base sm:text-xl lg:text-2xl font-normal text-gray-200 mb-8 sm:mb-12 animated-subheading">
-                Get instant AI tutoring, personalized study plans and More!
-            </p>
-        </div>
-        
-        <div class="slide-up stagger-3 flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-6 w-full max-w-sm sm:max-w-none px-4 mx-auto justify-center">
-            <button id="ctaLogin" class="glass border-2 border-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-bold hover:bg-white hover:text-purple-700 transition-all duration-300 btn-3d text-base sm:text-lg" onclick="window.location.href='log.html'" aria-label="Login to student account">
-                Get Started
-            </button>
-        </div>
-    </header>
-
-    <!-- AI Study Features Section -->
-    <section class="slide-up stagger-4 bg-gray-900 py-12 sm:py-16 px-4 sm:px-16 text-center max-w-7xl -mt-8 sm:-mt-24 shadow-2xl backdrop-blur-sm bg-opacity-80 relative z-10">
-        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold mb-8 sm:mb-16 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent px-4">
-            AI-Powered Study Tools for Academic Success
-        </h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 lg:gap-12 justify-items-center px-4">
-            <article class="feature-card glass p-6 sm:p-8 rounded-xl sm:rounded-2xl cursor-pointer group">
-                <div class="feature-icon-wrapper mx-auto mb-4 sm:mb-6">
-                    <svg class="w-12 h-12 sm:w-16 sm:h-16 text-yellow-400 group-hover:text-yellow-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                    </svg>
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900 relative">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <div class="inline-block px-4 py-2 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-sm mb-8">
+                    All Features • 100% Free Forever
                 </div>
-                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4 text-white">Personalized AI Study Recommendations</h3>
-                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
-                    Our advanced AI analyzes your learning patterns and performance to suggest customized study materials, homework solutions, and exam preparation strategies tailored to your academic needs.
+                <h2 class="reveal text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 gradient-text-blue">
+                    Comprehensive Study Tools
+                </h2>
+                <p class="reveal text-xl text-gray-400 max-w-4xl mx-auto">
+                    Access everything you need for academic success without any costs, limitations, or hidden fees
                 </p>
-            </article>
-            <article class="feature-card glass p-6 sm:p-8 rounded-xl sm:rounded-2xl cursor-pointer group">
-                <div class="feature-icon-wrapper mx-auto mb-4 sm:mb-6">
-                    <svg class="w-12 h-12 sm:w-16 sm:h-16 text-green-400 group-hover:text-green-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="10"/>
-                        <polyline points="12,6 12,12 16,14"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4 text-white">Smart Focus Timer & Study Sessions</h3>
-                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
-                    Maximize productivity with our intelligent Pomodoro and 52/17 study timers featuring ambient soundscapes. Perfect for maintaining focus during homework sessions and exam preparation.
-                </p>
-            </article>
-            <article class="feature-card glass p-6 sm:p-8 rounded-xl sm:rounded-2xl cursor-pointer group">
-                <div class="feature-icon-wrapper mx-auto mb-4 sm:mb-6">
-                    <svg class="w-12 h-12 sm:w-16 sm:h-16 text-purple-400 group-hover:text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                        <polyline points="17 6 23 6 23 12"/>
-                    </svg>
-                </div>
-                <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-3 sm:mb-4 text-white">Academic Progress Analytics</h3>
-                <p class="text-gray-300 leading-relaxed text-sm sm:text-base">
-                    Track your learning journey with comprehensive analytics showing study habits, subject mastery, and improvement areas. Data-driven insights help optimize your academic performance.
-                </p>
-            </article>
-        </div>
-    </section>
+            </div>
 
-    <!-- How AI Tutoring Works -->
-    <section class="lazy-load slide-up stagger-5 bg-gradient-to-br from-purple-900 to-blue-900 py-16 sm:py-24 px-4 sm:px-16 text-white relative overflow-hidden">
-        <div class="max-w-6xl mx-auto text-center">
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 morphing-text">
-                How Our AI Study Assistant Works
-            </h2>
-            <p class="text-lg sm:text-xl text-gray-200 mb-16 max-w-3xl mx-auto">
-                Transform your academic performance with AI-powered homework help and personalized tutoring in three simple steps
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
-                <article class="relative">
-                    <div class="feature-card glass-dark p-8 rounded-2xl h-full">
-                        <div class="relative mb-6">
-                            <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full flex items-center justify-center mx-auto mb-4 premium-glow">
-                                <span class="text-2xl font-bold">1</span>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-bold mb-4">Ask Any Academic Question</h3>
-                        <p class="text-gray-300 leading-relaxed">
-                            Submit homework questions, essay topics, or study queries across any subject. Our AI understands context and provides detailed, curriculum-aligned explanations for high school and college students.
-                        </p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <article class="reveal feature-card glass p-8 rounded-2xl">
+                    <div class="w-20 h-20 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
                     </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">AI Study Assistant</h3>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        Get intelligent study help and explanations across all subjects. Our AI provides detailed answers and step-by-step guidance for complex topics.
+                    </p>
+                    <div class="text-green-400 text-sm font-semibold">✓ Completely Free</div>
                 </article>
-                
-                <article class="relative">
-                    <div class="feature-card glass-dark p-8 rounded-2xl h-full">
-                        <div class="relative mb-6">
-                            <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4 premium-glow">
-                                <span class="text-2xl font-bold">2</span>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-bold mb-4">Get Interactive AI Tutoring</h3>
-                        <p class="text-gray-300 leading-relaxed">
-                            Receive instant step-by-step solutions, concept explanations, and study summaries. Our AI adapts to your learning style with visual aids, audio narration, and multiple explanation formats.
-                        </p>
+
+                <article class="reveal feature-card glass p-8 rounded-2xl">
+                    <div class="w-20 h-20 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12,6 12,12 16,14"/>
+                        </svg>
                     </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Smart Study Timer</h3>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        Optimize your study sessions with AI-powered timers, break reminders, and productivity insights to maximize learning efficiency.
+                    </p>
+                    <div class="text-green-400 text-sm font-semibold">✓ Unlimited Sessions</div>
                 </article>
-                
-                <article class="relative">
-                    <div class="feature-card glass-dark p-8 rounded-2xl h-full">
-                        <div class="relative mb-6">
-                            <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4 premium-glow">
-                                <span class="text-2xl font-bold">3</span>
-                            </div>
-                        </div>
-                        <h3 class="text-xl font-bold mb-4">Monitor Academic Progress</h3>
-                        <p class="text-gray-300 leading-relaxed">
-                            Track learning milestones with detailed performance analytics, study session insights, and personalized recommendations to improve exam scores and academic outcomes.
-                        </p>
+
+                <article class="reveal feature-card glass p-8 rounded-2xl">
+                    <div class="w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                            <polyline points="17 6 23 6 23 12"/>
+                        </svg>
                     </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Progress Analytics</h3>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        Track your learning journey with detailed analytics, study patterns, and personalized insights to identify improvement areas.
+                    </p>
+                    <div class="text-green-400 text-sm font-semibold">✓ Full Analytics Access</div>
+                </article>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                <article class="reveal feature-card glass p-8 rounded-2xl">
+                    <div class="w-20 h-20 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">Study Resources Library</h3>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        Access thousands of educational materials, study guides, and reference documents across all academic subjects and grade levels.
+                    </p>
+                    <div class="text-green-400 text-sm font-semibold">✓ Full Library Access</div>
+                </article>
+
+                <article class="reveal feature-card glass p-8 rounded-2xl">
+                    <div class="w-20 h-20 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mb-6">
+                        <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-4 text-white">24/7 AI Support</h3>
+                    <p class="text-gray-300 leading-relaxed mb-4">
+                        Get instant help anytime with our always-available AI assistant. No waiting times, no limits on questions or interactions.
+                    </p>
+                    <div class="text-green-400 text-sm font-semibold">✓ Always Available</div>
                 </article>
             </div>
         </div>
     </section>
 
-    <!-- Student Success Stories -->
-    <section class="lazy-load slide-up stagger-6 bg-gray-800 py-16 sm:py-24 px-4 sm:px-16 text-white">
-        <div class="max-w-6xl mx-auto text-center">
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
-                Student Success Stories with AI Tutoring
-            </h2>
-            <p class="text-lg sm:text-xl text-gray-300 mb-16 max-w-3xl mx-auto">
-                See how students worldwide are improving grades and academic performance with LunaAi's free AI homework help
-            </p>
+    <!-- Why Free Section -->
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-black relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="reveal text-4xl sm:text-5xl lg:text-6xl font-bold mb-6">
+                    <span class="gradient-text-free">Why 100% Free?</span>
+                </h2>
+                <p class="reveal text-xl text-gray-400 max-w-4xl mx-auto">
+                    Education should be accessible to everyone. We believe every student deserves quality learning tools regardless of financial situation.
+                </p>
+            </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <article class="feature-card glass-dark p-6 rounded-xl">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mr-4">
-                            <span class="font-bold">SA</span>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal-left">
+                    <h3 class="text-3xl font-bold mb-6 text-white">Our Commitment</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-white mb-2">No Premium Plans Ever</h4>
+                                <p class="text-gray-300 leading-relaxed">We will never introduce paid tiers or limit features behind paywalls. Everything remains free forever.</p>
+                            </div>
                         </div>
-                        <div class="text-left">
-                            <h4 class="font-semibold">Sarah A.</h4>
-                            <p class="text-sm text-gray-400">Medical Student</p>
+                        
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-white mb-2">No Hidden Costs</h4>
+                                <p class="text-gray-300 leading-relaxed">No subscription fees, no one-time purchases, no in-app payments. Completely free to use without any catches.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1">
+                                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-semibold text-white mb-2">Education for All</h4>
+                                <p class="text-gray-300 leading-relaxed">We believe quality educational tools should be accessible to every student worldwide, regardless of economic background.</p>
+                            </div>
                         </div>
                     </div>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        "LunaAi's AI tutoring helped me master complex biochemistry concepts that I struggled with for months. The personalized explanations and homework help are incredibly clear and effective!"
-                    </p>
-                    <div class="flex mt-4">
-                        <span class="text-yellow-400">★★★★★</span>
-                    </div>
-                </article>
+                </div>
                 
-                <article class="feature-card glass-dark p-6 rounded-xl">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mr-4">
-                            <span class="font-bold">MJ</span>
+                <div class="reveal-right glass-dark p-8 rounded-2xl">
+                    <div class="text-center mb-6">
+                        <div class="w-24 h-24 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
                         </div>
-                        <div class="text-left">
-                            <h4 class="font-semibold">Mike J.</h4>
-                            <p class="text-sm text-gray-400">Engineering Student</p>
+                        <h4 class="text-2xl font-bold text-white mb-4">$0 Forever</h4>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-center py-3 border-b border-gray-700">
+                            <span class="text-gray-300">AI Study Assistant</span>
+                            <span class="text-green-400 font-semibold">Free</span>
+                        </div>
+                        <div class="flex justify-between items-center py-3 border-b border-gray-700">
+                            <span class="text-gray-300">Study Timer & Analytics</span>
+                            <span class="text-green-400 font-semibold">Free</span>
+                        </div>
+                        <div class="flex justify-between items-center py-3 border-b border-gray-700">
+                            <span class="text-gray-300">Take Notes & Summeries</span>
+                            <span class="text-green-400 font-semibold">Free</span>
+                        </div>
+                        <div class="flex justify-between items-center py-3 border-b border-gray-700">
+                            <span class="text-gray-300">24/7 Support</span>
+                            <span class="text-green-400 font-semibold">Free</span>
+                        </div>
+                        <div class="flex justify-between items-center py-3">
+                            <span class="text-gray-300">All Future Features</span>
+                            <span class="text-green-400 font-semibold">Free</span>
                         </div>
                     </div>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        "The AI study assistant's focus timer and progress tracking features completely transformed my study habits. I'm solving homework problems faster and scoring higher on exams."
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="reveal text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 gradient-text">
+                    About LunaAi
+                </h2>
+                <p class="reveal text-xl text-gray-400 max-w-4xl mx-auto">
+                    LunaAi Educational Technology is dedicated to making quality educational tools accessible to every student worldwide through innovative AI-powered learning solutions.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div class="reveal-left">
+                    <h3 class="text-3xl font-bold mb-6 text-white">Our Mission</h3>
+                    <p class="text-gray-300 leading-relaxed mb-6">
+                        Founded with the belief that education is a fundamental right, LunaAi combines cutting-edge artificial intelligence with proven educational methodologies to create tools that genuinely enhance learning experiences.
                     </p>
-                    <div class="flex mt-4">
-                        <span class="text-yellow-400">★★★★★</span>
+                    <p class="text-gray-300 leading-relaxed mb-6">
+                        Our team consists of educators, technologists, and researchers who are passionate about democratizing access to quality educational support. We focus on creating intuitive, effective tools that complement traditional learning methods.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
+                        <div class="glass-dark p-6 rounded-xl text-center">
+                            <div class="text-3xl font-bold text-blue-400 mb-2">100K+</div>
+                            <div class="text-gray-300 text-sm">Students Helped</div>
+                        </div>
+                        <div class="glass-dark p-6 rounded-xl text-center">
+                            <div class="text-3xl font-bold text-green-400 mb-2">50+</div>
+                            <div class="text-gray-300 text-sm">Countries Reached</div>
+                        </div>
                     </div>
-                </article>
+                </div>
                 
-                <article class="feature-card glass-dark p-6 rounded-xl">
-                    <div class="flex items-center mb-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mr-4">
-                            <span class="font-bold">EL</span>
-                        </div>
-                        <div class="text-left">
-                            <h4 class="font-semibold">Emma L.</h4>
-                            <p class="text-sm text-gray-400">High School Senior</p>
+                <div class="reveal-right">
+                    <div class="glass p-8 rounded-2xl">
+                        <h4 class="text-2xl font-bold mb-6 text-white">Core Values</h4>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1">
+                                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-white mb-1">Accessibility First</h5>
+                                    <p class="text-gray-400 text-sm">Educational tools should be available to everyone, regardless of financial situation.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1">
+                                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-white mb-1">Evidence-Based</h5>
+                                    <p class="text-gray-400 text-sm">All features are designed using research-backed educational principles.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center mr-4 flex-shrink-0 mt-1">
+                                    <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-white mb-1">Privacy Focus</h5>
+                                    <p class="text-gray-400 text-sm">Student data protection and privacy are our top priorities.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <p class="text-gray-300 text-sm leading-relaxed">
-                        "I improved my SAT scores by 200 points using LunaAi's personalized study recommendations and AI homework help. It's like having a personal tutor available 24/7!"
-                    </p>
-                    <div class="flex mt-4">
-                        <span class="text-yellow-400">★★★★★</span>
-                    </div>
-                </article>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- FAQ Section -->
-    <section class="lazy-load slide-up stagger-7 bg-gray-900 py-16 sm:py-24 px-4 sm:px-16 text-white">
+    <section id="faq" class="py-20 px-4 sm:px-6 lg:px-8 bg-black">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-16 text-center bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-                Frequently Asked Questions About AI Study Assistant
-            </h2>
+            <div class="text-center mb-16">
+                <h2 class="reveal text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 gradient-text">
+                    Frequently Asked Questions
+                </h2>
+                <p class="reveal text-xl text-gray-400">
+                    Everything you need to know about our free educational platform
+                </p>
+            </div>
             
             <div class="space-y-6">
-                <article class="glass-dark p-6 rounded-xl">
-                    <button class="faq-toggle flex items-center w-full text-left" data-target="faq1">
-                        <h3 class="text-xl font-bold mb-3 flex items-center flex-grow">
-                            <svg class="w-6 h-6 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M9,9h0a3,3,0,0,1,6,0c0,2-3,3-3,3"/>
-                                <path d="M12,17h0"/>
-                            </svg>
-                            How does the AI homework help assistant work?
+                <article class="reveal faq-item glass-dark p-6 rounded-xl">
+                    <button class="faq-toggle flex items-center justify-between w-full text-left" data-target="faq1">
+                        <h3 class="text-xl font-bold text-white pr-4">
+                            Is LunaAi really 100% free with no hidden costs?
                         </h3>
-                        <svg class="w-6 h-6 text-gray-400 faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 text-blue-400 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <polyline points="6 9 12 15 18 9"/>
                         </svg>
                     </button>
-                    <div id="faq1" class="faq-content hidden text-gray-300 text-sm sm:text-base leading-relaxed mt-4">
+                    <div id="faq1" class="faq-content text-gray-400 leading-relaxed mt-4">
                         <p>
-                            LunaAi’s AI homework help assistant uses advanced natural language processing and machine learning to understand your questions and provide accurate, step-by-step solutions. Simply input your question or upload a problem, and our AI delivers detailed explanations, examples, and resources tailored to your academic level and subject.
+                            Yes! LunaAi is completely free with no premium plans, subscription fees, or hidden costs. All features are available to all users at no charge, and we are committed to keeping it this way forever.
                         </p>
                     </div>
                 </article>
 
-                <article class="glass-dark p-6 rounded-xl">
-                    <button class="faq-toggle flex items-center w-full text-left" data-target="faq2">
-                        <h3 class="text-xl font-bold mb-3 flex items-center flex-grow">
-                            <svg class="w-6 h-6 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M9,9h0a3,3,0,0,1,6,0c0,2-3,3-3,3"/>
-                                <path d="M12,17h0"/>
-                            </svg>
-                            Is LunaAi free to use for students?
+                <article class="reveal faq-item glass-dark p-6 rounded-xl">
+                    <button class="faq-toggle flex items-center justify-between w-full text-left" data-target="faq2">
+                        <h3 class="text-xl font-bold text-white pr-4">
+                            How does the AI study assistant work?
                         </h3>
-                        <svg class="w-6 h-6 text-gray-400 faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 text-blue-400 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <polyline points="6 9 12 15 18 9"/>
                         </svg>
                     </button>
-                    <div id="faq2" class="faq-content hidden text-gray-300 text-sm sm:text-base leading-relaxed mt-4">
+                    <div id="faq2" class="faq-content text-gray-400 leading-relaxed mt-4">
                         <p>
-                            Yes, LunaAi is completely free for students! Our platform offers unlimited access to AI-powered homework help, study tools, and personalized learning resources without any subscription fees. Optional premium features may be available, but the core tutoring and study tools are always free.
+                            Our AI study assistant uses natural language processing to understand your questions and provide helpful explanations, study guidance, and educational support across various subjects. It's designed to supplement your learning process, not replace traditional study methods.
                         </p>
                     </div>
                 </article>
 
-                <article class="glass-dark p-6 rounded-xl">
-                    <button class="faq-toggle flex items-center w-full text-left" data-target="faq3">
-                        <h3 class="text-xl font-bold mb-3 flex items-center flex-grow">
-                            <svg class="w-6 h-6 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M9,9h0a3,3,0,0,1,6,0c0,2-3,3-3,3"/>
-                                <path d="M12,17h0"/>
-                            </svg>
-                            What subjects does LunaAi cover?
+                <article class="reveal faq-item glass-dark p-6 rounded-xl">
+                    <button class="faq-toggle flex items-center justify-between w-full text-left" data-target="faq3">
+                        <h3 class="text-xl font-bold text-white pr-4">
+                            What subjects and grade levels do you support?
                         </h3>
-                        <svg class="w-6 h-6 text-gray-400 faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 text-blue-400 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <polyline points="6 9 12 15 18 9"/>
                         </svg>
                     </button>
-                    <div id="faq3" class="faq-content hidden text-gray-300 text-sm sm:text-base leading-relaxed mt-4">
+                    <div id="faq3" class="faq-content text-gray-400 leading-relaxed mt-4">
                         <p>
-                            LunaAi supports a wide range of subjects, including mathematics, science, literature, history, computer science, and more. Whether you’re in high school or college, our AI tutor provides comprehensive support for all academic levels and curricula.
+                            LunaAi provides educational support across multiple subjects including mathematics, science, literature, history, and social studies. Our tools are designed to be helpful for students from middle school through college level, with content that adapts to different academic levels.
                         </p>
                     </div>
                 </article>
 
-                <article class="glass-dark p-6 rounded-xl">
-                    <button class="faq-toggle flex items-center w-full text-left" data-target="faq4">
-                        <h3 class="text-xl font-bold mb-3 flex items-center flex-grow">
-                            <svg class="w-6 h-6 text-blue-400 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M9,9h0a3,3,0,0,1,6,0c0,2-3,3-3,3"/>
-                                <path d="M12,17h0"/>
-                            </svg>
-                            Can LunaAi help with exam preparation?
+                <article class="reveal faq-item glass-dark p-6 rounded-xl">
+                    <button class="faq-toggle flex items-center justify-between w-full text-left" data-target="faq4">
+                        <h3 class="text-xl font-bold text-white pr-4">
+                            Do I need to create an account to use LunaAi?
                         </h3>
-                        <svg class="w-6 h-6 text-gray-400 faq-chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-6 h-6 text-blue-400 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <polyline points="6 9 12 15 18 9"/>
                         </svg>
                     </button>
-                    <div id="faq4" class="faq-content hidden text-gray-300 text-sm sm:text-base leading-relaxed mt-4">
+                    <div id="faq4" class="faq-content text-gray-400 leading-relaxed mt-4">
                         <p>
-                            Absolutely! LunaAi offers personalized study plans, practice questions, and detailed explanations to help you prepare for exams like SAT, ACT, AP courses, and college finals. Our AI tracks your progress and provides targeted recommendations to boost your scores.
+                            While creating an account allows you to save your progress and access personalized features, you can use many of our basic study tools without registration. Account creation is free and helps us provide a more personalized learning experience.
+                        </p>
+                    </div>
+                </article>
+
+                <article class="reveal faq-item glass-dark p-6 rounded-xl">
+                    <button class="faq-toggle flex items-center justify-between w-full text-left" data-target="faq5">
+                        <h3 class="text-xl font-bold text-white pr-4">
+                            How do you keep the platform free?
+                        </h3>
+                        <svg class="w-6 h-6 text-blue-400 transition-transform duration-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </button>
+                    <div id="faq5" class="faq-content text-gray-400 leading-relaxed mt-4">
+                        <p>
+                            LunaAi is supported through educational partnerships and grants focused on improving global access to education. We may also display non-intrusive educational advertisements that help fund our operations while keeping all features free for students.
                         </p>
                     </div>
                 </article>
@@ -629,96 +845,329 @@
         </div>
     </section>
 
-    <!-- Footer Section -->
-    <footer class="lazy-load slide-up stagger-8 bg-gray-900 text-white py-12 sm:py-16 px-4 sm:px-16">
-        <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-            <!-- About LunaAi -->
-            <div>
-                <h3 class="text-xl font-bold mb-4 morphing-text">LunaAi™</h3>
-                <p class="text-gray-300 text-sm leading-relaxed">
-                    LunaAi is a free AI-powered study assistant designed to help students excel academically. Get instant homework help, personalized study plans, and progress tracking—all for free.
-                </p>
-            </div>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 bg-gray-900">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="reveal text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 gradient-text-blue">
+                Get in Touch
+            </h2>
+            <p class="reveal text-xl text-gray-400 mb-12">
+                Questions, feedback, or need support? We're here to help every student succeed.
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+                <div class="reveal glass-dark p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Email Support</h3>
+                    <p class="text-gray-400 text-sm mb-3">Get help with any questions</p>
+                    <a href="mailto:support@lunaai.edu" class="text-blue-400 hover:text-blue-300 text-sm font-medium">support@lunaai.edu</a>
+                </div>
 
-            <!-- Navigation Links -->
-            <div>
-                <h3 class="text-xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">Quick Links</h3>
-                <ul class="space-y-2 text-gray-300 text-sm">
-                    <li><a href="#features" class="hover:text-blue-400 transition-colors duration-300">Features</a></li>
-                    <li><a href="#how-it-works" class="hover:text-blue-400 transition-colors duration-300">How It Works</a></li>
-                    <li><a href="#success-stories" class="hover:text-blue-400 transition-colors duration-300">Success Stories</a></li>
-                    <li><a href="#faq" class="hover:text-blue-400 transition-colors duration-300">FAQ</a></li>
-                    <li><a href="log.html" class="hover:text-blue-400 transition-colors duration-300">Login</a></li>
-                </ul>
-            </div>
+                <div class="reveal glass-dark p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Help Center</h3>
+                    <p class="text-gray-400 text-sm mb-3">Browse our knowledge base</p>
+                    <a href="help.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium">Visit Help Center</a>
+                </div>
 
-            <!-- Newsletter Signup -->
-            <div>
-                <h3 class="text-xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Stay Updated</h3>
-                <p class="text-gray-300 text-sm mb-4">Subscribe to our newsletter for study tips, updates, and exclusive offers.</p>
-                <form class="flex flex-col sm:flex-row gap-2">
-                    <input
-                        type="email"
-                        placeholder="Enter your email"
-                        class="glass-dark px-4 py-2 rounded-lg text-sm text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                        aria-label="Email for newsletter subscription"
-                    />
-                    <button
-                        type="submit"
-                        class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all duration-300 btn-3d"
-                        aria-label="Subscribe to newsletter"
-                    >
-                        Subscribe
-                    </button>
-                </form>
-               
-   
-                    
+                <div class="reveal glass-dark p-6 rounded-xl hover:transform hover:scale-105 transition-all duration-300">
+                    <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Community</h3>
+                    <p class="text-gray-400 text-sm mb-3">Connect with other students</p>
+                    <a href="community.html" class="text-blue-400 hover:text-blue-300 text-sm font-medium">Join Community</a>
                 </div>
             </div>
+
+            <div class="reveal">
+                <button class="btn-primary px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-all duration-300" onclick="window.location.href='contact.html'">
+                    Contact Our Team
+                </button>
+            </div>
         </div>
-        <div class="mt-12 text-center text-gray-400 text-sm">
-            <p>&copy; 2025 LunaAi. All rights reserved.</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 sm:px-6 lg:px-8 bg-black border-t border-gray-800">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <h3 class="text-2xl font-bold gradient-text mb-4">LunaAi Educational Technology</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Providing free, AI-powered educational tools and resources to support student learning and academic success worldwide. Committed to keeping education accessible to everyone.
+                    </p>
+                    <div class="flex space-x-4 mb-4">
+                        <a href="privacy.html" class="text-gray-400 hover:text-blue-400 text-sm transition-colors">Privacy Policy</a>
+                        <a href="tos.html" class="text-gray-400 hover:text-blue-400 text-sm transition-colors">Terms of Service</a>
+                    </div>
+                    <div class="free-badge inline-block px-4 py-2 rounded-full text-sm font-bold text-white">
+                        Forever Free Platform
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Platform</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#features" class="text-gray-400 hover:text-blue-400 transition-colors text-sm">Features</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-blue-400 transition-colors text-sm">About</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-blue-400 transition-colors text-sm">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Support</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#contact" class="text-gray-400 hover:text-blue-400 transition-colors text-sm">Contact Us</a></li>
+                        <li><a href="#faq" class="text-gray-400 hover:text-blue-400 transition-colors text-sm">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-8 pt-8 border-t border-gray-800 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm">&copy; 2025 LunaAi Educational Technology. All rights reserved.</p>
+                <p class="text-gray-600 text-xs mt-2 md:mt-0 text-center md:text-right">
+                    Educational outcomes may vary based on individual effort and study habits.<br>
+                    Platform designed to supplement, not replace, traditional learning methods.
+                </p>
+            </div>
         </div>
     </footer>
 
-    <!-- JavaScript for Interactive Features -->
+    <!-- JavaScript -->
     <script>
+        // Progress bar
+        function updateProgressBar() {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progressBar').style.width = scrolled + '%';
+        }
+
+        window.addEventListener('scroll', updateProgressBar);
+
+        // Scroll reveal animations
+        function revealElements() {
+            const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+            
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 100;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', revealElements);
+        window.addEventListener('load', revealElements);
+
         // FAQ Toggle Functionality
         document.querySelectorAll('.faq-toggle').forEach(button => {
             button.addEventListener('click', () => {
                 const targetId = button.getAttribute('data-target');
                 const content = document.getElementById(targetId);
-                const chevron = button.querySelector('.faq-chevron');
+                const chevron = button.querySelector('svg');
                 
-                content.classList.toggle('hidden');
+                // Close all other FAQs
+                document.querySelectorAll('.faq-content').forEach(otherContent => {
+                    if (otherContent !== content && otherContent.classList.contains('open')) {
+                        otherContent.classList.remove('open');
+                        const otherChevron = otherContent.previousElementSibling.querySelector('svg');
+                        otherChevron.classList.remove('rotate-180');
+                    }
+                });
+                
+                // Toggle current FAQ
+                content.classList.toggle('open');
                 chevron.classList.toggle('rotate-180');
             });
         });
 
-        // Lazy Load Animations
-        document.addEventListener('DOMContentLoaded', () => {
-            const lazyLoadElements = document.querySelectorAll('.lazy-load');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('loaded');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
+        // Mobile menu functionality
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu) {
+                mobileMenu.classList.toggle('hidden');
+                document.body.style.overflow = mobileMenu.classList.contains('hidden') ? 'auto' : 'hidden';
+            }
+        }
 
-            lazyLoadElements.forEach(element => observer.observe(element));
-        });
-
-        // Smooth Scroll for Anchor Links
+        // Smooth scroll for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
+        });
+
+        // Enhanced parallax effect for floating orbs
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const orbs = document.querySelectorAll('.orb');
+            
+            orbs.forEach((orb, index) => {
+                const speed = 0.3 + (index * 0.1);
+                const yPos = -(scrolled * speed);
+                orb.style.transform = `translateY(${yPos}px)`;
+            });
+        });
+
+        // Add hover effects to feature cards
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-15px) scale(1.03)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+
+        // Initialize animations on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            revealElements();
+            
+            // Add stagger delay to reveal elements
+            document.querySelectorAll('.reveal').forEach((el, index) => {
+                el.style.transitionDelay = (index * 0.1) + 's';
+            });
+        });
+
+        // Performance optimization: throttle scroll events
+        let ticking = false;
+
+        function requestTick() {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    updateProgressBar();
+                    revealElements();
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestTick);
+
+        // Add loading states for better UX
+        window.addEventListener('load', () => {
+            document.body.classList.add('loaded');
+            
+            // Trigger initial animations
+            setTimeout(() => {
+                revealElements();
+            }, 100);
+        });
+
+        // Add intersection observer for better performance
+        if ('IntersectionObserver' in window) {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // Add click effects to buttons
+        document.querySelectorAll('.btn-primary, .btn-secondary').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('div');
+                const rect = button.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.3);
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    animation: ripple 0.6s linear;
+                    pointer-events: none;
+                `;
+                
+                button.style.position = 'relative';
+                button.style.overflow = 'hidden';
+                button.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add CSS for ripple animation and other effects
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            
+            .loaded {
+                opacity: 1;
+            }
+            
+            body {
+                opacity: 0;
+                transition: opacity 0.3s ease;
+            }
+            
+            .rotate-180 {
+                transform: rotate(180deg);
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all animations and interactions
+            revealElements();
+            updateProgressBar();
+            
+            // Set body as loaded for fade-in effect
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+            
+            console.log('LunaAi landing page loaded successfully');
         });
     </script>
 </body>
